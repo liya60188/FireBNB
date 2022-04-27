@@ -1,15 +1,26 @@
 package PixelPhoenix.FireBNB.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="User")
 public class User {
 
-	int id_owner;
-	public int getId_owner() {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	long id_owner;
+	public long getId_owner() {
 		return id_owner;
 	}
 	public void setId_owner(int id_owner) {
 		this.id_owner = id_owner;
 	}
-	
+
 	String firstName;
 	public String getFirstName() {
 		return firstName;
@@ -17,7 +28,7 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	String lastName;
 	public String getLastName() {
 		return lastName;
@@ -25,7 +36,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	int age;
 	public int getAge() {
 		return age;
@@ -33,7 +44,7 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
 	int rating;
 	public int getRating() {
 		return rating;
@@ -41,7 +52,7 @@ public class User {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	
+
 	String email;
 	public String getEmail() {
 		return email;
