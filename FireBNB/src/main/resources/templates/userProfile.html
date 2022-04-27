@@ -1,0 +1,11 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8"/>
+	<title> User Profile</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+	</head>
+	<body>
+		<h1 th:text="Hello + ' ' + ${person.firstName} + ' ' + ${person.lastName}"></h1>
+	</body>
+</html>
