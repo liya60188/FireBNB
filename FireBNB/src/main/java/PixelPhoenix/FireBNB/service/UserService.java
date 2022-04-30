@@ -14,12 +14,11 @@ public class UserService {
 	@Autowired
 	private UserRepository ur;
 	
-	public Optional<User> getUser(final long id){
+	public Optional<User> getUser(final Long id){
 		return ur.findById(id);
 	}
 	public Iterable<User> getUsers(){
 		return ur.findAll();
 	}
-	
 	
 }

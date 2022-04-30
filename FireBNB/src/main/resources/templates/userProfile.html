@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 	</head>
 	<body>
-		<h1 th:text="Hello + ' ' + ${person.firstName} + ' ' + ${person.lastName}"></h1>
+		<h1 th:text="${person.id_user} + ' ' + ${person.age}"></h1>
+		<a href="houseProfile.html"> View house</a>
 	</body>
 </html>

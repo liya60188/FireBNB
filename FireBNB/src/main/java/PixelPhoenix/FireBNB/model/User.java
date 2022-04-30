@@ -8,28 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="User")
+@Table(name="user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	long id_owner;
-	public long getId_owner() {
-		return id_owner;
+	@Column(name="id_user", unique = true)
+	private int id_user;
+	public int getId_user() {
+		return id_user;
 	}
-	public void setId_owner(int id_owner) {
-		this.id_owner = id_owner;
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
 	}
-
-	String firstName;
+	
+	@Column(name="first_name")
+	private String firstName;
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-	String lastName;
+	
+	@Column(name="last_name")
+	private String lastName;
 	public String getLastName() {
 		return lastName;
 	}
@@ -37,7 +40,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	int age;
+	private int age;
 	public int getAge() {
 		return age;
 	}
@@ -45,7 +48,7 @@ public class User {
 		this.age = age;
 	}
 
-	int rating;
+	private int rating;
 	public int getRating() {
 		return rating;
 	}
@@ -53,7 +56,7 @@ public class User {
 		this.rating = rating;
 	}
 
-	String email;
+	private String email;
 	public String getEmail() {
 		return email;
 	}
@@ -61,7 +64,7 @@ public class User {
 		this.email = email;
 	}
 	
-	String password;
+	private String password;
 	public String getPassword() {
 		return password;
 	}
@@ -69,15 +72,18 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(int id_owner, String firstName, String lastName, int age, int rating, String email, String password) {
+	public User(int id_user, String firstName, String lastName, int age, int rating, String email, String password) {
 		super();
-		this.id_owner = id_owner;
+		this.id_user = id_user;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.rating = rating;
 		this.email = email;
 		this.password = password;
+	}
+	
+	private User() {
 	}
 
 }

@@ -20,9 +20,16 @@ public class UserController {
 	
 	@GetMapping("/userProfile/{id}")
 	public String userProfile(Model model, @PathVariable long id) {
-		Optional<User> person = us.getUser(id);
-		model.addAttribute("person",person);
+		//Optional<User> person = us.getUser(id);
+		//model.addAttribute("person",person);
+		us.getUser(id).ifPresent(person -> model.addAttribute("person", person));
 		return "userProfile";
-		
 	}
+	
+	@GetMapping("/houseProfile")
+	public String houseProfile() {
+		return "houseProfile";
+	}
+
+
 }
