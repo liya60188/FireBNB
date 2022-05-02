@@ -20,5 +20,7 @@ public class UserService {
 	public Iterable<User> getUsers(){
 		return ur.findAll();
 	}
-	
+	public User createUser(User user) {
+		return ur.save(user);
+	}
 }

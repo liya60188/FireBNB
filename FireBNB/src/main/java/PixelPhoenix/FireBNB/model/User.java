@@ -14,16 +14,32 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_user", unique = true)
-	private int id_user;
-	public int getId_user() {
+	private Long id_user;
+	@Column(name="first_name")
+	private String firstName;
+	@Column(name="last_name")
+	private String lastName;
+	private int age;
+	private int rating;
+	private String email;
+	private String password;
+	private String address;
+	private String city;
+	@Column(name="postal_code")
+	private int postalCode;
+	private String country;
+	@Column(name="additional_address")
+	private String additionalAddress;
+	@Column(name="phone_number")
+	private int phoneNumber;
+	
+	public Long getId_user() {
 		return id_user;
 	}
-	public void setId_user(int id_user) {
+	public void setId_user(Long id_user) {
 		this.id_user = id_user;
 	}
 	
-	@Column(name="first_name")
-	private String firstName;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -31,8 +47,6 @@ public class User {
 		this.firstName = firstName;
 	}
 	
-	@Column(name="last_name")
-	private String lastName;
 	public String getLastName() {
 		return lastName;
 	}
@@ -40,7 +54,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	private int age;
 	public int getAge() {
 		return age;
 	}
@@ -48,7 +61,6 @@ public class User {
 		this.age = age;
 	}
 
-	private int rating;
 	public int getRating() {
 		return rating;
 	}
@@ -56,7 +68,6 @@ public class User {
 		this.rating = rating;
 	}
 
-	private String email;
 	public String getEmail() {
 		return email;
 	}
@@ -64,7 +75,6 @@ public class User {
 		this.email = email;
 	}
 	
-	private String password;
 	public String getPassword() {
 		return password;
 	}
@@ -72,7 +82,52 @@ public class User {
 		this.password = password;
 	}
 	
-	public User(int id_user, String firstName, String lastName, int age, int rating, String email, String password) {
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
+	public int getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(int postalCode) {
+		this.postalCode = postalCode;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
+	public String getAdditionalAddress() {
+		return additionalAddress;
+	}
+	public void setAdditionalAddress(String additionalAddress) {
+		this.additionalAddress = additionalAddress;
+	}
+	
+	public int getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	
+	
+	public User(Long id_user, String firstName, String lastName, int age, int rating, String email, String password,
+			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber) {
 		super();
 		this.id_user = id_user;
 		this.firstName = firstName;
@@ -81,9 +136,15 @@ public class User {
 		this.rating = rating;
 		this.email = email;
 		this.password = password;
+		this.address = address;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.additionalAddress = additionalAddress;
+		this.phoneNumber = phoneNumber;
 	}
 	
-	private User() {
+	public User() {
 	}
 
 }

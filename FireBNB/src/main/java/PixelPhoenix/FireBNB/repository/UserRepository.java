@@ -11,6 +11,8 @@ import PixelPhoenix.FireBNB.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-	Optional<User> findUserByUsername(String username);
+
+	@Query("SELECT u FROM User u WHERE u.email = ?1")
+	public User findByEmail(String email);
 }
 
