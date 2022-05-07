@@ -9,15 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="house")
-public class House extends User {
-	
-	//est-ce que ca extends le user 
-	
-		//pas sure de ça mdr mais eclipse m'a obligée 
-		public House(int id_owner, String firstName, String lastName, int age, int rating, String email, String password) {
-			super(id_owner, firstName, lastName, age, rating, email, password);
-			// TODO Auto-generated constructor stub
-		}
+public class House{
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,7 +69,6 @@ public class House extends User {
 		} 
 		
 		public House(int id_house,String description, int ratingsH, String services, String constraints,String photos) {
-			super(ratingsH, photos, photos, ratingsH, ratingsH, photos, photos);
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
@@ -85,6 +76,8 @@ public class House extends User {
 			this.constraints = constraints;
 			this.photos = photos;	
 		}
+		
+		public House() {}
 
 
 }

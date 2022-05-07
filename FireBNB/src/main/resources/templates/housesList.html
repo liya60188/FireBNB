@@ -5,16 +5,12 @@
 <title>List of Houses</title>
 </head>
 <body>
-
-<!-- Pour des raisons le fichier est pas reconnu -->
-
 	List of Houses
 
 	<form th:action="@{/housesList}" th:object="${house}" method="post">
 
 		<table>
 			<tr>
-				<!-- <th> Owner </th> -->
 				<th>Description</th>
 				<th>Services</th>
 				<th>Constraints</th>
@@ -34,6 +30,5 @@
 		</table>
 
 	</form>
-
 </body>
 </html>
