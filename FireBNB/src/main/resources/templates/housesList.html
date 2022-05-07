@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of Houses</title>
+</head>
+<body>
+
+<!-- Pour des raisons le fichier est pas reconnu -->
+
+	List of Houses
+
+	<form th:action="@{/housesList}" th:object="${house}" method="post">
+
+		<table>
+			<tr>
+				<!-- <th> Owner </th> -->
+				<th>Description</th>
+				<th>Services</th>
+				<th>Constraints</th>
+				<th>Rate</th>
+				<th>Photos</th>
+			</tr> 
+
+			<tr th:each="house: ${listHouses}">
+				<td th:text="${house.description}">Description</td>
+				<td th:text="${house.services}">Services</td>
+				<td th:text="${house.constraints}">Constraints</td>
+				<td th:text="${house.ratingsH}">Rate</td>
+				<td th:text="${house.photos}">Photos</td>
+			</tr>
+
+
+		</table>
+
+	</form>
+
+</body>
+</html>
