@@ -4,6 +4,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.repository.HouseRepository;
@@ -26,9 +31,9 @@ public class HouseService {
 		 hsrp.deleteById(id);
 	    }
 	 
-	 public House saveHouse(House house) {
-	        House savedHouse = hsrp.save(house);
-	        return savedHouse;
+	 @PutMapping(value = "listHouses/housesEdit")
+	 public House saveHouse(@RequestBody House house) {
+		 House savedHouse = hsrp.save(house);
+         return savedHouse;
 	    }
-
 }

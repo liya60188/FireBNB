@@ -14,12 +14,12 @@ public class House{
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name="id_house", unique = true)
-		int id_house;
-		public int getId_home() {
+		Long id_house;
+		public Long getId_house() {
 			return id_house;
 		}
 
-		public void setId_home(int id_house) {
+		public void setId_house(Long id_house) {
 			this.id_house = id_house;
 		}
 		
@@ -68,7 +68,7 @@ public class House{
 			this.photos = photos;
 		} 
 		
-		public House(int id_house,String description, int ratingsH, String services, String constraints,String photos) {
+		public House(Long id_house,String description, int ratingsH, String services, String constraints,String photos) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
