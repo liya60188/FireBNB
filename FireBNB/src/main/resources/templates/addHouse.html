@@ -17,22 +17,21 @@
 				<td><input type="text" name="description" th:value="${description}" /></td>
 			</tr>
 			<tr>
-				<td>Services</td>
-				 
+				<td>Services</td> 
 				<tr th:each="service: ${listServices}">
 				<td th:text="${service.serviceName}">Service Name</td>
-				<td><input type="checkbox" name="services" th:value="${service.serviceName}"/></td>
-				<!-- 
-				<td><input type="checkbox" name="services" 
-				th:each="service: ${listServices}"
-				th:text="${service.serviceName}"
-				th:value="${service.serviceName}"
-				th:field="*{services}" /></td>
-				-->
+				<td>
+				<input type="hidden" name="_services" th:value="${services}"/>
+				<input type="checkbox" name="services" th:field="*{services}" th:value="${id_service}"/></td>
 			</tr>
+			<br><br>
 			<tr>
 				<td>Constraints</td>
-				<td><input type="text" name="constraints" th:value="${constraints}" /></td>
+				<tr th:each="constraint: ${listConstraints}">
+				<td th:text="${constraint.constraintName}">Constraint Name</td>
+				<td>
+				<input type="hidden" name="_constraints" th:value="${constraints}"/>
+				<input type="checkbox" name="constraints" th:field="*{constraints}" th:value="${id_constraint}"/></td>
 			</tr>
 			<tr>
 				<td>Ratings</td>

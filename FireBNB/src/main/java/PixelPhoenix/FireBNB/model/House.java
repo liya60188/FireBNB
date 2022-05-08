@@ -54,16 +54,11 @@ public class House{
 		public void setRatingsH(int ratingsH) {
 			this.ratingsH = ratingsH;
 		}
-		
-		//Test for services checkbox
-		/*@ManyToMany
-	    @JoinTable(joinColumns = @JoinColumn(name = "id_house"), inverseJoinColumns = @JoinColumn(name = "id_services"))
-	    private Set<Service> services;
-	    */
-	
+
 		// TODO - Create FK in db
 		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
 		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
+		
 		Set<Service> services;
 		public Set<Service> getServices() {
 			return services;

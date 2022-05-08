@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndView;
 
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Service;
@@ -49,20 +50,8 @@ public class HouseController {
 		return "housesList";
 	}
 	
-	@GetMapping("/housesList/add")
-	public String houseForm(Model model) {
-		Iterable<Service> listServices = serviceService.getServices();
-		model.addAttribute("listServices", listServices);
-		
-		Iterable<Constraint> listConstraints = constraintService.getConstraints();
-		model.addAttribute("listConstraints", listConstraints);
-		
-		model.addAttribute("house", new House());
-		return "addHouse";
-	}
-	
 	// Tests for Services
-	/*@Autowired
+	@Autowired
 	private ServiceRepository serviceRepository;
 	@GetMapping("/housesList/add")
     public ModelAndView houseForm() {
@@ -70,13 +59,15 @@ public class HouseController {
         ModelAndView mav = new ModelAndView("addHouse");
         mav.addObject("house", house);
          
-        List<Service> listServices = (List<Service>) serviceRepository.findAll();
-         
-        mav.addObject("services", listServices);
+        Iterable<Service> listServices = serviceService.getServices();
+		mav.addObject("listServices", listServices);
+        
+		Iterable<Constraint> listConstraints = constraintService.getConstraints();
+		mav.addObject("listConstraints", listConstraints);
          
         return mav;    
-    }   */
-
+    }
+	
 	@PostMapping("/housesList/add")
 	public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
 		if (result.hasErrors()) {
@@ -86,6 +77,23 @@ public class HouseController {
 		model.addAttribute("house", houseAdd);
 		return "redirect:/housesList";
 	}
+
+	/*
+	 
+	 @GetMapping("/housesList/add")
+	public String houseForm(Model model) {
+		model.addAttribute("house", new House());
+		
+		Iterable<Service> listServices = serviceService.getServices();
+		model.addAttribute("listServices", listServices);
+		
+		Iterable<Constraint> listConstraints = constraintService.getConstraints();
+		model.addAttribute("listConstraints", listConstraints);
+		
+		return "addHouse";
+	}
+	
+	*/
 	
 	@RequestMapping(value = "/housesList/delete")
 	public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
@@ -100,7 +108,7 @@ public class HouseController {
 			@RequestParam(name = "constraints", defaultValue = "") String constraints,
 			@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
 			@RequestParam(name = "photos", defaultValue = "") String photos,
-			@RequestParam(name = "edit", defaultValue = "") int edit) {
+			@RequestParam(name = "edit", defaultValue = "") int edit) {		
 		if (edit == 0) {
 			model.addAttribute("id_house", id_house);
 			model.addAttribute("description", description);

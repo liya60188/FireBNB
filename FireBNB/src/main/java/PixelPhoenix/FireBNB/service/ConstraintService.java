@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import PixelPhoenix.FireBNB.model.Constraint;
 import PixelPhoenix.FireBNB.repository.ConstraintRepository;
 
 @Service
@@ -16,11 +17,11 @@ public class ConstraintService {
 	@Autowired
 	private ConstraintRepository constraintRepository;
 	
-	public Optional<PixelPhoenix.FireBNB.model.Constraint> getConstraint(final Long id){
+	public Optional<Constraint> getConstraint(final Long id){
 		return constraintRepository.findById(id);
 	}
 	
-	public Iterable<PixelPhoenix.FireBNB.model.Constraint> getConstraints(){
+	public Iterable<Constraint> getConstraints(){
 		return constraintRepository.findAll();
 	}
  
@@ -28,9 +29,9 @@ public class ConstraintService {
 		constraintRepository.deleteById(id);
     }
  
-	 @PutMapping(value = "servicesList")
-	 public PixelPhoenix.FireBNB.model.Constraint saveConstraint(@RequestBody PixelPhoenix.FireBNB.model.Constraint constraint) {
-		 PixelPhoenix.FireBNB.model.Constraint savedConstraint = constraintRepository.save(constraint);
+	 @PutMapping(value = "constraintsList")
+	 public Constraint saveConstraint(@RequestBody Constraint constraint) {
+		 Constraint savedConstraint = constraintRepository.save(constraint);
 	     return savedConstraint;
 	 }
 	

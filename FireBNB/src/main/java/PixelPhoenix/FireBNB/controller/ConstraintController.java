@@ -22,20 +22,20 @@ public class ConstraintController {
 	@Autowired
 	private ConstraintService constraintService;
 	
-	@GetMapping("/contraintsList")
+	@GetMapping("/constraintsList")
 	public String listConstraints(Model model) {
 		Iterable<Constraint> listConstraints = constraintService.getConstraints();
 		model.addAttribute("listConstraints", listConstraints);
-		return "contraintsList";
+		return "constraintsList";
 	}
 	
-	@GetMapping("/contraintsList/add")
+	@GetMapping("/constraintsList/add")
 	public String constraintForm(Model model) {
 		model.addAttribute("constraint", new Constraint());
 		return "addConstraint";
 	}
 	
-	@PostMapping("/contraintsList/add")
+	@PostMapping("/constraintsList/add")
 	public String add(@ModelAttribute("constraint") @Validated Constraint constraint, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "addConstraint";

@@ -11,6 +11,6 @@ import PixelPhoenix.FireBNB.model.Constraint;
 
 @Repository
 public interface ConstraintRepository extends JpaRepository<Constraint, Long>{
-	@Query("select service from Constraint constraint where constraint.id_constraint like :x")
+	@Query("select constraint from Constraint constraint where constraint.id_constraint like :x")
 	public Page<Constraint> findByName(@Param("x") Long id_constraint, Pageable pg);
 }
