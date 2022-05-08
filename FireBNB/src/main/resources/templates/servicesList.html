@@ -6,6 +6,18 @@
 </head>
 <body>
 	List of Services
+	
+	<div class=container>
+		<form action="/servicesList/search" method="post">
+			<table>
+				<tr>
+					<td>Recherche simple:</td>
+					<td><input type="text" name="motCle" th:value="${motC}" /></td>
+					<td><input type="submit" name="action" value="search" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 	<form th:action="@{/servicesList}" th:object="${service}" method="post">
 
@@ -18,10 +30,10 @@
 			<tr th:each="service: ${listServices}">
 				<td th:text="${service.id_service}">Id</td>
 				<td th:text="${service.serviceName}">Service Name</td>
-				<td> <a th:href="@{/listServices/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, houseService_FK=${service.houseService_FK}, edit=0)}">Edit</a>
+				<td> <a th:href="@{/listServices/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, houseService_FK=${service.houseService_FK}, edit=0, mc=${motC})}">Edit</a>
 				</td>
 				<td><a onclick="return confirm('Please Confirm')"
-					th:href="@{/servicesList/delete(id_service=${service.id_service})}"> Delete
+					th:href="@{/servicesList/delete(id_service=${service.id_service}, mc=${motC})}"> Delete
 				</a></td>
 			</tr>
 
@@ -31,5 +43,15 @@
 	</form>
 	
 	<a href="/servicesList/add">Add new service</a>
+	
+	<div class="container">
+		<ul class="pagination">
+			<li th:class="${pageCourante}==${status.index}?'active':''"
+				th:each="p,status:${pages}"><a
+				th:href="@{/servicesList/search(page=${status.index},motCle=${motC})}"
+				th:text="${status.index}"></a></li>
+		</ul>
+	</div>
+	
 </body>
 </html>

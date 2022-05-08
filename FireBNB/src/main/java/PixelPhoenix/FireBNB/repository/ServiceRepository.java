@@ -11,7 +11,7 @@ import PixelPhoenix.FireBNB.model.Service;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-	@Query("select service from Service service where service.id_service like :x")
-	public Page<Service> findByName(@Param("x") Long id_service, Pageable pg);
+	@Query("select service from Service service where service.serviceName like :x")
+	public Page<Service> findByName(@Param("x") String mc, Pageable pg);
 	
 }
