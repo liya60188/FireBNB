@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Service;
+import PixelPhoenix.FireBNB.model.Constraint;
 import PixelPhoenix.FireBNB.repository.HouseRepository;
 import PixelPhoenix.FireBNB.repository.ServiceRepository;
+import PixelPhoenix.FireBNB.repository.ConstraintRepository;
 import PixelPhoenix.FireBNB.service.HouseService;
 import PixelPhoenix.FireBNB.service.ServiceService;
+import PixelPhoenix.FireBNB.service.ConstraintService;
 
 @Controller
 public class HouseController {
@@ -31,6 +34,8 @@ public class HouseController {
 	private HouseService hssv;
 	@Autowired
 	private ServiceService serviceService;
+	@Autowired
+	private ConstraintService constraintService;
 	
 	/*public House chooseService(@RequestBody House house) {
 		hssv.saveHouse(house.getServices());
@@ -48,6 +53,9 @@ public class HouseController {
 	public String houseForm(Model model) {
 		Iterable<Service> listServices = serviceService.getServices();
 		model.addAttribute("listServices", listServices);
+		
+		Iterable<Constraint> listConstraints = constraintService.getConstraints();
+		model.addAttribute("listConstraints", listConstraints);
 		
 		model.addAttribute("house", new House());
 		return "addHouse";
@@ -106,7 +114,7 @@ public class HouseController {
 			House house = ot.get();
 			house.setDescription(description);
 			//house.setServices(services);
-			house.setConstraints(constraints);
+			//house.setConstraints(constraints);
 			house.setRatingsH(ratingsH);
 			house.setPhotos(photos);
 			hssv.saveHouse(house);

@@ -18,7 +18,7 @@
 			<tr th:each="service: ${listServices}">
 				<td th:text="${service.id_service}">Id</td>
 				<td th:text="${service.serviceName}">Service Name</td>
-				<td> <a th:href="@{/servicesList/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, houseService_FK=${service.houseService_FK}, edit=0)}">Edit</a>
+				<td> <a th:href="@{/listServices/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, houseService_FK=${service.houseService_FK}, edit=0)}">Edit</a>
 				</td>
 				<td><a onclick="return confirm('Please Confirm')"
 					th:href="@{/servicesList/delete(id_service=${service.id_service})}"> Delete

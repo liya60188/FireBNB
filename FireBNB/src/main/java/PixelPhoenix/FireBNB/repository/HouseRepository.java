@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import PixelPhoenix.FireBNB.model.Constraint;
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Service;
 
@@ -20,5 +21,8 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	
 	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 	public Set<Service> getJoinedHouseServices();
+	
+	@Query("select new Constraint(house.id_house, constraint.constraintName) from House house join house.constraints constraint")
+	public Set<Constraint> getJoinedHouseConstraint();
 }
 

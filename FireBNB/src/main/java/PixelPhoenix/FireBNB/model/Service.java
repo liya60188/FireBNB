@@ -9,7 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="service")
-public class Service {
+public class Service{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_service", unique = true)

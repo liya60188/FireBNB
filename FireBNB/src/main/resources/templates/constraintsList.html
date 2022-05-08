@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of Constraints</title>
+</head>
+<body>
+
+List of Constraints
+
+	<form th:action="@{/constraintsList}" th:object="${constraint}" method="post">
+
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Constraint Name</th>
+			</tr>
+
+			<tr th:each="constraint: ${listConstraints}">
+				<td th:text="${constraint.id_constraint}">Id</td>
+				<td th:text="${constraint.constraintName}">Constraint Name</td>
+				<td> <a th:href="@{/listConstraints/edit(id_constrainte=${constraint.id_constraint}, constraintName=${constraint.constraintName}, houseConstraint_FK=${constraint.houseConstraint_FK}, edit=0)}">Edit</a>
+				</td>
+				<td><a onclick="return confirm('Please Confirm')"
+					th:href="@{/constraintsList/delete(id_constraint=${constraint.id_constraint})}"> Delete
+				</a></td>
+			</tr>
+
+
+		</table>
+
+	</form>
+	
+	<!--  <a th:href="@{/servicesList/add(serviceName=${service.serviceName})}">Add new service</a>-->
+
+</body>
+</html>

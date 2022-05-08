@@ -7,11 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import PixelPhoenix.FireBNB.model.Service;
+import PixelPhoenix.FireBNB.model.Constraint;
 
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Long> {
-	@Query("select service from Service service where service.id_service like :x")
-	public Page<Service> findByName(@Param("x") Long id_service, Pageable pg);
-	
+public interface ConstraintRepository extends JpaRepository<Constraint, Long>{
+	@Query("select service from Constraint constraint where constraint.id_constraint like :x")
+	public Page<Constraint> findByName(@Param("x") Long id_constraint, Pageable pg);
 }

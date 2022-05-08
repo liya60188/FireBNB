@@ -73,16 +73,18 @@ public class House{
 			this.services = services;
 		}
 		
-
-		String constraints;
-		public String getConstraints() {
+		//Constraints
+		@OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
+		@JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
+		Set<Constraint> constraints;
+		public Set<Constraint> getConstraints() {
 			return constraints;
 		}
 
-		public void setConstraints(String constraints) {
+		public void setConstraints(Set<Constraint> constraints) {
 			this.constraints = constraints;
 		}
-		
+
 		String photos;
 		public String getPhotos() {
 			return photos;
@@ -92,7 +94,7 @@ public class House{
 			this.photos = photos;
 		} 
 		
-		public House(Long id_house,String description, int ratingsH, Set<Service> services, String constraints,String photos) {
+		public House(Long id_house,String description, int ratingsH, Set<Service> services, Set<Constraint> constraints,String photos) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;

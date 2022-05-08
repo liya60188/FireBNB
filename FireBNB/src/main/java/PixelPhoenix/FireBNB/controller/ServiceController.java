@@ -52,8 +52,7 @@ public class ServiceController {
 		return "redirect:/servicesList";
 	}
 	
-	// Doesn't work idk why
-	@RequestMapping(value = "/servicesList/edit")
+	@RequestMapping(value = "/listServices/edit")
 	public String edit(Model model, @RequestParam(name = "id_service", defaultValue = "") Long id_service,
 			@RequestParam(name = "serviceName", defaultValue = "") String serviceName,
 			@RequestParam(name = "houseService_FK", defaultValue = "") Long houseService_FK,

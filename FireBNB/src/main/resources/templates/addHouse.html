@@ -1,3 +1,10 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add House</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
 <body>
 	<div class="container">
 		<h1>Add House</h1>
@@ -9,6 +16,7 @@
 				<td>Description</td>
 				<td><input type="text" name="description" th:value="${description}" /></td>
 			</tr>
+			<tr>
 				<td>Services</td>
 				 
 				<tr th:each="service: ${listServices}">
