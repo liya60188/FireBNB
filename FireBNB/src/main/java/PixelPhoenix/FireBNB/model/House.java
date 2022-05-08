@@ -1,11 +1,24 @@
 package PixelPhoenix.FireBNB.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import PixelPhoenix.FireBNB.repository.ServiceRepository;
+import PixelPhoenix.FireBNB.service.ServiceService;
 
 @Entity
 @Table(name="house")
@@ -15,6 +28,7 @@ public class House{
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name="id_house", unique = true)
 		Long id_house;
+		
 		public Long getId_house() {
 			return id_house;
 		}
@@ -41,14 +55,24 @@ public class House{
 			this.ratingsH = ratingsH;
 		}
 		
-		String services;	
-		public String getServices() {
+		//Test for services checkbox
+		/*@ManyToMany
+	    @JoinTable(joinColumns = @JoinColumn(name = "id_house"), inverseJoinColumns = @JoinColumn(name = "id_services"))
+	    private Set<Service> services;
+	    */
+	
+		// TODO - Create FK in db
+		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
+		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
+		Set<Service> services;
+		public Set<Service> getServices() {
 			return services;
 		}
 
-		public void setServices(String services) {
+		public void setServices(Set<Service> services) {
 			this.services = services;
 		}
+		
 
 		String constraints;
 		public String getConstraints() {
@@ -68,7 +92,7 @@ public class House{
 			this.photos = photos;
 		} 
 		
-		public House(Long id_house,String description, int ratingsH, String services, String constraints,String photos) {
+		public House(Long id_house,String description, int ratingsH, Set<Service> services, String constraints,String photos) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
@@ -78,6 +102,4 @@ public class House{
 		}
 		
 		public House() {}
-
-
 }

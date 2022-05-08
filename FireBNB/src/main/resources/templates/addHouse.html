@@ -1,0 +1,47 @@
+<body>
+	<div class="container">
+		<h1>Add House</h1>
+		<p></p>
+		<p></p>
+		<form action="/housesList/add" th:object="${house}" method="post">
+			<table>
+				<tr>
+				<td>Description</td>
+				<td><input type="text" name="description" th:value="${description}" /></td>
+			</tr>
+				<td>Services</td>
+				 
+				<tr th:each="service: ${listServices}">
+				<td th:text="${service.serviceName}">Service Name</td>
+				<td><input type="checkbox" name="services" th:value="${service.serviceName}"/></td>
+				<!-- 
+				<td><input type="checkbox" name="services" 
+				th:each="service: ${listServices}"
+				th:text="${service.serviceName}"
+				th:value="${service.serviceName}"
+				th:field="*{services}" /></td>
+				-->
+			</tr>
+			<tr>
+				<td>Constraints</td>
+				<td><input type="text" name="constraints" th:value="${constraints}" /></td>
+			</tr>
+			<tr>
+				<td>Ratings</td>
+				<td><input type="text" name="ratingsH" th:value="${ratingsH}" /></td>
+			</tr>
+			<tr>
+				<td>Photos</td>
+				<td><input type="text" name="photos" th:value="${photos}" /></td>
+			</tr>
+			<tr>
+				<td>User ID (change to current logged in)</td>
+				<td><input type="text" name="id_user" th:value="1" /></td>
+			</tr>
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

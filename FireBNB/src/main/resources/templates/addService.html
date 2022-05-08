@@ -1,0 +1,18 @@
+<body>
+	<div class="container">
+		<h1>Add Services</h1>
+		<p></p>
+		<p></p>
+		<form action="/servicesList/add" method="post">
+			<table>
+				<tr>
+					<td>Service Name</td>
+					<td><input type="text" name="serviceName" th:value="${serviceName}" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

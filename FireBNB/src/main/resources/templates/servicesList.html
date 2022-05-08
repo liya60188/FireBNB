@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of Services</title>
+</head>
+<body>
+	List of Services
+
+	<form th:action="@{/servicesList}" th:object="${service}" method="post">
+
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Service Name</th>
+			</tr>
+
+			<tr th:each="service: ${listServices}">
+				<td th:text="${service.id_service}">Id</td>
+				<td th:text="${service.serviceName}">Service Name</td>
+				<td> <a th:href="@{/servicesList/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, houseService_FK=${service.houseService_FK}, edit=0)}">Edit</a>
+				</td>
+				<td><a onclick="return confirm('Please Confirm')"
+					th:href="@{/servicesList/delete(id_service=${service.id_service})}"> Delete
+				</a></td>
+			</tr>
+
+
+		</table>
+
+	</form>
+	
+	<!--  <a th:href="@{/servicesList/add(serviceName=${service.serviceName})}">Add new service</a>-->
+</body>
+</html>
