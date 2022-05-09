@@ -2,12 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Log In</title>
 </head>
 <body>
+	<div>
+		<h2>Log In</h2>
+      	<form method="post" th:action="@{/login}" th:object="${user}">
+       		<div>
+                <label>Email: </label>
+                <div>
+                    <input type="email" th:field="*{email}"
+                            required/>
+                </div>
+            </div>
+            <div>
+                <label>Password: </label>
+                <div>
+                    <input type="email" th:field="*{email}"
+                            required/>
+                </div>
+            </div>
+
+      </form>
+	</div>
+	
     <div>
         <div>
-            <h1>User Registration - Sign Up</h1>
+            <h1>No account? - Sign Up</h1>
         </div>
         <form th:action="@{/userRegistration}" th:object="${user}"
             method="post">
@@ -78,15 +99,14 @@
             <div>
                 <label>Additional Address: </label>
                 <div>
-                    <input type="text" th:field="*{additionalAddress}"
-                            required/>
+                    <input type="text" th:field="*{additionalAddress}"/>
                 </div>
             </div>
             
             <div>
                 <label>Phone Number: </label>
                 <div>
-                    <input type="text" th:field="*{phoneNumber}"
+                    <input type="number" th:field="*{phoneNumber}"
                             required minlength="10" maxlength="10"/>
                 </div>
             </div>

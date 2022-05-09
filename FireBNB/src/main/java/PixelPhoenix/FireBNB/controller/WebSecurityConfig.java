@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import PixelPhoenix.FireBNB.service.CustomUserDetailsService;
+import PixelPhoenix.FireBNB.model.User;
 
 @Configuration
 @EnableWebSecurity
@@ -43,20 +44,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider());
+	    	
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// Pages that do not require login
 		http.authorizeRequests()
-			.antMatchers("/users").authenticated()
-			.anyRequest().permitAll()
+			.antMatchers("/", "/registration").hasAnyAuthority("admin","user")
+			//Pages for admin only
+			.antMatchers("/users").hasAnyAuthority("admin")
+			//Pages for admin and users
+			.antMatchers("/profile").access("hasRole('user') or hasRole('admin')")
+			.anyRequest().authenticated()
 			.and()
 			.formLogin()
-				.usernameParameter("email")
-				.defaultSuccessUrl("/users")
-				.permitAll()
+			//.loginPage("/registration")
+			.loginProcessingUrl("/login")
+			.usernameParameter("email")
+			.passwordParameter("password")
+			.defaultSuccessUrl("/profile")
 			.and()
-			.logout().logoutSuccessUrl("/login").permitAll();
+			.logout().logoutSuccessUrl("/");
+		
 	}
 	
 	

@@ -22,6 +22,11 @@ public class UserController {
 	@Autowired
 	private UserService us;
 	
+	@GetMapping("/")
+	public String index() {
+		return "index";
+	}
+	
 	@GetMapping("/users")
 	public String listUsers(Model model) {
 		Iterable<User> listUsers = us.getUsers();
@@ -30,10 +35,8 @@ public class UserController {
 		return "usersList";
 	}
 	
-	@GetMapping("/userProfile/{id}")
+	@GetMapping("/profile/{id}")
 	public String userProfile(Model model, @PathVariable long id) {
-		//Optional<User> person = us.getUser(id);
-		//model.addAttribute("person", person);
 		us.getUser(id).ifPresent(person -> model.addAttribute("person", person));
 		return "userProfile";
 	}

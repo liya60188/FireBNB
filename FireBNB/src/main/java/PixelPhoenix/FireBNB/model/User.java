@@ -1,11 +1,9 @@
 package PixelPhoenix.FireBNB.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="user")
@@ -32,7 +30,11 @@ public class User {
 	private String additionalAddress;
 	@Column(name="phone_number")
 	private int phoneNumber;
+	@OneToOne(targetEntity= Role.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_role", referencedColumnName = "role_id")
+    private Role roles;
 	
+
 	public Long getId_user() {
 		return id_user;
 	}
@@ -123,8 +125,17 @@ public class User {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	public Role getRoles() {
+		return roles;
+	}
+	public void setRoles(Role roles) {
+		this.roles = roles;
+	}
 	
+	@PrePersist
+	private void onCreate() {
+		roles.setName("user");
+	}
 	
 	public User(Long id_user, String firstName, String lastName, int age, int rating, String email, String password,
 			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber) {
