@@ -20,6 +20,16 @@
 					<td>Content</td>
 					<td><input type="text" name="content" th:value="${content}" /></td>
 				</tr>
+				<!--  
+				<tr>
+					<td>Receiver</td>
+					<tr th:each="user: ${listUsers}">
+					<td th:text="${user.firstName}">Name</td>
+				<td>
+				<input type="hidden" name="_users" th:value="${users}"/>
+				<input type="checkbox" name="users" th:field="*{users}" th:value="${id_user}"/></td>
+			</tr>
+			-->
 				<tr>
 					<td><input type="submit" name="action" value="save" /></td>
 				</tr>
