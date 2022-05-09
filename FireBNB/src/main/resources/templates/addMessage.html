@@ -1,0 +1,29 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add Service</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>Add Message</h1>
+		<p></p>
+		<p></p>
+		<form action="/messagesList/add" method="post">
+			<table>
+				<tr>
+					<td>Subject</td>
+					<td><input type="text" name="subject" th:value="${subject}" /></td>
+				</tr>
+				<tr>
+					<td>Content</td>
+					<td><input type="text" name="content" th:value="${content}" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
