@@ -2,10 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>List of Services</title>
+<title>List of houses</title>
 </head>
 <body>
 	List of Houses
+	
+	<div class=container>
+		<form action="/housesList/search" method="post">
+			<table>
+				<tr>
+					<td>Search: </td>
+					<td><input type="text" name="motCle" th:value="${motC}" placeholder="Find by description or Ratings" size="50"/></td>
+					<td><input type="submit" name="action" value="search" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
 
 	<form th:action="@{/housesList}" th:object="${house}" method="post">
 
@@ -24,11 +36,15 @@
 				<td th:text="${house.constraints}">Constraints</td>
 				<td th:text="${house.ratingsH}">Rate</td>
 				<td th:text="${house.photos}">Photos</td>
+				<td>
+				<a th:href="@{/housesList/{id}(id=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos})}">View</a>
+				</td>
 				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, edit=0)}">Edit</a>
 				</td>
 				<td><a onclick="return confirm('Please Confirm')"
 					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete
 				</a></td>
+				
 			</tr>
 
 

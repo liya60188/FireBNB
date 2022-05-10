@@ -1,6 +1,5 @@
 package PixelPhoenix.FireBNB.repository;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
@@ -16,8 +15,14 @@ import PixelPhoenix.FireBNB.model.Service;
 
 @Repository
 public interface HouseRepository extends JpaRepository<House, Long>{
+	/* ORIGINAL
 	@Query("select house from House house where house.id_house like :x")
 	public Page<House> findByName(@Param("x") Long id_house, Pageable pg);
+	*/
+	
+	@Query("select house from House house where house.description like :x or house.ratingsH like: x")
+	public Page<House> findByName(@Param("x") String keyword, Pageable pg);
+	
 	
 	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 	public Set<Service> getJoinedHouseServices();

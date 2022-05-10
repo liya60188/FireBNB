@@ -8,6 +8,18 @@
 
 List of Constraints
 
+	<div class=container>
+		<form action="/constraintsList/search" method="post">
+			<table>
+				<tr>
+					<td>Recherche simple:</td>
+					<td><input type="text" name="motCle" th:value="${motC}" /></td>
+					<td><input type="submit" name="action" value="search" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
 	<form th:action="@{/constraintsList}" th:object="${constraint}" method="post">
 
 		<table>

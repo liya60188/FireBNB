@@ -3,6 +3,8 @@ package PixelPhoenix.FireBNB.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import PixelPhoenix.FireBNB.model.Constraint;
 import PixelPhoenix.FireBNB.model.Service;
+import PixelPhoenix.FireBNB.repository.ConstraintRepository;
+import PixelPhoenix.FireBNB.repository.ServiceRepository;
 import PixelPhoenix.FireBNB.service.ConstraintService;
 
 @Controller
@@ -22,12 +26,32 @@ public class ConstraintController {
 	@Autowired
 	private ConstraintService constraintService;
 	
+	/*
 	@GetMapping("/constraintsList")
 	public String listConstraints(Model model) {
 		Iterable<Constraint> listConstraints = constraintService.getConstraints();
 		model.addAttribute("listConstraints", listConstraints);
 		return "constraintsList";
 	}
+	*/
+	
+	
+	//List of constraints Page with search bar
+		@Autowired
+		private ConstraintRepository constraintRepository;
+		@RequestMapping(value = {"/constraintsList", "/constraintsList/search"})
+		public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc,
+				@RequestParam(name = "page", defaultValue = "0") int page,
+				@RequestParam(name = "size", defaultValue = "5") int size) {
+			Page<Constraint> listConstraints = constraintRepository.findByName("%" + mc + "%", PageRequest.of(page, size));
+			int[] pages = new int[listConstraints.getTotalPages()];
+			model.addAttribute("listConstraints", listConstraints.getContent());
+			model.addAttribute("motC", mc);
+			model.addAttribute("pages", pages);
+			model.addAttribute("pageCourante", page);
+			return "constraintsList";
+		}
+	
 	
 	@GetMapping("/constraintsList/add")
 	public String constraintForm(Model model) {

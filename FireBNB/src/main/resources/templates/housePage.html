@@ -1,0 +1,39 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>House Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<form th:action="{/housePage/{id}(id=${house.id_house})}" method="get">
+		
+		
+		<div>
+			<label>Description</label>
+			<div> <input type = "text" name="description" th:values="${house.description}" disabled="disabled"></div>
+		</div>
+		
+		<div>
+			<label>Services</label>
+			<div> <input type = "text" name="services" th:values="${house.services}"></div>
+		</div>
+		
+		<div>
+			<label>Constraints</label>
+			<div> <input type = "text" name="constraints" th:values="${house.constraints}"></div>
+		</div>
+		
+		<div>
+			<label>Rate</label>
+			<div> <input type = "text" name="ratingsH" th:values="${house.ratingsH}"></div>
+		</div>
+		
+		<div>
+			<label>Photos</label>
+			<div> <input type = "text" name="photos" th:values="${house.photos}"></div>
+		</div>
+
+	</form>
+</body>
+</html>

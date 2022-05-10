@@ -1,24 +1,17 @@
 package PixelPhoenix.FireBNB.model;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import PixelPhoenix.FireBNB.repository.ServiceRepository;
-import PixelPhoenix.FireBNB.service.ServiceService;
 
 @Entity
 @Table(name="house")
@@ -55,7 +48,7 @@ public class House{
 			this.ratingsH = ratingsH;
 		}
 
-		// TODO - Create FK in db
+		// Services - Foreign Key
 		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
 		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
 		
@@ -68,7 +61,7 @@ public class House{
 			this.services = services;
 		}
 		
-		//Constraints
+		//Constraints - Foreign Key
 		@OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
 		@JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
 		Set<Constraint> constraints;
@@ -80,16 +73,19 @@ public class House{
 			this.constraints = constraints;
 		}
 
-		String photos;
-		public String getPhotos() {
+		//Photos - Foreign Key
+		@OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
+		@JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
+		Set<Photo> photos;		
+		public Set<Photo> getPhotos() {
 			return photos;
 		}
 
-		public void setPhotos(String photos) {
+		public void setPhotos(Set<Photo> photos) {
 			this.photos = photos;
-		} 
-		
-		public House(Long id_house,String description, int ratingsH, Set<Service> services, Set<Constraint> constraints,String photos) {
+		}
+
+		public House(Long id_house,String description, int ratingsH, Set<Service> services, Set<Constraint> constraints,Set<Photo> photos) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
