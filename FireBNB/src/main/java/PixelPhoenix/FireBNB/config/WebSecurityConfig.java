@@ -1,8 +1,5 @@
-package PixelPhoenix.FireBNB.controller;
+package PixelPhoenix.FireBNB.config;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,13 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import PixelPhoenix.FireBNB.service.CustomUserDetailsService;
-import PixelPhoenix.FireBNB.model.User;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private DataSource dataSource;
+
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -51,15 +46,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// Pages that do not require login
 		http.authorizeRequests()
-			.antMatchers("/", "/registration").hasAnyAuthority("admin","user")
+			.antMatchers("/", "/registration").permitAll()
 			//Pages for admin only
 			.antMatchers("/users").hasAnyAuthority("admin")
 			//Pages for admin and users
 			.antMatchers("/profile").access("hasRole('user') or hasRole('admin')")
 			.anyRequest().authenticated()
 			.and()
-			.formLogin()
-			//.loginPage("/registration")
+			.formLogin().loginPage("/registration")
 			.loginProcessingUrl("/login")
 			.usernameParameter("email")
 			.passwordParameter("password")

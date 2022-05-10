@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
@@ -18,12 +19,14 @@
             <div>
                 <label>Password: </label>
                 <div>
-                    <input type="email" th:field="*{email}"
+                    <input type="password" th:field="*{password}"
                             required/>
                 </div>
             </div>
-
-      </form>
+			<div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+      	</form>
 	</div>
 	
     <div>

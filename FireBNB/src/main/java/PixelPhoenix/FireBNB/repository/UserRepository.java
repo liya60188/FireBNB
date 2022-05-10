@@ -1,5 +1,6 @@
 package PixelPhoenix.FireBNB.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,7 @@ import PixelPhoenix.FireBNB.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query("SELECT u FROM User u WHERE u.email = ?1")
-	public User findByEmail(@Param("email") String email);
+	public User findByEmail(@Param("email") String email);	
+	List<User> findByFirstNameLike(String firstName);
 }
 

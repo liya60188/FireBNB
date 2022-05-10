@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@SuppressWarnings("serial")
 public class CustomUserDetails implements UserDetails{
 	
 	private User user;
@@ -19,14 +20,14 @@ public class CustomUserDetails implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Role roles = user.getRoles();
+		List<Role> roles = user.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-         
-        
-            authorities.add(new SimpleGrantedAuthority(roles.getName()));
-        
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
          
         return authorities;
+        
 	}
 
 	@Override

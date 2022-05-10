@@ -1,5 +1,6 @@
 package PixelPhoenix.FireBNB.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,17 +28,14 @@ public class UserController {
 		return "index";
 	}
 	
-	@GetMapping("/users")
-	public String listUsers(Model model) {
-		Iterable<User> listUsers = us.getUsers();
-		model.addAttribute("listUsers", listUsers);
+	@GetMapping("/profile")
+	public String userProfile(Model model, Principal principal/*@PathVariable long id*/) {
 		
-		return "usersList";
-	}
-	
-	@GetMapping("/profile/{id}")
-	public String userProfile(Model model, @PathVariable long id) {
-		us.getUser(id).ifPresent(person -> model.addAttribute("person", person));
+		String email = principal.getName();
+		User user = us.getUser(email);
+		model.addAttribute("person", user);
+		//us.getUser(email).ifPresent(person -> model.addAttribute("person", person));
+		
 		return "userProfile";
 	}
 	
@@ -50,10 +48,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/userRegistration")
-	public String processRegister(@ModelAttribute User user) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
+	public String processRegister(@ModelAttribute User user, Model model) {
+		
+		if(us.isUserExist(user.getEmail())) {
+			model.addAttribute("exist",true);
+			return "register";
+		}
 		us.createUser(user);
 		
 		return "registrationSuccess";
