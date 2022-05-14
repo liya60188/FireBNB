@@ -35,7 +35,6 @@ public class UserController {
 		User user = us.getUser(email);
 		model.addAttribute("person", user);
 		//us.getUser(email).ifPresent(person -> model.addAttribute("person", person));
-		
 		return "userProfile";
 	}
 	

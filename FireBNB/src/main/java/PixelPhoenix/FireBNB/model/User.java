@@ -31,8 +31,15 @@ public class User {
 	private String additionalAddress;
 	@Column(name="phone_number")
 	private int phoneNumber;
-    @ManyToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_role")
+//    @ManyToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "user_role")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ElementCollection(targetClass=Role.class)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+            )
     private List<Role> roles;
 	
 
