@@ -38,11 +38,11 @@ public class UserController {
 		return "userProfile";
 	}
 	
-	@GetMapping("/registration")
+	@GetMapping("/register")
 	public String registrationForm(Model model) {
 		User user = new User();
 	    model.addAttribute("user",user);
-	    
+	
 	    return "register";
 	}
 	

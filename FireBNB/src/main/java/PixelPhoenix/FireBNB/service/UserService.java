@@ -1,10 +1,9 @@
 package PixelPhoenix.FireBNB.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,20 +35,22 @@ public class UserService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-		Role userRole = new Role("user");
-		List<Role> roles = new ArrayList<>();
-		roles.add(userRole);
-		user.setRoles(roles);
+//		Role userRole = new Role("user");
+//		Set<Role> roles = new HashSet<>();
+//		roles.add(userRole);
+//		user.setRoles(roles);
+		user.setRole("user");
 		ur.save(user);
 	}
 	public void createAdmin(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-		Role userRole = new Role("admin");
-		List<Role> roles = new ArrayList<>();
-		roles.add(userRole);
-		user.setRoles(roles);
+//		Role userRole = new Role("admin");
+//		Set<Role> roles = new HashSet<>();
+//		roles.add(userRole);
+//		user.setRoles(roles);
+		user.setRole("admin");
 		ur.save(user);
 	}
 	

@@ -1,19 +1,21 @@
 package PixelPhoenix.FireBNB.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name="user")
-public class User {
+public class User implements Serializable{
 
 	@Id
+	@Column(name="user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_user", unique = true)
-	private Long id_user;
+	private Long user_id;
 	@Column(name="first_name")
 	private String firstName;
 	@Column(name="last_name")
@@ -31,25 +33,18 @@ public class User {
 	private String additionalAddress;
 	@Column(name="phone_number")
 	private int phoneNumber;
-//    @ManyToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "user_role")
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@ElementCollection(targetClass=Role.class)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-            )
-    private List<Role> roles;
-	
+//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@JoinTable(
+//			name="user_roles",
+//			joinColumns = @JoinColumn(name="user_id"),
+//			inverseJoinColumns = @JoinColumn(name="role_id")
+//			)
+//	private Set<Role> roles;
+	private String role;
 
 	public Long getId_user() {
-		return id_user;
+		return user_id;
 	}
-	public void setId_user(Long id_user) {
-		this.id_user = id_user;
-	}
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -132,18 +127,24 @@ public class User {
 	}
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}	
+//	public Set<Role> getRoles() {
+//		return roles;
+//	}
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
+	public String getRole() {
+		return role;
 	}
-	public List<Role> getRoles() {
-		return roles;
-	}
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
-	public User(Long id_user, String firstName, String lastName, int age, int rating, String email, String password,
-			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber) {
+	public User(Long user_id, String firstName, String lastName, int age, int rating, String email, String password,
+			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber, String role) {
 		super();
-		this.id_user = id_user;
+		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -156,6 +157,7 @@ public class User {
 		this.country = country;
 		this.additionalAddress = additionalAddress;
 		this.phoneNumber = phoneNumber;
+		this.role = role;
 	}
 	
 	public User() {
