@@ -44,7 +44,7 @@ public class HouseController {
 		hssv.saveHouse(house.getServices());
 	}*/
 	
-	/*
+	
 	@GetMapping("/housesList")
 	public String listHouses(Model model) {
 		Iterable<House> listHouses = hssv.getHouses();
@@ -52,121 +52,133 @@ public class HouseController {
 		
 		return "housesList";
 	}
-	*/
+	
 	
 	//List of houses Page with search bar
-			@Autowired
-			private HouseRepository houseRepository;
-			@RequestMapping(value = {"/housesList", "/housesList/search"})
-			public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String keyword,
-					@RequestParam(name = "page", defaultValue = "0") int page,
-					@RequestParam(name = "size", defaultValue = "5") int size) {
-				Page<House> listHouses = houseRepository.findByName("%" + keyword + "%", PageRequest.of(page, size));
-				int[] pages = new int[listHouses.getTotalPages()];
-				model.addAttribute("listHouses", listHouses.getContent());
-				model.addAttribute("motC", keyword);
-				model.addAttribute("pages", pages);
-				model.addAttribute("pageCourante", page);
-				return "housesList";
-			}
+	@Autowired
+	private HouseRepository houseRepository;
+	@RequestMapping(value = {"/housesList", "/housesList/search"})
+	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String keyword,
+			@RequestParam(name = "page", defaultValue = "0") int page,
+			@RequestParam(name = "size", defaultValue = "5") int size) {
+		Page<House> listHouses = houseRepository.findByName("%" + keyword + "%", PageRequest.of(page, size));
+		int[] pages = new int[listHouses.getTotalPages()];
+		model.addAttribute("listHouses", listHouses.getContent());
+		model.addAttribute("motC", keyword);
+		model.addAttribute("pages", pages);
+		model.addAttribute("pageCourante", page);
+		return "housesList";
+	}
 	
 	
+			
 	// Tests for Services
 	@Autowired
 	private ServiceRepository serviceRepository;
 	@GetMapping("/housesList/add")
-    public ModelAndView houseForm() {
-        House house = new House();
-        ModelAndView mav = new ModelAndView("addHouse");
-        mav.addObject("house", house);
-         
-        Iterable<Service> listServices = serviceService.getServices();
-		mav.addObject("listServices", listServices);
-        
-		Iterable<Constraint> listConstraints = constraintService.getConstraints();
-		mav.addObject("listConstraints", listConstraints);
-         
-        return mav;    
-    }
-	
-	@PostMapping("/housesList/add")
-	public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "addHouse";
-		}
-		House houseAdd = hssv.saveHouse(house);
-		model.addAttribute("house", houseAdd);
-		return "redirect:/housesList";
-	}
-
-	/*
-	 
-	 @GetMapping("/housesList/add")
 	public String houseForm(Model model) {
-		model.addAttribute("house", new House());
-		
-		Iterable<Service> listServices = serviceService.getServices();
-		model.addAttribute("listServices", listServices);
-		
-		Iterable<Constraint> listConstraints = constraintService.getConstraints();
-		model.addAttribute("listConstraints", listConstraints);
-		
-		return "addHouse";
-	}
+		 House house = new House();
+		 //ModelAndView mav = new ModelAndView("addHouse");
+		 model.addAttribute("house", house);
+		         
+		 Iterable<Service> listServices = serviceService.getServices();
+		 model.addAttribute("listServices", listServices);
+		        
+		 Iterable<Constraint> listConstraints = constraintService.getConstraints();
+		 model.addAttribute("listConstraints", listConstraints);
+		         
+		 return "addHouse";    
+		 }
+			
+//			@PostMapping("/housesList/add")
+//			public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
+//				if (result.hasErrors()) {
+//					return "addHouse";
+//				}
+//				House houseAdd = hssv.saveHouse(house);
+//				model.addAttribute("house", houseAdd);
+//				return "redirect:/housesList";
+//			}
+
+			@PostMapping("/housesList/add")
+			public String add(@ModelAttribute("house") @Validated House house, Model model) {
+				hssv.createHouse(house);
+				//model.addAttribute("house", houseAdd);
+				return "redirect:/housesList";
+			}
+			/*
+			 
+			 @GetMapping("/housesList/add")
+			public String houseForm(Model model) {
+				model.addAttribute("house", new House());
+				
+				Iterable<Service> listServices = serviceService.getServices();
+				model.addAttribute("listServices", listServices);
+				
+				Iterable<Constraint> listConstraints = constraintService.getConstraints();
+				model.addAttribute("listConstraints", listConstraints);
+				
+				return "addHouse";
+			}
+			
+			*/
 	
-	*/
-	
-	@RequestMapping(value = "/housesList/delete")
-	public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
-		hssv.deleteHouse(id_house);
-		return "redirect:/housesList";
-	}
-	
-	@RequestMapping(value = "/listHouses/edit")
-	public String edit(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house,
-			@RequestParam(name = "description", defaultValue = "") String description,
-			@RequestParam(name = "services", defaultValue = "") String services,
-			@RequestParam(name = "constraints", defaultValue = "") String constraints,
-			@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
-			@RequestParam(name = "photos", defaultValue = "") String photos,
-			@RequestParam(name = "edit", defaultValue = "") int edit) {		
-		if (edit == 0) {
-			model.addAttribute("id_house", id_house);
-			model.addAttribute("description", description);
-			model.addAttribute("services", services);
-			model.addAttribute("constraints", constraints);
-			model.addAttribute("ratingsH", ratingsH);
-			model.addAttribute("photos", photos);
-			return "housesEdit";
-		} else {
-			Optional<House> ot = hssv.getHouse(id_house);
-			House house = ot.get();
-			house.setDescription(description);
-			//house.setServices(services);
-			//house.setConstraints(constraints);
-			house.setRatingsH(ratingsH);
-			//house.setPhotos(photos);
-			hssv.saveHouse(house);
-			return "redirect:/housesList";
-		}
-	}
-	
-	
+			@RequestMapping(value = "/housesList/delete")
+			public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
+				hssv.deleteHouse(id_house);
+				return "redirect:/housesList";
+			}
+			
+			@RequestMapping(value = "/listHouses/edit")
+			public String edit(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house,
+					@RequestParam(name = "description", defaultValue = "") String description,
+					@RequestParam(name = "services", defaultValue = "") String services,
+					@RequestParam(name = "constraints", defaultValue = "") String constraints,
+					@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
+					@RequestParam(name = "photos", defaultValue = "") String photos,
+					@RequestParam(name = "edit", defaultValue = "") int edit) {		
+				if (edit == 0) {
+					model.addAttribute("id_house", id_house);
+					model.addAttribute("description", description);
+					model.addAttribute("services", services);
+					model.addAttribute("constraints", constraints);
+					model.addAttribute("ratingsH", ratingsH);
+					model.addAttribute("photos", photos);
+					return "housesEdit";
+				} else {
+					Optional<House> ot = hssv.getHouse(id_house);
+					House house = ot.get();
+					house.setDescription(description);
+					//house.setServices(services);
+					//house.setConstraints(constraints);
+					house.setRatingsH(ratingsH);
+					house.setPhotos(photos);
+					hssv.saveHouse(house);
+					return "redirect:/housesList";
+				}
+			}
 	/*
-	@RequestMapping(value="/housePage/{id}")
-	public String house(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house, 
+	@RequestMapping(value="/housePage/{id_housew}")
+	public String housePage(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house, 
 			@RequestParam(name = "description", defaultValue = "") String description,
 			@RequestParam(name = "services", defaultValue = "") String services,
 			@RequestParam(name = "constraints", defaultValue = "") String constraints,
 			@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
-			@RequestParam(name = "photos", defaultValue = "") String photos,
-			@RequestParam(name = "edit", defaultValue = "") int edit){		 
-		*/
+			@RequestParam(name = "photos", defaultValue = "") String photos){	
+		model.addAttribute("id_house", id_house);
+		model.addAttribute("description", description);
+		//model.addAttribute("services", services);
+		//model.addAttribute("constraints", constraints);
+		model.addAttribute("ratingsH", ratingsH);
+		//model.addAttribute("photos", photos);
+		return "housePage"; 
+	}*/
 	
-	
-	@RequestMapping(value="/housePage/{id}") 
+	@RequestMapping(value="/housePage/{id_house}") 
 	public String House(@PathVariable Long id_house, Model model){
-		model.addAttribute("house", hssv.getHouse(id_house));
+		Optional<House> house = hssv.getHouse(id_house);
+		model.addAttribute("house", house);
+		
 		return "housePage";
 		
 	}

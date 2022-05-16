@@ -23,11 +23,14 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	@Query("select house from House house where house.description like :x or house.ratingsH like: x")
 	public Page<House> findByName(@Param("x") String keyword, Pageable pg);
 	
+	/*
 	
 	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 	public Set<Service> getJoinedHouseServices();
 	
 	@Query("select new Constraint(house.id_house, constraint.constraintName) from House house join house.constraints constraint")
 	public Set<Constraint> getJoinedHouseConstraint();
+	
+	*/
 }
 

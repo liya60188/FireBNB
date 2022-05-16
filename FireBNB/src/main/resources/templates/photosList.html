@@ -16,20 +16,18 @@
 				<th>House Picture</th>
 			</tr>
 
-			<tr th:each="photo: ${photosList}">
+			<tr th:each="photo: ${listPhotos}">
 				<td th:text="${photo.id_photo}">Id</td>
-				<td th:text="${photo.housePhoto}">House Picture</td>
-				<td th:text="${photo.housePhoto_FK}">House id</td>
+				<td th:text="${photo.housePhoto}"><img alt="" th:src="*{'data:image/jpeg;base64,'+{photo.housePhoto}}" style="width: 100px;height: 100px;"></td>
+				<!--  <td th:text="${photo.housePhoto_FK}">House id</td> -->
 				<td><a onclick="return confirm('Please Confirm')"
 					th:href="@{/photosList/delete(id_photo=${photo.id_photo}, mc=${motC})}"> Delete
 				</a></td>
 			</tr>
 
-
 		</table>
 
 	</form>
-	
 
 </body>
 

@@ -33,25 +33,10 @@ public class Service{
 		this.serviceName = serviceName;
 	}
 	
-	Long houseService_FK;	
-	public Long getHouseService_FK() {
-		return houseService_FK;
-	}
 
-	public void setHouseService_FK(Long houseService_FK) {
-		this.houseService_FK = houseService_FK;
-	}
-	
-	// Need constructor with 2 argmts to not have an error while joining for HouseServices
 	public Service(Long id_service, String serviceName) {
 		this.id_service = id_service;
 		this.serviceName = serviceName;
-	}
-
-	public Service(Long id_service, String serviceName, Long houseService_FK) {
-		this.id_service = id_service;
-		this.serviceName = serviceName;
-		this.houseService_FK = houseService_FK;
 	}
 
 	public Service() {}

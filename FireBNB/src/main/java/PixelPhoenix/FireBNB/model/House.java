@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -47,6 +48,28 @@ public class House{
 		public void setRatingsH(int ratingsH) {
 			this.ratingsH = ratingsH;
 		}
+		
+		String services;
+		
+		public String getServices() {
+			return services;
+		}
+
+		public void setServices(String services) {
+			this.services = services;
+		}
+		
+		String constraints;
+
+		public String getConstraints() {
+			return constraints;
+		}
+
+		public void setConstraints(String constraints) {
+			this.constraints = constraints;
+		}
+
+		/*
 
 		// Services - Foreign Key
 		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
@@ -73,6 +96,8 @@ public class House{
 			this.constraints = constraints;
 		}
 
+*/
+		/*
 		//Photos - Foreign Key
 		@OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
 		@JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
@@ -84,14 +109,38 @@ public class House{
 		public void setPhotos(Set<Photo> photos) {
 			this.photos = photos;
 		}
+		*/
+		
+		@Lob
+		@Column(columnDefinition = "LONGBLOB")
+		String photos;
 
-		public House(Long id_house,String description, int ratingsH, Set<Service> services, Set<Constraint> constraints,Set<Photo> photos) {
+		public String getPhotos() {
+			return photos;
+		}
+
+		public void setPhotos(String photos) {
+			this.photos = photos;
+		}
+		
+		Long id_user;
+		
+		public Long getId_user() {
+			return id_user;
+		}
+
+		public void setId_user(Long id_user) {
+			this.id_user = id_user;
+		}
+
+		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
 			this.services = services;
 			this.constraints = constraints;
 			this.photos = photos;	
+			this.id_user = id_user;
 		}
 		
 		public House() {}

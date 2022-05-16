@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<form th:action="{/housePage/{id}(id=${house.id_house})}" method="get">
+	<form action="/housePage" method="get">
 		
 		
 		<div>
@@ -22,7 +22,7 @@
 		<div>
 			<label>Constraints</label>
 			<div> <input type = "text" name="constraints" th:values="${house.constraints}"></div>
-		</div>
+		</div> 
 		
 		<div>
 			<label>Rate</label>
@@ -31,7 +31,7 @@
 		
 		<div>
 			<label>Photos</label>
-			<div> <input type = "text" name="photos" th:values="${house.photos}"></div>
+			<div> <img alt="" th:src="${house.photos}" style="width: 100px;height: 100px;"></div>
 		</div>
 
 	</form>

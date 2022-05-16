@@ -33,25 +33,9 @@ public class Constraint {
 		this.constraintName = constraintName;
 	}
 	
-	Long houseConstraint_FK;
-
-	public Long getHouseConstraint_FK() {
-		return houseConstraint_FK;
-	}
-
-	public void setHouseConstraint_FK(Long houseConstraint_FK) {
-		this.houseConstraint_FK = houseConstraint_FK;
-	}
-	
 	public Constraint(Long id_constraint, String constraintName) {
 		this.id_constraint = id_constraint;
 		this.constraintName = constraintName;
-	}
-	
-	public Constraint(Long id_constraint, String constraintName, Long houseConstraint_FK) {
-		this.id_constraint = id_constraint;
-		this.constraintName = constraintName;
-		this.houseConstraint_FK = houseConstraint_FK;
 	}
 
 	public Constraint() {}
