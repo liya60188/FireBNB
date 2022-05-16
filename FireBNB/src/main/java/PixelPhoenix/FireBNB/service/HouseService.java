@@ -35,7 +35,7 @@ public class HouseService {
 		 hsrp.deleteById(id);
 	    }
 	 
-	 @PutMapping(value = "listHouses/housesEdit")
+	 @PutMapping(value = "/housesList/add")
 	 public House saveHouse(@RequestBody House house) {
 		 House savedHouse = hsrp.save(house);
          return savedHouse;
@@ -45,15 +45,19 @@ public class HouseService {
 		 hsrp.save(house);
 	 }
 	 
-//	@SuppressWarnings("null")
-//	@GetMapping("housesList")
-//	 public String getJoinedHouseServices(){
-//		 List<String> serviceNames = null;
-//		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
-//	            serviceNames.add(service.getServiceName());
-//	        }
-//		 return Arrays.toString(serviceNames.toArray());
-//	 }
+	 /*
+	@SuppressWarnings("null")
+	@GetMapping("housesList")
+	 public String getJoinedHouseServices(){
+		 List<String> serviceNames = null;
+		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
+	            serviceNames.add(service.getServiceName());
+	        }
+		 return Arrays.toString(serviceNames.toArray());
+	 }
+	 */
+	
+	
 	
 
 }

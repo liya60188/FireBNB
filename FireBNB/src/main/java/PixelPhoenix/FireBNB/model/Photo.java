@@ -36,22 +36,11 @@ public class Photo {
 	public void setHousePhoto(String housePhoto) {
 		this.housePhoto = housePhoto;
 	}
-
-	Long housePhoto_FK;
-
-	public Long getHousePhoto_FK() {
-		return housePhoto_FK;
-	}
-
-	public void setHousePhoto_FK(Long housePhoto_FK) {
-		this.housePhoto_FK = housePhoto_FK;
-	}
 	
 	
-	public Photo(Long id_photo, String housePhoto, Long housePhoto_FK) {
+	public Photo(Long id_photo, String housePhoto) {
 		this.id_photo = id_photo;
 		this.housePhoto = housePhoto;
-		this.housePhoto_FK = housePhoto_FK;
 	}
 	
 	public Photo() {}
