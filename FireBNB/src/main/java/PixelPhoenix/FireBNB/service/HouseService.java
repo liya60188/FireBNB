@@ -41,15 +41,19 @@ public class HouseService {
          return savedHouse;
 	 }
 	 
-	@SuppressWarnings("null")
-	@GetMapping("housesList")
-	 public String getJoinedHouseServices(){
-		 List<String> serviceNames = null;
-		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
-	            serviceNames.add(service.getServiceName());
-	        }
-		 return Arrays.toString(serviceNames.toArray());
+	 public void createHouse(House house) {
+		 hsrp.save(house);
 	 }
+	 
+//	@SuppressWarnings("null")
+//	@GetMapping("housesList")
+//	 public String getJoinedHouseServices(){
+//		 List<String> serviceNames = null;
+//		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
+//	            serviceNames.add(service.getServiceName());
+//	        }
+//		 return Arrays.toString(serviceNames.toArray());
+//	 }
 	
 
 }

@@ -23,7 +23,7 @@
 				<td th:text="${house.services}">Services</td>
 				<td th:text="${house.constraints}">Constraints</td>
 				<td th:text="${house.ratingsH}">Rate</td>
-				<td th:text="${house.photos}">Photos</td>
+				<td><img th:src="${house.photos}" style="width : 100px; height: 100px;"></td>
 				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, edit=0)}">Edit</a>
 				</td>
 				<td><a onclick="return confirm('Please Confirm')"

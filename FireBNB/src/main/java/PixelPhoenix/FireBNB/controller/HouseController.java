@@ -54,30 +54,36 @@ public class HouseController {
 	@Autowired
 	private ServiceRepository serviceRepository;
 	@GetMapping("/housesList/add")
-    public ModelAndView houseForm() {
+    public String houseForm(Model model) {
         House house = new House();
-        ModelAndView mav = new ModelAndView("addHouse");
-        mav.addObject("house", house);
+        //ModelAndView mav = new ModelAndView("addHouse");
+        model.addAttribute("house", house);
          
         Iterable<Service> listServices = serviceService.getServices();
-		mav.addObject("listServices", listServices);
+		model.addAttribute("listServices", listServices);
         
 		Iterable<Constraint> listConstraints = constraintService.getConstraints();
-		mav.addObject("listConstraints", listConstraints);
+		model.addAttribute("listConstraints", listConstraints);
          
-        return mav;    
+        return "addHouse";    
     }
 	
+//	@PostMapping("/housesList/add")
+//	public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
+//		if (result.hasErrors()) {
+//			return "addHouse";
+//		}
+//		House houseAdd = hssv.saveHouse(house);
+//		model.addAttribute("house", houseAdd);
+//		return "redirect:/housesList";
+//	}
+
 	@PostMapping("/housesList/add")
-	public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "addHouse";
-		}
-		House houseAdd = hssv.saveHouse(house);
-		model.addAttribute("house", houseAdd);
+	public String add(@ModelAttribute("house") @Validated House house, Model model) {
+		hssv.createHouse(house);
+		//model.addAttribute("house", houseAdd);
 		return "redirect:/housesList";
 	}
-
 	/*
 	 
 	 @GetMapping("/housesList/add")

@@ -19,10 +19,10 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	@Query("select house from House house where house.id_house like :x")
 	public Page<House> findByName(@Param("x") Long id_house, Pageable pg);
 	
-	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
-	public Set<Service> getJoinedHouseServices();
-	
-	@Query("select new Constraint(house.id_house, constraint.constraintName) from House house join house.constraints constraint")
-	public Set<Constraint> getJoinedHouseConstraint();
+//	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
+//	public Set<Service> getJoinedHouseServices();
+//	
+//	@Query("select new Constraint(house.id_house, constraint.constraintName) from House house join house.constraints constraint")
+//	public Set<Constraint> getJoinedHouseConstraint();
 }
 
