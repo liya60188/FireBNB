@@ -1,0 +1,195 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Index</title>
+		<link rel="stylesheet" type="text/css" href="index.css"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</head>
+
+<body>
+
+<!-- Header -->
+<div class="sticky-top">
+	<div class="container-fluid" style="background-color: rgba(20, 166, 182);">
+	  <div class="row">
+	    <div class="col-3 mt-2">
+	     	<img src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" alt="FireBnB logo" class="img-fluid" width="25%" height="25%">
+	    </div>
+	    <div class="col-6 text-left mt-2">
+	     	<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-light">Find a home</a>
+	    </div>
+	    <div class="col-3 text-right mt-2">
+	    	<a href="https://cdn.futura-sciences.com/buildsv6/images/mediumoriginal/6/5/2/652a7adb1b_98148_01-intro-773.jpg" class="text-light">Sign Up / Log In</a>
+	    </div>
+	  </div>
+	</div>
+</div>
+<!-- End of header -->
+
+<!-- Page content -->
+
+<!-- Search bars-->
+<div class="container-fluid" style="background-color: rgba(20, 166, 182);">
+	<div class="row">
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+ 			 	<input type="search" id="form1" class="form-control rounded-pill" placeholder="Country" aria-label="Search"/>
+			</div>
+		</div>
+		
+		<div class="col mt-5 mb-5">
+			<div class="form-outline text-center">
+ 			 	<input type="search" id="form2" class="form-control rounded-pill" placeholder="City" aria-label="Search"/>
+			</div>
+		</div>
+		
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+ 			 	<input type="search" id="form3" class="form-control rounded-pill" placeholder="Date" aria-label="Search" />
+			</div>
+		</div>
+		
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+ 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="People" aria-label="Search" />
+			</div>
+		</div>
+		
+		<div class="col-1 mt-5 mb-5 text-left">
+			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  				<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+  			</svg>
+		</div>
+	</div>
+</div>
+<!-- End of search bars -->
+
+<!-- Background images -->
+<div class="bg-image" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzNzYzNn0?utm_source=dictionnaire&utm_medium=referral');background-repeat: no-repeat; background-size: contain;">
+	<div class="mask" style="background-color: rgba(203, 238, 242, 0.6);">
+    	<div class="d-flex justify-content-center align-items-center h-100">
+    	<!-- Carousel -->
+    	<div id="carousel" class="carousel slide" data-ride="carousel">
+		  <ul class="carousel-indicators">
+		    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#carousel" data-slide-to="1"></li>
+		    <li data-target="#carousel" data-slide-to="2"></li>
+		  </ul>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="https://static.almeriahomes.com/img/og_default.2020112416483745.jpg" alt="Madrid, Spain" class="rounded">
+		      <div class="carousel-caption d-none d-md-block" style="background-color: rgba(20, 23, 24, 0.6);">
+			    <h5>New House. New City. For FREE</h5>
+			  </div>
+		    </div>
+		    <div class="carousel-item">
+		      <img src="https://cdn.decoist.com/wp-content/uploads/2016/06/Street-facade-of-Two-Houses-by-Alkhemist-Architects-in-Bangkok-Thailand.jpg" alt="Bangkok, Thailand" class="rounded" >
+		    </div>
+		    <div class="carousel-item">
+		      <img src="https://pbs.twimg.com/media/ExBSISWWQAI3OtV.jpg" alt="Seoul, South Korea" class="rounded">
+		    </div>
+		  </div>
+		  <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+		    <span class="carousel-control-prev-icon"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#carousel" data-slide="next">
+		    <span class="carousel-control-next-icon"></span>
+		  </a>
+		</div>
+    </div>
+ </div>
+ 
+ <div class="bg-image" style="background-image: url('https://www.vivons-maison.com/sites/default/files/styles/740px/public/field/image/belle-maison-de-ville-luxe.jpg?itok=Q2QYVCq6'); background-repeat: no-repeat; background-size: cover;">
+	<div class="mask" style="background-color: rgba(3, 3, 3, 0.6);">
+    	<div class="d-flex justify-content-center h-100">
+    		<div class="row">
+    			<h1 class="text-white">BEST RATED HOUSES</h1>
+    		</div>
+      		
+      		<div class="row">
+      			
+      		</div>
+      	</div>
+    </div>
+ </div>
+<!-- End of background images -->
+
+<div class="container-fluid">
+	<div class="row">
+	</div>
+	<div class="row">
+	</div>
+	<div class="row">
+	</div>
+</div>
+<!-- End of page content -->
+
+<!-- Footer -->
+<div class="container-fluid" style="background-color: rgba(20, 166, 182);">
+	<div class="row text-light">
+		<div class="col-1"></div>
+		<div class="col mt-3 text-left">
+			<p><u>Help</u></p>
+			<a href="https://www.photobox.fr/blog/wp-content/uploads/sites/3/2017/05/types-de-lumiere-photo-ideales.jpg" class="text-light">Contact the administrator</a><br>
+			<a href="https://img.freepik.com/photos-gratuite/prise-vue-au-grand-angle-seul-arbre-poussant-sous-ciel-assombri-pendant-coucher-soleil-entoure-herbe_181624-22807.jpg?w=2000" class="text-light">Q&A</a>	
+		</div>
+		 
+		<div class="col-3 text-left mt-3" >
+				<p><u>Where to find us</u></p>
+				<p>10 rue de Vanves <br> 92130 ISSY-LES-MOULINEAUX <br> +33 00 00 00 00</p>
+			
+			<div class="row">
+				<!-- Instagram icon inserted using svg -->
+				<div class="col">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+	  					<path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+					</svg>
+				</div>
+				
+				<!-- Facebook icon inserted using svg -->
+				<div class="col">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+	  					<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+					</svg>
+				</div>
+				
+				<!-- Twitter icon inserted using svg -->
+				<div class="col">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+  						<path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+					</svg>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col mt-3 text-right">
+			<!--Google map-->
+			<div id="map-container-google-2" class="z-depth-1-half map-container">
+ 					<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.7616130391557!2d2.277726215501728!3d48.82460971103901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e670797935962f%3A0xa2a4098b11eb5c09!2s10%20Rue%20de%20Vanves%2C%2092170%20Issy-les-Moulineaux!5e0!3m2!1sfr!2sfr!4v1652701815643!5m2!1sfr!2sfr" width="300" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+		</div>
+		
+		<div class="col-1"></div>
+	</div>
+	
+	<div class="row text-light">
+		<div class="col text-center mt-3">
+			<hr class="mt-2 mb-3 bg-light"/>
+			<p>© 2022 HomeExchange, Inc. ·
+			<a href="https://images.pexels.com/photos/1461974/pexels-photo-1461974.jpeg?cs=srgb&dl=pexels-nextvoyage-1461974.jpg&fm=jpg" class="text-light">Conditions générales</a> ·
+			<a href="https://imgv3.fotor.com/images/homepage-feature-card/Fotor-AI-photo-enhancement-tool-fr.jpg" class="text-light">Plan du site</a>
+		</div>
+	</div>
+</div>
+<!-- End of Footer -->
+
+</body>
+</html>

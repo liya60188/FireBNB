@@ -61,5 +61,8 @@ public class UserController {
 		return "houseProfile";
 	}
 
-
+	@GetMapping("/userProfile")
+	public String userProfile() {
+		return "userProfile";
+	}
 }
