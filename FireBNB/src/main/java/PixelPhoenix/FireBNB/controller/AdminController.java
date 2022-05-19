@@ -17,9 +17,9 @@ public class AdminController {
 	
 	@GetMapping("/users")
 	public String listUsers(Model model, @RequestParam(defaultValue="") String name) {
-		//Iterable<User> listUsers = us.getUsers();
-		//model.addAttribute("listUsers", listUsers);
-		model.addAttribute("users", us.findByName(name));
+		Iterable<User> listUsers = us.getUsers();
+		model.addAttribute("listUsers", listUsers);
+		//model.addAttribute("users", us.findByName(name));
 		
 		return "usersList";
 	}

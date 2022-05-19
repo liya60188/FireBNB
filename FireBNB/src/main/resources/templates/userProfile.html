@@ -1,12 +1,22 @@
 <!DOCTYPE HTMl>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 	<meta charset="UTF-8"/>
 	<title> User Profile</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 	</head>
 	<body>
+		<p>V1</p>
 		<h1 th:text="${person.firstName} + ' ' + ${person.lastName}"></h1>
-		<a href="houseProfile.html"> View house</a>
+		
+		<p> V2 </p>
+		<div sec:authentication="name"></div>
+		<div sec:authentication="principal.authorities"></div>
+		
+		<div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
+		
 	</body>
 </html>

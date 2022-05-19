@@ -2,11 +2,9 @@ package PixelPhoenix.FireBNB.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
-
 
 @Entity
 @Table(name="user")
@@ -33,14 +31,14 @@ public class User implements Serializable{
 	private String additionalAddress;
 	@Column(name="phone_number")
 	private int phoneNumber;
+	private String role;
 //	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //	@JoinTable(
 //			name="user_roles",
 //			joinColumns = @JoinColumn(name="user_id"),
 //			inverseJoinColumns = @JoinColumn(name="role_id")
 //			)
-//	private Set<Role> roles;
-	private String role;
+//	private Set<Role> roles = new HashSet<>();
 
 	public Long getId_user() {
 		return user_id;
@@ -128,19 +126,12 @@ public class User implements Serializable{
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}	
-//	public Set<Role> getRoles() {
-//		return roles;
-//	}
-//	public void setRoles(Set<Role> roles) {
-//		this.roles = roles;
-//	}
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
 	public User(Long user_id, String firstName, String lastName, int age, int rating, String email, String password,
 			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber, String role) {
 		super();
