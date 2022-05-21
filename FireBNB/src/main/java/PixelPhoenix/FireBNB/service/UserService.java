@@ -40,14 +40,14 @@ public class UserService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-		user.setRole("user");
+		user.setRole("USER");
 		ur.save(user);
 	}
 	public void createAdmin(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-		user.setRole("admin");
+		user.setRole("ADMIN");
 		ur.save(user);
 	}
 	
