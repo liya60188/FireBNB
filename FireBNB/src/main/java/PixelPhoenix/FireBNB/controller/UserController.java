@@ -65,4 +65,9 @@ public class UserController {
 	public String userProfile() {
 		return "userProfile";
 	}
+	
+	@GetMapping("/header")
+	public String header() {
+		return "header";
+	}
 }
