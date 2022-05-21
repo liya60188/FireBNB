@@ -31,7 +31,7 @@ public class House{
 			this.id_house = id_house;
 		}
 		
-		String description;
+		public String description;
 		public String getDescription() {
 			return description;
 		}
@@ -40,7 +40,7 @@ public class House{
 			this.description = description;
 		} 
 		
-		int ratingsH;
+		public int ratingsH;
 		public int getRatingsH() {
 			return ratingsH;
 		}
@@ -49,7 +49,7 @@ public class House{
 			this.ratingsH = ratingsH;
 		}
 		
-		String services;
+		public String services;
 		
 		public String getServices() {
 			return services;
@@ -59,7 +59,7 @@ public class House{
 			this.services = services;
 		}
 		
-		String constraints;
+		public String constraints;
 
 		public String getConstraints() {
 			return constraints;
@@ -112,8 +112,8 @@ public class House{
 		*/
 		
 		@Lob
-		@Column(columnDefinition = "LONGBLOB")
-		String photos;
+		@Column(columnDefinition = "MEDIUMBLOB")
+		public String photos;
 
 		public String getPhotos() {
 			return photos;
@@ -123,7 +123,7 @@ public class House{
 			this.photos = photos;
 		}
 		
-		Long id_user;
+		public Long id_user;
 		
 		public Long getId_user() {
 			return id_user;

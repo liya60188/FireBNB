@@ -1,5 +1,6 @@
 package PixelPhoenix.FireBNB.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndView;
 
 import PixelPhoenix.FireBNB.model.House;
@@ -52,7 +51,6 @@ public class HouseController {
 		
 		return "housesList";
 	}
-	
 	
 	//List of houses Page with search bar
 	@Autowired
@@ -157,31 +155,40 @@ public class HouseController {
 					return "redirect:/housesList";
 				}
 			}
-	/*
+	
+			
 	@RequestMapping(value="/housePage/{id_housew}")
 	public String housePage(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house, 
 			@RequestParam(name = "description", defaultValue = "") String description,
 			@RequestParam(name = "services", defaultValue = "") String services,
 			@RequestParam(name = "constraints", defaultValue = "") String constraints,
-			@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
-			@RequestParam(name = "photos", defaultValue = "") String photos){	
+			@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH/*,
+			@RequestParam(name = "photos", defaultValue = "") String photos*/){	
+		Optional<House> house = hssv.getHouse(id_house);
+		House housePage = house.get();
 		model.addAttribute("id_house", id_house);
 		model.addAttribute("description", description);
-		//model.addAttribute("services", services);
-		//model.addAttribute("constraints", constraints);
+		model.addAttribute("services", services);
+		model.addAttribute("constraints", constraints);
 		model.addAttribute("ratingsH", ratingsH);
 		//model.addAttribute("photos", photos);
+		
+		model.addAttribute("house", housePage);
+		
 		return "housePage"; 
-	}*/
-	
-	@RequestMapping(value="/housePage/{id_house}") 
-	public String House(@PathVariable Long id_house, Model model){
-		Optional<House> house = hssv.getHouse(id_house);
-		model.addAttribute("house", house);
-		
-		return "housePage";
-		
 	}
 	
+	
+			/*
+	@RequestMapping(value="/housePage/{id_house}") 
+	public String HousePage(@PathVariable Long id_house, Model model){
+		//House housePage = house.get();
+		
+		Optional<House> houseP = hssv.getHouse(id_house);
+		model.addAttribute("houseP", houseP);
+		
+		return "housePage";
+	}
+	*/
 
 }

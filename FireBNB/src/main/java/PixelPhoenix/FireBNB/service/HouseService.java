@@ -23,6 +23,7 @@ public class HouseService {
 	 @Autowired
 	 private HouseRepository hsrp;
 
+	 //@PutMapping(value = "/housePage")
 	 public Optional<House> getHouse(final Long id){
 			return hsrp.findById(id);
 		}

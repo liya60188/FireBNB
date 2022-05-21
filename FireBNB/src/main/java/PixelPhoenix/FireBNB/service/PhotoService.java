@@ -7,8 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Photo;
 import PixelPhoenix.FireBNB.repository.PhotoRepository;
 
@@ -30,7 +33,7 @@ public class PhotoService {
 		photoRepository.deleteById(id);
     }
 	
-	
+	/*
 	//to save a photo in the database
 	public void savePhoto(MultipartFile file) {
 		Photo p = new Photo();
@@ -47,7 +50,16 @@ public class PhotoService {
 		
 		photoRepository.save(p);
 	}
+	*/
 	
+	public void createPhoto(Photo photo) {
+		photoRepository.save(photo);
+	 }
 	
+	@PutMapping(value = "/photosList/add")
+	 public Photo savePhoto(@RequestBody Photo photo) {
+		 Photo savedPhoto = photoRepository.save(photo);
+        return savedPhoto;
+	 }
 	
 }

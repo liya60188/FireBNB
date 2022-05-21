@@ -25,6 +25,7 @@ public class Photo {
 		this.id_photo = id_photo;
 	}
 	
+	/*
 	@Lob
 	@Column(columnDefinition = "LONGBLOB")
 	String housePhoto;
@@ -37,7 +38,19 @@ public class Photo {
 		this.housePhoto = housePhoto;
 	}
 	
+	*/
 	
+	@Column(nullable = true, length = 64)
+    private String housePhoto;
+	
+	public String getHousePhoto() {
+		return housePhoto;
+	}
+
+	public void setHousePhoto(String housePhoto) {
+		this.housePhoto = housePhoto;
+	}
+
 	public Photo(Long id_photo, String housePhoto) {
 		this.id_photo = id_photo;
 		this.housePhoto = housePhoto;

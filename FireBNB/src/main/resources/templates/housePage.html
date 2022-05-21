@@ -6,33 +6,54 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<form action="/housePage" method="get">
-		
+
+<h1>House Page</h1>
+	<form th:action="@{/housePage/{id_house}}" method="post">
 		
 		<div>
 			<label>Description</label>
-			<div> <input type = "text" name="description" th:values="${house.description}" disabled="disabled"></div>
+			<div> <p th:text="${description}"></div>
 		</div>
 		
 		<div>
 			<label>Services</label>
-			<div> <input type = "text" name="services" th:values="${house.services}"></div>
+			<div> <p th:text="${services}"></div>
 		</div>
 		
 		<div>
 			<label>Constraints</label>
-			<div> <input type = "text" name="constraints" th:values="${house.constraints}"></div>
+			<div> <p th:text="${constraints}"></div>
 		</div> 
 		
 		<div>
 			<label>Rate</label>
-			<div> <input type = "text" name="ratingsH" th:values="${house.ratingsH}"></div>
+			<div> <p th:text="${ratingsH}"></div>
 		</div>
 		
+		<!--
 		<div>
 			<label>Photos</label>
 			<div> <img alt="" th:src="${house.photos}" style="width: 100px;height: 100px;"></div>
 		</div>
+		
+		 
+		<table>
+			<tr>
+					<th>Description</th>
+					<th>Services</th>
+					<th>Constraints</th>
+					<th>Rate</th>
+					<th>Photos</th>
+				</tr> 
+			
+			<tr>
+					<td th:value="${house.description}">Description</td>
+					<td th:value="${house.services}">Services</td>
+					<td th:value="${house.constraints}">Constraints</td>
+					 <td th:value="${house.ratingsH}">Rate</td> 
+					 <td> <img th:src="${housePage.photos}" style="width: 100px;height: 100px;"></td>		
+			</tr>
+		</table> -->
 
 	</form>
 </body>
