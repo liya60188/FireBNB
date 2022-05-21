@@ -4,19 +4,18 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 	<meta charset="UTF-8"/>
 	<title> User Profile</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 	</head>
 	<body>
-		<p>V1</p>
-		<h1 th:text="${person.firstName} + ' ' + ${person.lastName}"></h1>
-		
-		<p> V2 </p>
-		<div sec:authentication="name"></div>
+		<h1 th:text="${user.firstName} + ' ' + ${user.lastName}"></h1>
 		<div sec:authentication="principal.authorities"></div>
-		
-		<div sec:authorize="isAuthenticated()">
-            Text visible only to authenticated users.
-        </div>
+		<a sec:authorize="hasAuthority('USER')" th:href="@{/profile/update/{email}(email=${user.email}, 
+					firstName=${user.firstName}, lastName = ${user.lastName}, 
+					age = ${user.age}, address = ${user.address}, city = ${user.city}
+					, postalCode = ${user.postalCode}, country = ${user.country},  
+					phoneNumber = ${user.phoneNumber}, edit = 0)}"> Edit</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
 		
 	</body>
 </html>

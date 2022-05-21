@@ -22,16 +22,24 @@
 		<table>
 			<thead>
 				<tr>
-					<th>E-mail</th>
 					<th>First Name</th>
 					<th>Last Name</th>
+					<th>E-mail</th>
+					<th>Age</th>
+					<th>Edit</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="user: ${listUsers}">
-					<td th:text="${user.email}"></td>
 					<td th:text="${user.firstName}"></td>
 					<td th:text="${user.lastName}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.age}"></td>
+					<td><a th:href="@{/profile/update/{email}(email=${user.email}, 
+					firstName=${user.firstName}, lastName = ${user.lastName}, 
+					age = ${user.age}, address = ${user.address}, city = ${user.city}
+					, postalCode = ${user.postalCode}, country = ${user.country},  
+					phoneNumber = ${user.phoneNumber}, edit = 0)}"> Edit</a></td>
 				</tr>
 			</tbody>
 		</table>

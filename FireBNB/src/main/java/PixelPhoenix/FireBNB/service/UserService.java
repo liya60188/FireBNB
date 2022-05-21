@@ -3,11 +3,14 @@ package PixelPhoenix.FireBNB.service;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import PixelPhoenix.FireBNB.model.Role;
 import PixelPhoenix.FireBNB.model.User;
@@ -20,9 +23,11 @@ public class UserService {
 	private UserRepository ur;
 	
 	public User getUser(String email){
-		return ur.findByEmail(email);
-		
+		return ur.findByEmail(email);	
 	}
+//	public Optional<User> getUserId(long id){
+//		return ur.findById(id);	
+//	}
 	public Iterable<User> getUsers(){
 		return ur.findAll();
 	}
@@ -35,10 +40,6 @@ public class UserService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-//		Role userRole = new Role("user");
-//		Set<Role> roles = new HashSet<>();
-//		roles.add(userRole);
-//		user.setRoles(roles);
 		user.setRole("user");
 		ur.save(user);
 	}
@@ -46,10 +47,6 @@ public class UserService {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
-//		Role userRole = new Role("admin");
-//		Set<Role> roles = new HashSet<>();
-//		roles.add(userRole);
-//		user.setRoles(roles);
 		user.setRole("admin");
 		ur.save(user);
 	}
@@ -60,5 +57,13 @@ public class UserService {
 			return true;
 		}
 		return false;
+	}
+
+	public User updateUser(User user ) {
+		return ur.save(user);	
+	}
+	
+	public void deleteUser(User user) {
+		ur.delete(user);
 	}
 }
