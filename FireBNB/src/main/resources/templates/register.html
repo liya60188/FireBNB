@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+</head>
+<body>
+	<div>
+		<h2>Log In</h2>
+      	<form method="post" th:action="@{/login}" th:object="${user}">
+       		<div>
+                <label>Email: </label>
+                <div>
+                    <input type="email" th:field="*{email}"
+                            required/>
+                </div>
+            </div>
+            <div>
+                <label>Password: </label>
+                <div>
+                    <input type="password" th:field="*{password}"
+                            required/>
+                </div>
+            </div>
+			<div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+      	</form>
+	</div>
+	
+    <div>
+        <div>
+            <h1>No account? - Sign Up</h1>
+        </div>
+        <form th:action="@{/userRegistration}" th:object="${user}"
+            method="post">
+        <div>
+        	<div>
+                <label>First Name: </label>
+                <div>
+                    <input type="text" th:field="*{firstName}"
+                            required/>
+                </div>
+            </div>
+             
+            <div>
+                <label>Last Name: </label>
+                <div>
+                    <input type="text" th:field="*{lastName}"
+                            required/>
+                </div>
+            </div>
+            <div>
+                <label>E-mail: </label>
+                <div>
+                    <input type="email" th:field="*{email}" required />
+                </div>
+            </div>
+             
+             
+            <div>
+                <label>Age: </label>
+                <div>
+                    <input type="number" th:field="*{age}"
+                            required/>
+                </div>
+            </div>
+             
+            <div>
+                <label>Address: </label>
+                <div>
+                    <input type="text" th:field="*{address}"
+                            required/>
+                </div>
+            </div>
+             
+            <div>
+                <label>City: </label>
+                <div>
+                    <input type="text" th:field="*{city}"
+                            required/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Postal Code: </label>
+                <div>
+                    <input type="text" th:field="*{postalCode}"
+                            required/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Country: </label>
+                <div>
+                    <input type="text" th:field="*{country}"
+                            required/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Additional Address: </label>
+                <div>
+                    <input type="text" th:field="*{additionalAddress}"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Phone Number: </label>
+                <div>
+                    <input type="number" th:field="*{phoneNumber}"
+                            required minlength="10" maxlength="10"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Password: </label>
+                <div>
+                    <input type="password" th:field="*{password}" required minlength="6" maxlength="10"/>
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit">Sign Up</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+</html>
