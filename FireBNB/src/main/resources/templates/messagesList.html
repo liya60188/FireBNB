@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Message System</title>
+</head>
+<body>
+	Message System
+	
+	<div class=container>
+		<form action="/messagesList/search" method="post">
+			<table>
+				<tr>
+					<td>Search by subject:</td>
+					<td><input type="text" name="motCle" th:value="${motC}" /></td>
+					<td><input type="submit" name="action" value="search" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<form th:action="@{/messagesList}" th:object="${message}" method="post">
+
+		<table>
+			<tr>
+				<th>Id</th>
+				<th>Subject</th>
+				<th>Content</th>
+			</tr>
+
+			<tr th:each="message: ${listMessages}">
+				<td th:text="${message.id_message}">Id</td>
+				<td th:text="${message.subject}">Subject</td>
+				<td th:text="${message.content}">Content</td>
+				</td>
+				<td><a onclick="return confirm('Please Confirm')"
+					th:href="@{/messagesList/delete(id_message=${message.id_message}, mc=${motC})}"> Delete
+				</a></td>
+			</tr>
+
+
+		</table>
+
+	</form>
+	
+	<a href="/messagesList/add">Add new message</a>
+	
+	<div class="container">
+		<ul class="pagination">
+			<li th:class="${pageCourante}==${status.index}?'active':''"
+				th:each="p,status:${pages}"><a
+				th:href="@{/messagesList/search(page=${status.index},motCle=${motC})}"
+				th:text="${status.index}"></a></li>
+		</ul>
+	</div>
+	
+</body>
+</html>

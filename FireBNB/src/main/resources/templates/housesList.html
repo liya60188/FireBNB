@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of Services</title>
+</head>
+<body>
+	List of Houses
+
+	<form th:action="@{/housesList}" th:object="${house}" method="post">
+
+		<table>
+			<tr>
+				<th>Description</th>
+				<th>Services</th>
+				<th>Constraints</th>
+				<th>Rate</th>
+				<th>Photos</th>
+			</tr> 
+
+			<tr th:each="house: ${listHouses}">
+				<td th:text="${house.description}">Description</td>
+				<td th:text="${house.services}">Services</td>
+				<td th:text="${house.constraints}">Constraints</td>
+				<td th:text="${house.ratingsH}">Rate</td>
+				<td><img th:src="${house.photos}" style="width : 100px; height: 100px;"></td>
+				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, edit=0)}">Edit</a>
+				</td>
+				<td><a onclick="return confirm('Please Confirm')"
+					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete
+				</a></td>
+			</tr>
+
+
+		</table>
+
+	</form>
+	
+	<a href="/housesList/add">Add new house</a>
+</body>
+</html>
