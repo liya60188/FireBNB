@@ -7,35 +7,51 @@
 </head>
 <body>
 
-<h1>House Page</h1>
-	<form th:action="@{/housePage/{id_house}}" method="post">
-		
+	<h1>House Page</h1>
+	<!-- 	<form th:action="@{/housePage/{id_house}}" method="post" object="house"> -->
+
+	<div>
+		<label>Description</label>
 		<div>
-			<label>Description</label>
-			<div> <p th:text="${description}"></div>
+			<p th:text="${house.description}">
 		</div>
-		
+	</div>
+	
+	<br>
+
+	<div>
+		<label>Services</label>
 		<div>
-			<label>Services</label>
-			<div> <p th:text="${services}"></div>
+			<p th:text="${house.services}">
 		</div>
-		
+	</div>
+	
+	<br>
+
+	<div>
+		<label>Constraints</label>
 		<div>
-			<label>Constraints</label>
-			<div> <p th:text="${constraints}"></div>
-		</div> 
-		
-		<div>
-			<label>Rate</label>
-			<div> <p th:text="${ratingsH}"></div>
+			<p th:text="${house.constraints}">
 		</div>
-		
-		<!--
+	</div>
+	
+	<br>
+
+	<div>
+		<label>Rate</label>
+		<div>
+			<p th:text="${house.ratingsH}">
+		</div>
+	</div>
+	
+	<br>
+
 		<div>
 			<label>Photos</label>
 			<div> <img alt="" th:src="${house.photos}" style="width: 100px;height: 100px;"></div>
 		</div>
 		
+		<!-- 
 		 
 		<table>
 			<tr>
@@ -55,6 +71,6 @@
 			</tr>
 		</table> -->
 
-	</form>
+<!-- 	</form> -->
 </body>
 </html>

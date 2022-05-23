@@ -186,7 +186,8 @@ public class HouseController {
 		//House housePage = house.get();
 		
 		Optional<House> house = hssv.getHouse(id_house);
-		model.addAttribute("house", house);
+		House house2 = house.get();
+		model.addAttribute("house", house2);
 		
 		return "housePage";
 	}
