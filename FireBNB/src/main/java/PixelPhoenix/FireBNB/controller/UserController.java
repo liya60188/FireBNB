@@ -70,4 +70,9 @@ public class UserController {
 	public String header() {
 		return "header";
 	}
+	
+	@GetMapping("/housesList")
+	public String housesList() {
+		return "housesList";
+	}
 }
