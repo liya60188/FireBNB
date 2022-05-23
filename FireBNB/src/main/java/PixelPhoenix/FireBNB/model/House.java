@@ -133,7 +133,57 @@ public class House{
 			this.id_user = id_user;
 		}
 
-		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user) {
+		public String address;
+		
+		public String getAddress() {
+			return address;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String city;
+		
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+		
+		public int postal_code;
+		
+		public int getPostal_code() {
+			return postal_code;
+		}
+
+		public void setPostal_code(int postal_code) {
+			this.postal_code = postal_code;
+		}
+		
+		public String country;
+
+		public String getCountry() {
+			return country;
+		}
+
+		public void setCountry(String country) {
+			this.country = country;
+		}
+		
+		public String additional_address;
+
+		public String getAdditional_address() {
+			return additional_address;
+		}
+
+		public void setAdditional_address(String additional_address) {
+			this.additional_address = additional_address;
+		}
+
+		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
@@ -141,6 +191,11 @@ public class House{
 			this.constraints = constraints;
 			this.photos = photos;	
 			this.id_user = id_user;
+			this.address = address;
+			this.city = city;
+			this.postal_code = postal_code;
+			this.country = country;
+			this.additional_address = additional_address;
 		}
 		
 		public House() {}

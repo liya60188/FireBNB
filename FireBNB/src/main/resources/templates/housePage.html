@@ -8,7 +8,6 @@
 <body>
 
 	<h1>House Page</h1>
-	<!-- 	<form th:action="@{/housePage/{id_house}}" method="post" object="house"> -->
 
 	<div>
 		<label>Description</label>
@@ -45,32 +44,20 @@
 	</div>
 	
 	<br>
+	
+	<div>
+		<label>Address</label>
+		<div>
+			<p th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}">
+		</div>
+	</div>
+	
+	<br>
 
 		<div>
 			<label>Photos</label>
 			<div> <img alt="" th:src="${house.photos}" style="width: 100px;height: 100px;"></div>
 		</div>
 		
-		<!-- 
-		 
-		<table>
-			<tr>
-					<th>Description</th>
-					<th>Services</th>
-					<th>Constraints</th>
-					<th>Rate</th>
-					<th>Photos</th>
-				</tr> 
-			
-			<tr>
-					<td th:value="${house.description}">Description</td>
-					<td th:value="${house.services}">Services</td>
-					<td th:value="${house.constraints}">Constraints</td>
-					 <td th:value="${house.ratingsH}">Rate</td> 
-					 <td> <img th:src="${housePage.photos}" style="width: 100px;height: 100px;"></td>		
-			</tr>
-		</table> -->
-
-<!-- 	</form> -->
 </body>
 </html>

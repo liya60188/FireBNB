@@ -27,6 +27,7 @@
 				<th>Services</th>
 				<th>Constraints</th>
 				<th>Rate</th>
+				<th>Address</th>
 				<th>Photos</th>
 			</tr> 
 
@@ -34,13 +35,14 @@
 				<td th:text="${house.description}">Description</td>
 				<td th:text="${house.services}">Services</td>
 				<td th:text="${house.constraints}">Constraints</td>
-				 <td th:text="${house.ratingsH}">Rate</td> 
+				<td th:text="${house.ratingsH}">Rate</td> 
+				<td th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"> Address </td> 
 				<td> <img th:src="${house.photos}" style="width: 100px;height: 100px;"></td>
 				<td>
 				<a th:href="@{/housePage/{id_house} (id_house=${house.id_house})}">View</a>
 				</td>
 				
-				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, edit=0)}">Edit</a>
+				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, edit=0)}">Edit</a>
 				</td>
 				<td><a onclick="return confirm('Please Confirm')"
 					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete
