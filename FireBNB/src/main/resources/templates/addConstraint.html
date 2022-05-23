@@ -1,0 +1,25 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add Constraint</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>Add Constraints</h1>
+		<p></p>
+		<p></p>
+		<form action="/constraintsList/add" method="post">
+			<table>
+				<tr>
+					<td>Constraint Name</td>
+					<td><input type="text" name="constraintName" th:value="${constraintName}" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

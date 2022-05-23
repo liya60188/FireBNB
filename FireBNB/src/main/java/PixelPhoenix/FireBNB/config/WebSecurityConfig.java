@@ -1,7 +1,6 @@
 package PixelPhoenix.FireBNB.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -43,14 +42,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    @Override
    protected void configure(HttpSecurity http) throws Exception {
        http.authorizeRequests()
-           .antMatchers("/users").hasAnyAuthority("ADMIN")
+       	   .antMatchers("/","/register").permitAll()
+           .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
            .antMatchers("/profile").hasAnyAuthority("ADMIN", "USER")
+           .antMatchers("/housesList/**").hasAnyAuthority("ADMIN", "USER")
+           .antMatchers("/listHouses/**").hasAnyAuthority("ADMIN", "USER")
+           .antMatchers("/servicesList/**").hasAnyAuthority("ADMIN")
+           .antMatchers("/listServices/**").hasAnyAuthority("ADMIN")
+           .antMatchers("/constraintsList/**").hasAnyAuthority("ADMIN")
+           .antMatchers("/listConstraints/**").hasAnyAuthority("ADMIN")
+           .antMatchers("/messagesList/**").hasAnyAuthority("ADMIN", "USER")
            .anyRequest().permitAll()
            .and()
-           .formLogin()
-               .usernameParameter("email")
-               .defaultSuccessUrl("/profile")
-               .permitAll()
+           .formLogin().loginPage("/login")
+           .defaultSuccessUrl("/profile")
+           .failureUrl("/login?error=true")
+           .permitAll()
            .and()
            .logout().logoutSuccessUrl("/").permitAll();
    }

@@ -1,0 +1,95 @@
+package PixelPhoenix.FireBNB.model;
+
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+
+@Entity
+@Table(name="messaging")
+public class Message {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_message", unique = true)
+	Long id_message;
+	Long id_sender;
+	Long id_receiver;
+	String subject;
+	String content;
+	Date creation_date;
+	
+	public Long getId_message() {
+		return id_message;
+	}
+
+	public void setId_message(Long id_message) {
+		this.id_message = id_message;
+	}
+
+	public Long getId_sender() {
+		return id_sender;
+	}
+
+	public void setId_sender(Long id_sender) {
+		this.id_sender = id_sender;
+	}
+
+	public Long getId_receiver() {
+		return id_receiver;
+	}
+
+	public void setId_receiver(Long id_receiver) {
+		this.id_receiver = id_receiver;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getCreation_date() {
+		return creation_date;
+	}
+
+	/*public void setCreation_date(Date creation_date) {
+		this.creation_date = creation_date;
+	}*/
+	@PrePersist
+	private void onCreate() {
+		//TODO - Change with users after choosing
+		id_receiver = (long) 2;
+		id_sender = (long) 1;
+	    creation_date = new Date();
+	}
+
+	public Message(Long id_message, Long id_sender, Long id_receiver, String subject, String content, Date creation_date) {
+		this.id_message = id_message;
+		this.id_sender = id_sender;
+		this.id_receiver = id_receiver;
+		this.subject = subject;
+		this.content = content;
+		this.creation_date = creation_date;
+		
+	}
+	
+	public Message() {}
+}

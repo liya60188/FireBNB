@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.repository.UserRepository;
+import PixelPhoenix.FireBNB.service.HouseService;
 import PixelPhoenix.FireBNB.service.UserService;
 
 @Controller
@@ -28,13 +29,15 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
+	@Autowired
+	private HouseService hs;
 	
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("/admin/users")
 	public String listUsers(Model model, @RequestParam(defaultValue="") String name) {
 		Iterable<User> listUsers = us.getUsers();
 		model.addAttribute("listUsers", listUsers);
@@ -48,12 +51,15 @@ public class UserController {
 		
 		String email = principal.getName();
 		User user = us.getUser(email);
+
+		int numberOfHouses = hs.numberHouses(user.getId_user());
+		
 		model.addAttribute("user", user);
-		//us.getUser(email).ifPresent(person -> model.addAttribute("person", person));
+		model.addAttribute("numberOfHouses", numberOfHouses);
 		return "userProfile";
 	}
 	
-	@GetMapping("/register")
+	@GetMapping("/login")
 	public String registrationForm(Model model) {
 		User user = new User();
 	    model.addAttribute("user",user);
@@ -73,19 +79,6 @@ public class UserController {
 		return "registrationSuccess";
 	}
 	
-//	@RequestMapping(value = "/profile/update")
-//	public String edit(Model model, @RequestParam(name = "email", defaultValue = "") String email,
-//			@RequestParam(name = "edit", defaultValue = "") String edit) {
-//			User user = us.getUser(email);
-//		if (edit.equals("0")) {
-//			model.addAttribute("user", user);
-//			return "userEdit";
-//		} else {
-//			us.updateUser(user);
-//
-//			return "redirect:/users";
-//		}
-//	}
 	@GetMapping("/profile/update/{email}")
 	public String editUser(Model model, @PathVariable(name = "email") String email){
 		User user = us.getUser(email);
@@ -129,14 +122,17 @@ public class UserController {
 		user.setPhoneNumber(phoneNumber);
 		us.updateUser(user);   
 
-		return "redirect:/users";
+		return "redirect:/profile";
 	}
 	
 	@RequestMapping(value = "/profile/delete")
 	public String delete(Model model, @RequestParam(name = "email") String email) {
+		System.out.print("email" + email);
 		User user = us.getUser(email);
-		us.deleteUser(user);
-		return "redirect:/users";
+		Long id_user = user.getId_user();
+		//us.deleteUser(user);
+		us.deleteUser(id_user);
+		return "redirect:/admin/users";
 	}
 
 

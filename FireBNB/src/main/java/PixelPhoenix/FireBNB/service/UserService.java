@@ -63,7 +63,8 @@ public class UserService {
 		return ur.save(user);	
 	}
 	
-	public void deleteUser(User user) {
-		ur.delete(user);
+	public void deleteUser(final Long id_user) {
+		ur.deleteById(id_user);
+		//ur.delete(user);
 	}
 }

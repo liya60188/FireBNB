@@ -13,7 +13,12 @@ import PixelPhoenix.FireBNB.model.User;
  
 public class CustomUserDetails implements UserDetails {
  
-    private User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1992087126632388416L;
+	
+	private User user;
      
     public CustomUserDetails(User user) {
         this.user = user;

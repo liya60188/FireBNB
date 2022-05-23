@@ -84,7 +84,7 @@ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
             <div>
                 <button type="submit" name="action">Save</button>
             </div>
-            <div><button sec:authorize="hasAuthority('ADMIN')" th:href="@{/profile/delete(email=${user.email})}">Delete</button></div>
+            <div><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/profile/delete(email=${user.email})}">Delete</a></div>
         </form>
 		
 	</body>

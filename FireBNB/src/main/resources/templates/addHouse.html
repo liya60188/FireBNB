@@ -1,0 +1,128 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add House</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<!-- <body> -->
+<!-- 	<div class="container"> -->
+<!-- 		<h1>Add House</h1> -->
+<!-- 		<p></p> -->
+<!-- 		<p></p> -->
+<!-- 		<form action="/housesList/add" th:object="${house}" method="post"> -->
+<!-- 			<div> -->
+<!-- 				<label>Description -->
+<!-- 				<input type="text"  th:field="*{description}" /></label> -->
+<!-- <!-- 				name="description" --> 
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label>Services -->
+<!-- 					<th:block th:each="service: ${listServices}"> -->
+<!-- 					<input type=radio  -->
+<!-- 					th:text="${service.serviceName}" -->
+<!-- 					th:field="*{services}"  th:value="${id_service}"/>  -->
+<!-- 					</th:block> -->
+<!-- 				</label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label th:each="constraint: ${listConstraints}">Constraints -->
+<!-- 				<input type=radio  -->
+<!-- 					th:text="${constraint.constraintName}" -->
+<!-- 					name="constraints" th:field="*{constraints}" th:value="${id_constraint}"/> </label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label>Ratings -->
+<!-- 				<input type="text" th:field="*{ratingsH}" /></label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label>Photos -->
+<!-- 				<input type="text"  th:field="*{photos}" /></label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<label>User ID (change to current logged in) -->
+<!-- 				<input type="text" th:field="*{id_user}"/></label> -->
+<!-- 			</div> -->
+<!-- 			<div> -->
+<!-- 				<input type="submit" name="action" value="save" /> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 	</div> -->
+<!-- </body> -->
+<body>
+	<div class="container">
+		<h1>Add House</h1>
+		<p></p>
+		<p></p>
+		<form action="/housesList/add" th:object="${house}" method="post">
+			<table>
+				<tr>
+					<td>Description</td>
+					<td><input type="text" name="description" th:value="${description}" /></td>
+				</tr>
+				
+				<tr>
+					<td>Services</td> 
+					<tr th:each="service: ${listServices}">
+						<td th:text="${service.serviceName}"></td>
+						<td><input type="checkbox" name="services" 
+						th:field="*{services}" th:value="${service.serviceName}"/></td>
+					</tr>
+				</tr>
+				
+				<tr>
+					<td>Constraints</td>
+					<tr th:each="constraint: ${listConstraints}">
+						<td th:text="${constraint.constraintName}">Constraint Name</td>
+						<td><input type="checkbox" name="constraints"
+						th:field="*{constraints}" th:value="${constraint.constraintName}" /></td>
+					</tr>
+				</tr>
+				
+				<tr>
+					<td>Ratings</td>
+					<td><input type="text" name="ratingsH" th:value="${ratingsH}" /></td>
+				</tr>
+				
+				<tr>
+					<td>Photos</td>
+					<td><input type="file" name="photos" multiple></td>
+				</tr>
+				
+				<tr>
+					<td>Address</td>
+					<td><input type="text" name="address" th:value="${address}"></td>
+				</tr>
+					
+				<tr>
+					<td>Additional address</td>
+					<td><input type="text" name="additional_address" th:value="${additional_address}"></td>
+				</tr>
+				
+				<tr>
+					<td>City</td>
+					<td><input type="text" name="city" th:value="${city}"></td>
+				</tr>
+				
+				<tr>
+					<td>Postal code</td>
+					<td><input type="text" name="postal_code" th:value="${postal_code}"></td>
+				</tr>
+				
+				<tr>
+					<td>Country</td>
+					<td><input type="text" name="country" th:value="${country}"></td>
+				</tr>
+				
+				<tr>
+					<td>User ID (change to current logged in)</td>
+					<td><input type="text" name="id_user"/></td>
+				</tr>
+				
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
