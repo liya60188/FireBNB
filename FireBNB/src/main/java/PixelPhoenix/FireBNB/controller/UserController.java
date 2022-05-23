@@ -75,4 +75,14 @@ public class UserController {
 	public String housesList() {
 		return "housesList";
 	}
+	
+	@GetMapping("/editProfile")
+	public String editProfile() {
+		return "editProfile";
+	}
+	
+	@GetMapping("/editHouse")
+	public String editHouse() {
+		return "editHouse";
+	}
 }
