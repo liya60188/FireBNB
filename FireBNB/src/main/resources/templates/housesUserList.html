@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List of houses</title>
+</head>
+<body>
+	<span th:text="${user.firstName} + ' ' + ${user.lastName} + ' houses'"></span>
+	
+	<div class=container>
+		<form action="/housesList/search" method="post">
+			<table>
+				<tr>
+					<td>Search: </td>
+					<td><input type="text" name="motCle" th:value="${motC}" placeholder="Find by description or Ratings" size="50"/></td>
+					<td><input type="submit" name="action" value="search" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+		<table>
+			<tr>
+				<th>Description</th>
+				<th>Services</th>
+				<th>Constraints</th>
+				<th>Rate</th>
+				<th>Address</th>
+				<th>Photos</th>
+			</tr> 
+
+			<tr th:each="house: ${listUserHouses}" var="house">
+				<td th:text="${house.description}">Description</td>
+				<td th:text="${house.services}">Services</td>
+				<td th:text="${house.constraints}">Constraints</td>
+				<td th:text="${house.ratingsH}">Rate</td> 
+				<td th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"> Address </td> 
+				<td> <img th:src="${house.photos}" style="width: 100px;height: 100px;"></td>
+				<td>
+				<a th:href="@{/housePage/{id_house} (id_house=${house.id_house})}">View</a>
+				</td>
+				
+			</tr>
+
+		</table>
+
+</body>
+</html>

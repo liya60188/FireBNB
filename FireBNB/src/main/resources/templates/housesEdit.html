@@ -1,59 +1,66 @@
-<!DOCTYPE HTML>
+<!DOCTYPE HTMl>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>List of houses</title>
+<meta charset="UTF-8" />
+<title>House Edit</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	List of Houses
-	
-	<div class=container>
-		<form action="/housesList/search" method="post">
-			<table>
-				<tr>
-					<td>Search: </td>
-					<td><input type="text" name="motCle" th:value="${motC}" placeholder="Find by description or Ratings" size="50"/></td>
-					<td><input type="submit" name="action" value="search" /></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<form th:action="@{/housesUserList}" th:object="${house}" method="post">
-
+	<form action="/listHouses/edit" method="get">
 		<table>
 			<tr>
-				<th>Description</th>
-				<th>Services</th>
-				<th>Constraints</th>
-				<th>Rate</th>
-				<th>Address</th>
-				<th>Photos</th>
-			</tr> 
-
-			<tr th:each="house: ${listHouses}" var="house">
-				<td th:text="${house.description}">Description</td>
-				<td th:text="${house.services}">Services</td>
-				<td th:text="${house.constraints}">Constraints</td>
-				<td th:text="${house.ratingsH}">Rate</td> 
-				<td th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"> Address </td> 
-				<td> <img th:src="${house.photos}" style="width: 100px;height: 100px;"></td>
-				<td>
-				<a th:href="@{/housePage/{id_house} (id_house=${house.id_house})}">View</a>
-				</td>
-				
-				<td> <a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, edit=0)}">Edit</a>
-				</td>
-				<td><a onclick="return confirm('Please Confirm')"
-					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete
-				</a></td>
-				
+				<td>ID</td>
+				<td><input type="text" name="id_house" th:value="${id_house}" readonly /></td>
 			</tr>
-
+			<tr>
+				<td>Description</td>
+				<td><input type="text" name="description" th:value="${description}" /></td>
+			</tr>
+			<tr>
+				<td>Services</td>
+				<td><input type="text" name="services" th:value="${services}" /></td>
+			</tr>
+			<tr>
+				<td>Constraints</td>
+				<td><input type="text" name="constraints" th:value="${constraints}" /></td>
+			</tr>
+			<tr>
+				<td>Ratings</td>
+				<td><input type="text" name="ratingsH" th:value="${ratingsH}" /></td>
+			</tr>
+			<tr>
+				<td>Photos</td>
+				<td><input type="text" name="photos" th:value="${photos}" /></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td><input type="text" name="address" th:value="${address}" /></td>
+			</tr>
+			<tr>
+				<td>Additional Address</td>
+				<td><input type="text" name="additional_address" th:value="${additional_address}" /></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td><input type="text" name="city" th:value="${city}" /></td>
+			</tr>
+			<tr>
+				<td>Postal Code</td>
+				<td><input type="text" name="postal_code" th:value="${postal_code}" /></td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td><input type="text" name="country" th:value="${country}" /></td>
+			</tr>
+			
+			
+			<tr>
+				<td><input type="hidden" name="edit" value="1" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="save" /></td>
+			</tr>
 		</table>
-
 	</form>
-	
-	<a href="/housesList/add">Add new house</a>
 </body>
 </html>

@@ -96,6 +96,7 @@ public class UserController {
 			@RequestParam("country") String country,
 			@RequestParam("additionalAddress") String additionalAddress,
 			@RequestParam("phoneNumber") int phoneNumber,
+			@RequestParam("password") String password,
 			@RequestParam(name = "edit", defaultValue = "") int edit
 			) {
 		if(edit == 0) {
@@ -120,6 +121,9 @@ public class UserController {
 		user.setCountry(country);
 		user.setAdditionalAddress(additionalAddress);
 		user.setPhoneNumber(phoneNumber);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(password);
+		user.setPassword(encodedPassword);
 		us.updateUser(user);   
 
 		return "redirect:/profile";

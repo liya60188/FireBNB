@@ -61,6 +61,7 @@ public class HouseController {
 		User user = us.getUser(email);
 		Iterable<House> listUserHouses = hssv.getUserHouses(user.getId_user());
 		model.addAttribute("listUserHouses", listUserHouses);
+		model.addAttribute("user", user);
 		
 		return "housesUserList";
 	}

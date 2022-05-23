@@ -1,0 +1,91 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<head>
+	<meta charset="UTF-8"/>
+	<title> Edit User</title>
+	</head>
+	<body>
+		 <form sec:authorize="isAuthenticated()" th:action="@{/profile/update}" th:object="${user}" method="post"> 
+        	<div>
+                <label>First Name: </label>
+                <div>
+                    <input type="text" th:field="*{firstName}" th:placeholder="${user.firstName}" readonly/>
+                </div>
+            </div>
+             
+            <div>
+                <label>Last Name: </label>
+                <div>
+                    <input type="text" th:field="*{lastName}" th:placeholder="${user.lastName}"/>
+                </div>
+            </div>
+            <div>
+                <label>E-mail: </label>
+                <div>
+                    <input type="email" th:field="*{email}" th:placeholder="${user.email}" readonly/>
+                </div>
+            </div>
+             
+            <div>
+                <label>Age: </label>
+                <div>
+                    <input type="number" th:field="*{age}" th:placeholder="${user.age}"/>
+                </div>
+            </div>
+             
+            <div>
+                <label>Address: </label>
+                <div>
+                    <input type="text" th:field="*{address}" th:placeholder="${user.address}"/>
+                </div>
+            </div>
+             
+            <div>
+                <label>City: </label>
+                <div>
+                    <input type="text" th:field="*{city}" th:placeholder="${user.city}"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Postal Code: </label>
+                <div>
+                    <input type="text" th:field="*{postalCode}" th:placeholder="${user.postalCode}"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Country: </label>
+                <div>
+                    <input type="text" th:field="*{country}" th:placeholder="${user.country}"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Additional Address: </label>
+                <div>
+                    <input type="text" th:field="*{additionalAddress}" th:placeholder="${user.additionalAddress}"/>
+                </div>
+            </div>
+            
+            <div>
+                <label>Phone Number: </label>
+                <div>
+                    <input type="number" th:field="*{phoneNumber}"
+                             minlength="10" maxlength="10" th:placeholder="${user.phoneNumber}"/>
+                </div>
+            </div>
+
+            <div>
+                    <input type="hidden" name="edit" value="1"/>
+             </div>
+            
+            <div>
+                <button type="submit" name="action">Save</button>
+            </div>
+            <div><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/profile/delete(email=${user.email})}">Delete</a></div>
+        </form>
+		
+	</body>
+</html>

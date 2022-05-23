@@ -23,7 +23,7 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	public int countHouseNumber(@Param("x") Long id_user);
 	
 	@Query(value = "SELECT * FROM `house` WHERE id_user = :x", nativeQuery = true)
-	public Page<House> findListHouses(@Param("x") Long id_user, Pageable pg);
+	public Iterable<House> findListHouses(@Param("x") Long id_user);
 	
 //	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 //	public Set<Service> getJoinedHouseServices();
