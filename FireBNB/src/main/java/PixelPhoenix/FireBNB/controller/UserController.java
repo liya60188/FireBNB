@@ -47,7 +47,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/profile")
-	public String userProfile(Model model, Principal principal/*@PathVariable long id*/) {
+	public String userProfile(Model model, Principal principal) {
 		
 		String email = principal.getName();
 		User user = us.getUser(email);
@@ -72,11 +72,12 @@ public class UserController {
 		
 		if(us.isUserExist(user.getEmail())) {
 			model.addAttribute("exist",true);
-			return "register";
+		}else{
+			us.createUser(user);	
+			model.addAttribute("registrationSuccess", true);
 		}
-		us.createUser(user);
 		
-		return "registrationSuccess";
+		return "register";
 	}
 	
 	@GetMapping("/profile/update/{email}")

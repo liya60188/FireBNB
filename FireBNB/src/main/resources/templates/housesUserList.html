@@ -1,48 +1,368 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>List of houses</title>
-</head>
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Houses List</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
-	<span th:text="${user.firstName} + ' ' + ${user.lastName} + ' houses'"></span>
-	
-	<div class=container>
-		<form action="/housesList/search" method="post">
-			<table>
-				<tr>
-					<td>Search: </td>
-					<td><input type="text" name="motCle" th:value="${motC}" placeholder="Find by description or Ratings" size="50"/></td>
-					<td><input type="submit" name="action" value="search" /></td>
-				</tr>
-			</table>
-		</form>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container-fluid">
+	<!-- Search bars-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col mt-5 mb-5 border-0">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form1" class="form-control rounded-pill" placeholder="Country" aria-label="Search"/>
+				</div>
+			</div>
+			
+			<div class="col mt-5 mb-5">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form2" class="form-control rounded-pill" placeholder="City" aria-label="Search"/>
+				</div>
+			</div>
+			
+			<div class="col mt-5 mb-5 border-0">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form3" class="form-control rounded-pill" placeholder="Date" aria-label="Search" />
+				</div>
+			</div>
+			
+			<div class="col mt-5 mb-5 border-0">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="People" aria-label="Search" />
+				</div>
+			</div>
+			
+			<div class="col mt-5 mb-5 border-0">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="Surface" aria-label="Search" />
+				</div>
+			</div>
+			
+			<div class="col mt-5 mb-5 border-0">
+				<div class="form-outline text-center">
+	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="Price" aria-label="Search" />
+				</div>
+			</div>
+			
+			<div class="col-1 mt-5 mb-5 text-left">
+				<button type="submit" class="btn btn-light border border-dark rounded-pill">
+		  			<svg xmlns="http://www.w3.org/2000/svg" width="40%" height="40%" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+		  				<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		  			</svg>	
+		  		</button>
+			</div>
+		</div>
+
+<!-- End of search bars -->
+		<div class="row">
+			<div class="col-11 text-right">
+		  		<button type="submit" class="btn btn-light border border-dark rounded-pill" data-toggle="collapse" data-target="#collapseElements" aria-expanded="false" aria-controls="collapseElements">+more</button>
+		  	</div>
+		</div>
 	</div>
-
-		<table>
-			<tr>
-				<th>Description</th>
-				<th>Services</th>
-				<th>Constraints</th>
-				<th>Rate</th>
-				<th>Address</th>
-				<th>Photos</th>
-			</tr> 
-
-			<tr th:each="house: ${listUserHouses}" var="house">
-				<td th:text="${house.description}">Description</td>
-				<td th:text="${house.services}">Services</td>
-				<td th:text="${house.constraints}">Constraints</td>
-				<td th:text="${house.ratingsH}">Rate</td> 
-				<td th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"> Address </td> 
-				<td> <img th:src="${house.photos}" style="width: 100px;height: 100px;"></td>
-				<td>
-				<a th:href="@{/housePage/{id_house} (id_house=${house.id_house})}">View</a>
-				</td>
+	
+	<div class="collapse" id="collapseElements">
+		<div th:fragment="characteristics">
+			<div class="row">
+				<div class="col">
+					<hr class="bg-dark"/>
+				</div>
+			</div>
+	
+			<div class="row">
+				<div class="col">
+					<p style="color:#14a6b6"><b> Rooms and beds </b></p>
+				</div>
+			</div>
+			
+			<div class="row ml-5">
+				<div class="col">
+					Rooms 
+				</div>
 				
-			</tr>
+				<div class="col">
+					<input type="number" value="1" min="0" max="50"/>
+				</div>
+				
+				<div class="col">
+					Beds 
+				</div>
+				
+				<div class="col">
+					<input type="number" value="1" min="0" max="50"/>
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<p style="color:#14a6b6"><b>Amenities</b></p>
+				</div>
+			</div>
+				
+			<div class="row ml-5">
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Amenities x
+					  </label>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row mt-3">
+				<div class="col">
+					<p style="color:#14a6b6"><b>Property type</b></p>
+				</div>
+			</div>
+			
+		<div class="row ml-5">
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					    Type x
+					  </label>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row mt-3">
+				<div class="col">
+					<p style="color:#14a6b6"><b>Constraints</b></p>
+				</div>
+			</div>
+			
+			<div class="row ml-5">
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+				
+				<div class="col-4">
+					<div class="form-check">
+					  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+					  <label class="form-check-label" for="flexCheckDefault">
+					   Constraint x
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+			<div class="row">
+						<div class="col mt-5 text-center">
+					  		<button type="submit" class="btn btn-light border border-dark rounded-pill">
+					  			<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					  				<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+					  			</svg>	
+					  		</button>
+					  	</div>
+			</div>	
+			
+			<div class="row">
+				<div class="col">
+					<hr class="bg-dark"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- Houses list -->
+<div class="container-fluid" th:each="house: ${listUserHouses}"var="house">
+	<div class="row mt-5">
+		<div class="col text-right">
+			<img class="img-fluid border mx-auto d-block" th:src="${house.photos}" alt="FireBnB logo" width="50%" height="50%">
+			<!--   src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"  -->
+		</div>
+		
+		<div class="col">
+			<div class="row">
+				<div class="col">
+					<b th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"></b>
+				</div>
+				
+				<div class="col text-right">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20%" height="20%" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+					  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+					</svg>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col mr-5 text-justify">
+				<p th:text="${house.description}"> </p>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-2">
+					<span th:text="${house.ratingsH} + '/5'"> </span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
+  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+					</svg>
+				</div>
+				
+				<div class="col text-righ mr-5">
+					<a th:href="@{/housePage/{id_house} (id_house=${house.id_house})}">View</a>	
+					<a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, edit=0)}">Edit</a>
+					<a sec:authorize="hasAuthority('ADMIN')" onclick="return confirm('Please Confirm')"
+					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of houses list -->
 
-		</table>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
 
 </body>
 </html>

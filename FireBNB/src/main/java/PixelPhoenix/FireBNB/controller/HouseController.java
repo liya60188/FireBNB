@@ -101,91 +101,67 @@ public class HouseController {
 		         
 		 return "addHouse";    
 		 }
-			
-//			@PostMapping("/housesList/add")
-//			public String add(@ModelAttribute("house") @Validated House house, BindingResult result, Model model) {
-//				if (result.hasErrors()) {
-//					return "addHouse";
-//				}
-//				House houseAdd = hssv.saveHouse(house);
-//				model.addAttribute("house", houseAdd);
-//				return "redirect:/housesList";
-//			}
-
-			@PostMapping("/housesList/add")
-			public String add(@ModelAttribute("house") @Validated House house, Model model) {
-				hssv.createHouse(house);
-				//model.addAttribute("house", houseAdd);
-				return "redirect:/housesList";
-			}
-			/*
-			 
-			 @GetMapping("/housesList/add")
-			public String houseForm(Model model) {
-				model.addAttribute("house", new House());
-				
-				Iterable<Service> listServices = serviceService.getServices();
-				model.addAttribute("listServices", listServices);
-				
-				Iterable<Constraint> listConstraints = constraintService.getConstraints();
-				model.addAttribute("listConstraints", listConstraints);
-				
-				return "addHouse";
-			}
-			
-			*/
 	
-			@RequestMapping(value = "/housesList/delete")
-			public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
-				hssv.deleteHouse(id_house);
-				return "redirect:/housesList";
-			}
+
+	@PostMapping("/housesList/add")
+	public String add(@ModelAttribute("house") @Validated House house, Model model) {
+		hssv.createHouse(house);
+		//model.addAttribute("house", houseAdd);
+		return "redirect:/housesList";
+	}
 			
-			@RequestMapping(value = "/listHouses/edit")
-			public String edit(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house,
-					@RequestParam(name = "description", defaultValue = "") String description,
-					@RequestParam(name = "services", defaultValue = "") String services,
-					@RequestParam(name = "constraints", defaultValue = "") String constraints,
-					@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
-					@RequestParam(name = "photos", defaultValue = "") String photos,
-					@RequestParam(name = "address", defaultValue = "") String address,
-					@RequestParam(name = "city", defaultValue = "") String city,
-					@RequestParam(name = "postal_code", defaultValue = "") int postal_code,
-					@RequestParam(name = "country", defaultValue = "") String country,
-					@RequestParam(name = "additional_address", defaultValue = "") String additional_address,
-					@RequestParam(name = "edit", defaultValue = "") int edit) {		
-				if (edit == 0) {
-					model.addAttribute("id_house", id_house);
-					model.addAttribute("description", description);
-					model.addAttribute("services", services);
-					model.addAttribute("constraints", constraints);
-					model.addAttribute("ratingsH", ratingsH);
-					model.addAttribute("photos", photos);
-					model.addAttribute("address", address);
-					model.addAttribute("city", city);
-					model.addAttribute("postal_code", postal_code);
-					model.addAttribute("country", country);
-					model.addAttribute("additional_address", additional_address);
-					return "housesEdit";
-				} else {
-					Optional<House> ot = hssv.getHouse(id_house);
-					House house = ot.get();
-					house.setDescription(description);
-					//house.setServices(services);
-					//house.setConstraints(constraints);
-					house.setRatingsH(ratingsH);
-					house.setPhotos(photos);
-					house.setAddress(address);
-					house.setCity(city);
-					house.setPostal_code(postal_code);
-					house.setCountry(country);
-					house.setAdditional_address(additional_address);
-					hssv.saveHouse(house);
-					return "redirect:/housesList";
-				}
-			}
+	
+	@RequestMapping(value = "/housesList/delete")
+	public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
+		hssv.deleteHouse(id_house);
+		return "redirect:/housesList";
+	}
 			
-	@RequestMapping(value="/housePage/{id_house}") 
+	@RequestMapping(value = "/listHouses/edit")
+	public String edit(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house,
+		@RequestParam(name = "description", defaultValue = "") String description,
+		@RequestParam(name = "services", defaultValue = "") String services,
+		@RequestParam(name = "constraints", defaultValue = "") String constraints,
+		@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
+		@RequestParam(name = "photos", defaultValue = "") String photos,
+		@RequestParam(name = "address", defaultValue = "") String address,
+		@RequestParam(name = "city", defaultValue = "") String city,
+		@RequestParam(name = "postal_code", defaultValue = "") int postal_code,
+		@RequestParam(name = "country", defaultValue = "") String country,
+		@RequestParam(name = "additional_address", defaultValue = "") String additional_address,
+		@RequestParam(name = "edit", defaultValue = "") int edit) {	
+		if (edit == 0) {
+			model.addAttribute("id_house", id_house);
+			model.addAttribute("description", description);
+			model.addAttribute("services", services);
+			model.addAttribute("constraints", constraints);
+			model.addAttribute("ratingsH", ratingsH);
+			model.addAttribute("photos", photos);
+			model.addAttribute("address", address);
+			model.addAttribute("city", city);
+			model.addAttribute("postal_code", postal_code);
+			model.addAttribute("country", country);
+			model.addAttribute("additional_address", additional_address);
+			return "housesEdit";
+		} else {
+			Optional<House> ot = hssv.getHouse(id_house);
+			House house = ot.get();
+			house.setDescription(description);
+			//house.setServices(services);
+			//house.setConstraints(constraints);
+			house.setRatingsH(ratingsH);
+			house.setPhotos(photos);
+			house.setAddress(address);
+			house.setCity(city);
+			house.setPostal_code(postal_code);
+			house.setCountry(country);
+			house.setAdditional_address(additional_address);
+			hssv.saveHouse(house);
+			return "redirect:/housesList";
+		}
+	}
+			
+	@RequestMapping(value="/houseProfil/{id_house}") 
 	public String HousePage(@PathVariable Long id_house, Model model){
 		//House housePage = house.get();
 		
@@ -193,7 +169,7 @@ public class HouseController {
 		House house2 = house.get();
 		model.addAttribute("house", house2);
 		
-		return "housePage";
+		return "houseProfil";
 	}
 	
 }

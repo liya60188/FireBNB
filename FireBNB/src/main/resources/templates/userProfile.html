@@ -3,40 +3,16 @@
 		xmlns:th="http://www.thymeleaf.org"
 		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
-	<meta charset="utf-8" />
-	<title>Profile</title>
-		<link rel="stylesheet" type="text/css" href="index.css"/>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
- 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<meta charset="utf-8" />
+		<title>Profile</title>
+		<div th:insert="fragments/header.html :: links"> 
+		</div>
 	</head>
 
 <body>
-
 <!-- Header -->
-<div class="sticky-top">
-	<div class="container-fluid" style="background-color: rgba(20, 166, 182);">
-	  <div class="row">
-	    <div class="col-3 mt-2">
-	     	<img src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" alt="FireBnB logo" class="img-fluid" width="25%" height="25%">
-	    </div>
-	    <div class="col-3 text-left mt-2">
-	     	<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-light">Find a home</a>
-	    </div>
-	    <div class="col-3 text-right mt-2">
-	    	<a href="https://cdn.futura-sciences.com/buildsv6/images/mediumoriginal/6/5/2/652a7adb1b_98148_01-intro-773.jpg" class="text-light">Sign Up / Log In</a>
-	    </div>
-	  </div>
-	  <div class="col-3 text-right mt-2">
-	    	<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
-		</form>
-	    </div>
-	</div>
-</div>
+<header th:insert="fragments/header.html :: header"> 
+</header>
 <!-- End of header -->
 
 <!-- Content -->
@@ -94,11 +70,9 @@
 			
 			<div class="row mt-3">
 				<div class="col">
-					<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-dark"><u>See all houses</u></a>
 					<a th:href="@{/profile/houses/{email}(email=${user.email})}">See all houses</a>
 				</div>	
-			</div>
-			<div class="row mt-3">
+				<div class="col">
 <!--      			<span th:if="${user.email == principal.name}"> 			 -->
     				<a th:href="@{/profile/update/{email}(email=${user.email}, 
 					firstName=${user.firstName}, lastName = ${user.lastName},  
@@ -107,6 +81,7 @@
  					phoneNumber = ${user.phoneNumber}, edit = 0)}"> Edit Profile</a> 
 <!--     			</span>	 -->
 
+				</div>
 			</div>
 		</div>
 		
@@ -118,7 +93,7 @@
 				</div>
 				
 				<div class="col-1">
-					3,5/5
+					<span th:text="${rating} + '/5'"></span>
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
   						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 					</svg>

@@ -36,10 +36,10 @@
 	     	<img src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" alt="FireBnB logo" class="img-fluid" width="25%" height="25%">
 	    </div>
 	    <div class="col-6 text-left mt-2">
-	     	<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-light">Find a home</a>
+	     	<a th:href="@{/}" class="text-light">Home</a>
 	    </div>
 	    <div class="col-3 text-right mt-2">
-	    	<a href="https://cdn.futura-sciences.com/buildsv6/images/mediumoriginal/6/5/2/652a7adb1b_98148_01-intro-773.jpg" class="text-light">Sign Up / Log In</a>
+	    	<a href="" class="text-light">Sign Up / Log In</a>
 	    </div>
 	  </div>
 	</div>
@@ -66,18 +66,18 @@
 		    
 		    <div class="col-5 text-right mt-2 mb-3">
 		    	<div class="btn-group btn-sm btn-light border rounded-pill">
-				  <button type="button" class="btn btn-sm">Welcome, XXXXX</button>
+				  <button type="button" class="btn btn-sm">Welcome, [[${#request.userPrincipal.principal.fullName}]]</button>
 				  
 				  <button type="button" class="btn btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    <span class="sr-only">Toggle Dropdown</span>
 				  </button>
 				  
 				  <div class="dropdown-menu dropdown-menu-right">
-				    <a class="dropdown-item" href="#">Profile</a>
-				    <a class="dropdown-item" href="#">Houses</a>
-				    <a class="dropdown-item" href="#">Messages</a>
+				    <a class="dropdown-item" th:href="@{/profile}">Profile</a>
+				    <a class="dropdown-item" th:href="@{/profile/houses/{email}(email=${user.email})}">Houses</a>
+				    <a class="dropdown-item" th:href="@{/messagesList}">Messages</a>
 				    <div class="dropdown-divider"></div>
-				    <a class="dropdown-item text-danger" href="#">Logout</a>
+				    <a class="dropdown-item text-danger" th:href="@{/logout}">Logout</a>
 				  </div>
 				</div>     
 		  		</div>
