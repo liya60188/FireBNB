@@ -1,6 +1,7 @@
 package PixelPhoenix.FireBNB.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,12 +57,23 @@ public class HouseController {
 		return "housesList";
 	}
 	
-	@GetMapping("/profile/houses/{email}")
-	public String listUserHouses(@PathVariable("email") String email, Model model) {
-		User user = us.getUser(email);
-		Iterable<House> listUserHouses = hssv.getUserHouses(user.getId_user());
+//	@GetMapping("/profile/houses/{email}")
+//	public String listUserHouses(@PathVariable("email") String email, Model model) {
+//		User user = us.getUser(email);
+//		Iterable<House> listUserHouses = hssv.getUserHouses(user.getId_user());
+//		model.addAttribute("listUserHouses", listUserHouses);
+//		model.addAttribute("user", user);
+//		
+//		return "housesUserList";
+//	}
+	@GetMapping("/profile/houses")
+	public String listUserHouses(Principal principal, Model model) {
+		String emailLoggedUser = principal.getName();
+		User loggedUser = us.getUser(emailLoggedUser);
+		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
+		
 		model.addAttribute("listUserHouses", listUserHouses);
-		model.addAttribute("user", user);
+		model.addAttribute("loggedUser", loggedUser);
 		
 		return "housesUserList";
 	}

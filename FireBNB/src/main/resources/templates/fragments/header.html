@@ -35,7 +35,7 @@
 	    <div class="col-3 mt-2">
 	     	<img src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" alt="FireBnB logo" class="img-fluid" width="25%" height="25%">
 	    </div>
-	    <div class="col-6 text-left mt-2">
+	    <div class="col-2 text-left mt-2 mb-0">
 	     	<a th:href="@{/}" class="text-light">Home</a>
 	    </div>
 	    <div class="col-3 text-right mt-2">
@@ -57,11 +57,11 @@
 		    </div>
 		    
 		    <div class="col-2 text-left mt-2">
-		     	<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-light">Find a home</a>
+		     	<a th:href= @{/}" class="text-light">Home</a>
 		    </div>
 		    
 		    <div class="col-2 text-left mt-2 mb-0">
-		     	<a href="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" class="text-light">Find owner</a>
+		     	<a th:href="@{/usersList}" class="text-light">Find owner</a>
 		    </div>
 		    
 		    <div class="col-5 text-right mt-2 mb-3">
@@ -74,7 +74,7 @@
 				  
 				  <div class="dropdown-menu dropdown-menu-right">
 				    <a class="dropdown-item" th:href="@{/profile}">Profile</a>
-				    <a class="dropdown-item" th:href="@{/profile/houses/{email}(email=${user.email})}">Houses</a>
+				    <a class="dropdown-item" th:href="@{/profile/houses}">Houses</a>
 				    <a class="dropdown-item" th:href="@{/messagesList}">Messages</a>
 				    <div class="dropdown-divider"></div>
 <!-- 				    <a class="dropdown-item text-danger" th:href="@{/logout}"> -->
@@ -84,8 +84,8 @@
 <!-- 					Logout</a> -->
 				  </div>
 				</div>     
-		  		</div>
-			</div>
+		  	</div>
+		</div>
 		</div>
 	</div>
 </div>

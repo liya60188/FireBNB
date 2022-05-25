@@ -4,7 +4,7 @@
 		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 		<meta charset="utf-8" />
-		<title>User Profile</title>
+		<title>My Profile</title>
 		<div th:insert="fragments/header.html :: links"> 
 		</div>
 	</head>
@@ -64,9 +64,15 @@
 			
 			<div class="row mt-3">
 				<div class="col">
-					<a th:href="@{/profile/houses/{email}(email=${user.email})}">See all houses</a>
+					<a th:href="@{/profile/houses}">See all houses</a>
 				</div>	
-
+				<div class="col">		 
+    				<a th:href="@{/profile/update/{email}(email=${user.email}, 
+					firstName=${user.firstName}, lastName = ${user.lastName}, 
+					address = ${user.address}, city = ${user.city}, 
+					postalCode = ${user.postalCode}, country = ${user.country},   
+ 					phoneNumber = ${user.phoneNumber}, password = ${user.password}, edit = 0)}"> Edit Profile</a>  
+				</div>
 			</div>
 		</div>
 		

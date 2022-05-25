@@ -19,14 +19,16 @@
 <!-- Gallery -->
 <div class="container">
 	<div class="row mt-5">
-		<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+		<div>
 	    	<img
 	      		src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
 	      		class="w-100 shadow-1-strong rounded mb-4"
 	      		alt="Boat on Calm Water"
 	   	 	/>
 	    	<div class="text-center mt-4">
-        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#house_photos"> See all pictures</button>
+        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#house_photos">
+  					See all photos
+				</button>
          	</div>
 		</div>
 	</div>
@@ -45,40 +47,28 @@
 		
 	</div>
 </div>
-<div class="modal" id="house_photos" tabindex="-1" 
-role="dialog" aria-labelledby="house_photosLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title"> All photos </h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
+<div class="modal fade" id="house_photos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
 			<div class="modal-body">
-				<div>
 					<img
 		      			src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
 		      			class="w-100 shadow-1-strong rounded mb-4"
 		      			alt="Wintry Mountain Landscape"
 		    		/>
-		 		</div>
-		
-				 <div class="col-lg-4 mb-4 mb-lg-0">
+	
 				    <img
 				      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
 				      class="w-100 shadow-1-strong rounded mb-4"
 				      alt="Mountains in the Clouds"
 				    />
-				
-				    <img
-				      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="Boat on Calm Water"
-				    />
-				 </div>
-		
-				 <div class="col-lg-4 mb-4 mb-lg-0">
+
 				    <img
 				      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
 				      class="w-100 shadow-1-strong rounded mb-4"
@@ -90,7 +80,8 @@ role="dialog" aria-labelledby="house_photosLabel" aria-hidden="true">
 				      class="w-100 shadow-1-strong rounded mb-4"
 				      alt="Yosemite National Park"
 				    /> 
-				 </div>
+			</div>
+			<div class="modal-footer">
 			</div>
 		</div>
 	</div>

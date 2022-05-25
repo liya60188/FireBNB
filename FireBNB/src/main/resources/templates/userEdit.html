@@ -50,7 +50,15 @@
 					    
 					    <div class="col-8 mt-3">
 					    	<input type="text" class="form-control" id="lastNameInput" th:field="*{lastName}" th:placeholder="${user.lastName}" readonly/>
-					    </div>				    
+					    </div>	
+					    
+					    <div class="col-3 text-right">
+					    	<label for="emailInput">Email</label>
+					    </div>
+					    
+					    <div class="col-8">
+					    	<input type="email" class="form-control" id="emailInput" th:field="*{email}" th:placeholder="${user.email}" readonly/>
+					    </div>			    
 					  </div>
 				  </div>
 	

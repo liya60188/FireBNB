@@ -38,6 +38,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/admin/users")
+	public String listUsersAdmin(Model model, @RequestParam(defaultValue="") String name) {
+		Iterable<User> listUsers = us.getUsers();
+		model.addAttribute("listUsers", listUsers);
+		//model.addAttribute("users", us.findByName(name));
+		
+		return "usersList";
+	}
+	
+	@GetMapping("/usersList")
 	public String listUsers(Model model, @RequestParam(defaultValue="") String name) {
 		Iterable<User> listUsers = us.getUsers();
 		model.addAttribute("listUsers", listUsers);
@@ -46,10 +55,8 @@ public class UserController {
 		return "usersList";
 	}
 	
-	@GetMapping("/profile")
-	public String userProfile(Model model, Principal principal) {
-		
-		String email = principal.getName();
+	@GetMapping("/profile/{email}")
+	public String userProfile(Model model, @PathVariable("email") String email) {
 		User user = us.getUser(email);
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
@@ -57,6 +64,19 @@ public class UserController {
 		model.addAttribute("user", user);
 		model.addAttribute("numberOfHouses", numberOfHouses);
 		return "userProfile";
+	}
+	
+	@GetMapping("/profile")
+	public String userProfile(Model model, Principal principal) {
+		
+		String emailLoggedUser = principal.getName();
+		User user = us.getUser(emailLoggedUser);
+
+		int numberOfHouses = hs.numberHouses(user.getId_user());
+		
+		model.addAttribute("numberOfHouses", numberOfHouses);
+		model.addAttribute("user", user);
+		return "loggedUserProfile";
 	}
 	
 	@GetMapping("/login")
@@ -81,7 +101,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/profile/update/{email}")
-	public String editUser(Model model, @PathVariable(name = "email") String email){
+	public String editUser(Model model, Principal principal){
+		String email = principal.getName();
 		User user = us.getUser(email);
 		model.addAttribute("user",user);
 		return "userEdit";
