@@ -1,0 +1,166 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Users Edit</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="row">
+				<div class="col mt-5 ml-5 text-center">
+					<img src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg" alt="FireBnB logo" class="img-fluid border rounded-circle mx-auto d-block" width="50%" height="50%">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col text-right">
+			  		<button type="submit" class="btn btn-light border border-dark rounded-pill">Edit picture</button>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	
+	<form>
+		<div class="form-group">
+			<div class="row mt-3">
+				<div class="col">
+					<label for="firstNameInput">First Name</label>
+				</div>
+				
+				<div class="col">
+					<input type="text" class="form-control" id="firstNameInput" placeholder="My first name">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="lastNameInput">Last Name</label>
+				</div>
+				
+				<div class="col">
+					<input type="text" class="form-control" id="lastNameInput" placeholder="My last name">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="emailInput">Email</label>
+				</div>
+				
+				<div class="col">
+					<input type="email" class="form-control" id="emailInput" placeholder="my email">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="ageInput">Age</label>
+				</div>
+				
+				<div class="col">
+					<input type="number" class="form-control" id="ageInput" placeholder="my age">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="adressInput">Adress</label>
+				</div>
+				
+				<div class="col">
+					<input type="text" class="form-control" id="adressInput" placeholder="my address">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="additionalAdressInput">Additional adress</label>
+				</div>
+				
+				<div class="col">
+					<input type="text" class="form-control" id="additionalAdressInput" placeholder="additional address">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+					<label for="cityInput">City</label>
+				</div>
+				
+				<div class="col">
+					<input type="text" class="form-control" id="cityInput" placeholder="my city">
+				</div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+			    	<label for="zipCodeInput">Zip code</label>
+			    </div>
+			    
+			    <div class="col">
+			    	<input type="text" class="form-control" id="zipCodeInput" placeholder="zip code" >
+			    </div>	
+		    </div>
+		    
+		    <div class="row mt-3">
+			    <div class="col">
+			    	<label for="countryInput">Country</label>
+			    </div>
+			    
+			    <div class="col">
+			    	<input type="text" class="form-control" id="countryInput" placeholder="nom du pays">
+			    </div>
+			</div>
+			
+			<div class="row mt-3"> 
+			    <div class="col">
+			    	<label for="phoneNumberInput">Phone number</label>
+			    </div>
+			    
+			    <div class="col">
+			    	<input type="text" class="form-control" id="phoneNumberInput" placeholder="+3300000000">
+			    </div>
+			</div>
+			
+			<div class="row mt-3">
+				<div class="col">
+			    	<label for="passwordInput">Password</label>
+			    </div>
+			    
+			    <div class="col">
+			    	<input type="password" class="form-control" id="passwordInput" >
+			    </div>
+			</div>
+		</div>
+	</form>
+	
+	<div class="row">
+		<div class="col-10 text-right">
+	  		<button type="submit" class="btn btn-danger border-0">Delete user</button>
+	  	</div>
+	  	
+		<div class="col  text-right">
+	  		<button type="submit" class="btn btn-success border-0">Save changes</button>
+	  	</div>
+	</div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+</body>
+</html>

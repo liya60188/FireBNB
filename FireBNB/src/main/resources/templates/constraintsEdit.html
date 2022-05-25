@@ -1,0 +1,54 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Constraints Edit</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container">
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Edit constraint</b></h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mt-5 mb-5 border-0">
+			ID
+		</div>
+		
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+ 			 	<input type="search" id="form1" class="form-control" placeholder="Constraint name" aria-label="Search"/>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-10 text-right">
+	  		<button type="submit" class="btn btn-danger border-0">Delete constraint</button>
+	  	</div>
+	  	
+		<div class="col  text-right">
+	  		<button type="submit" class="btn btn-success border-0">Save changes</button>
+	  	</div>
+	</div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+</body>
+</html>

@@ -90,4 +90,24 @@ public class UserController {
 	public String usersList() {
 		return "usersList";
 	}
+	
+	@GetMapping("/constraintsList")
+	public String constraintsList() {
+		return "constraintsList";
+	}
+	
+	@GetMapping("/constraintsEdit")
+	public String constraintsEdit() {
+		return "constraintsEdit";
+	}
+	
+	@GetMapping("/usersEdit")
+	public String usersEdit() {
+		return "usersEdit";
+	}
+	
+	@GetMapping("/addHouse")
+	public String addHouse() {
+		return "addHouse";
+	}
 }

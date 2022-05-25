@@ -1,0 +1,165 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Add house</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+
+<!-- House description -->
+
+<!-- End of house description -->
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Add a house</b></h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mt">
+			<h4 style="color:#14A6B6"><b>About the house</b></h4>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row">
+			<div class="col-2 text-right">
+				<label for="houseNameInput">House name</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="houseNameInput">
+			</div>
+		</div>	
+		
+		<div class="row">
+			<div class="col">
+				<div class="md-form">
+					<div class="row">
+						<div class="col-2 text-right">
+							<label for="form7" >House description</label>
+						</div>
+						
+						<div class="col mt-3">
+					 		<textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
+					 	</div>
+				 	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- House location -->
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="col mt-5">
+			<h4 style="color:#14A6B6"><b>Location information</b></h4>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="adressInput">Adress</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="adressInput" placeholder="my address">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="additionalAdressInput">Additional adress</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="additionalAdressInput" placeholder="additional address">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="cityInput">City</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="cityInput" placeholder="my city">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+		    	<label for="zipCodeInput">Zip code</label>
+		    </div>
+		    
+		    <div class="col">
+		    	<input type="text" class="form-control" id="zipCodeInput" placeholder="zip code" >
+		    </div>	
+		   </div>
+		   
+		   <div class="row mt-3">
+		    <div class="col-2 text-right">
+		    	<label for="countryInput">Country</label>
+		    </div>
+		    
+		    <div class="col mb-5">
+		    	<input type="text" class="form-control" id="countryInput" placeholder="nom du pays">
+		    </div>
+		</div>
+	</div>
+</div>
+<!-- End of house location -->
+
+<!-- House amenities, constraints and services -->
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="row">
+			<div class="col mt-3">
+				<h4 style="color:#14A6B6"><b>Amenities, constraints and services</b></h4>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mb-5">
+			<div th:insert="housesList.html :: characteristics"></div>
+		</div>
+	</div>
+</div>
+<!-- end of House amenities, constraints and services -->
+
+<!-- Pictures of the house -->
+<div class="container">
+	<div class="row mt-5">
+		<div class="col">
+			<button type="submit" class="btn btn-light border border-dark rounded-pill">Add pictures</button>
+		</div>
+		
+		<div class="col text-right">
+			<button type="submit" class="btn btn-success border-0 rounded-pill btn-block">Save</button>
+		</div>
+	</div>
+</div>
+<!-- End of pictures of the house -->
+
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+</body>
+</html>

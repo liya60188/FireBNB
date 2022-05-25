@@ -1,0 +1,64 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Constraints List</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Constraints List</b></h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mt-3 mb-3 text-right">
+	  		<button type="submit" class="btn btn-light border-0" style="background-color: rgba(20, 166, 182);">Add constraint</button>
+	  	</div>
+	</div>
+	
+	<div th:fragment="constraintsItems">
+		<div class="row mb-3">
+			<div class="col">
+				ID
+			</div>
+			
+			<div class="col">
+				Constraint Name
+			</div>
+			
+			<div class="col text-right">
+				<button type="submit" class="btn btn-light border border-dark rounded-pill">Edit</button>
+			</div>
+		</div>
+	</div>
+	
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+	<div th:insert="constraintsList.html :: constraintsItems"></div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+</body>
+</html>
