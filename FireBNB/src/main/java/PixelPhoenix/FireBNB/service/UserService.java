@@ -25,9 +25,9 @@ public class UserService {
 	public User getUser(String email){
 		return ur.findByEmail(email);	
 	}
-//	public Optional<User> getUserId(long id){
-//		return ur.findById(id);	
-//	}
+	public Optional<User> getUserId(long id){
+		return ur.findById(id);	
+	}
 	public Iterable<User> getUsers(){
 		return ur.findAll();
 	}

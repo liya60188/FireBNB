@@ -90,7 +90,6 @@ public class UserController {
 	public String updateUser(@RequestParam("email") String email, Model model,
 			@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName,
-			@RequestParam("age") int age,
 			@RequestParam("address") String address,
 			@RequestParam("city") String city,
 			@RequestParam("postalCode") int postalCode,
@@ -103,7 +102,6 @@ public class UserController {
 		if(edit == 0) {
 		model.addAttribute("firstName", firstName);
 		model.addAttribute("lastName", lastName);
-		model.addAttribute("age", age);
 		model.addAttribute("address", address);
 		model.addAttribute("city", city);
 		model.addAttribute("postalCode", postalCode);
@@ -115,7 +113,6 @@ public class UserController {
 		User user = us.getUser(email);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		user.setAge(age);
 		user.setAddress(address);
 		user.setCity(city);
 		user.setPostalCode(postalCode);

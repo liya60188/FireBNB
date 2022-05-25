@@ -129,8 +129,12 @@ public class HouseController {
 		@RequestParam(name = "postal_code", defaultValue = "") int postal_code,
 		@RequestParam(name = "country", defaultValue = "") String country,
 		@RequestParam(name = "additional_address", defaultValue = "") String additional_address,
+		@RequestParam(name = "id_user", defaultValue = "") Long id_user,
 		@RequestParam(name = "edit", defaultValue = "") int edit) {	
 		if (edit == 0) {
+			Optional<User> u = us.getUserId(id_user); 
+			User user = u.get();
+			model.addAttribute("user",user);
 			model.addAttribute("id_house", id_house);
 			model.addAttribute("description", description);
 			model.addAttribute("services", services);
@@ -161,7 +165,7 @@ public class HouseController {
 		}
 	}
 			
-	@RequestMapping(value="/houseProfil/{id_house}") 
+	@RequestMapping(value="/houseProfile/{id_house}") 
 	public String HousePage(@PathVariable Long id_house, Model model){
 		//House housePage = house.get();
 		
@@ -169,7 +173,7 @@ public class HouseController {
 		House house2 = house.get();
 		model.addAttribute("house", house2);
 		
-		return "houseProfil";
+		return "houseProfile";
 	}
 	
 }

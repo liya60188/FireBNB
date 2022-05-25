@@ -36,12 +36,6 @@
 			
 			<div class="row">
 				<div class="col text-center">
-					<p th:text="${user.age}"> </p>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col text-center">
 					<p><b>About</b></p>
 				</div>
 			</div>
@@ -75,10 +69,10 @@
 				<div class="col">
 <!--      			<span th:if="${user.email == principal.name}"> 			 -->
     				<a th:href="@{/profile/update/{email}(email=${user.email}, 
-					firstName=${user.firstName}, lastName = ${user.lastName},  
- 					age = ${user.age}, address = ${user.address}, city = ${user.city} 
- 					, postalCode = ${user.postalCode}, country = ${user.country},   
- 					phoneNumber = ${user.phoneNumber}, edit = 0)}"> Edit Profile</a> 
+					firstName=${user.firstName}, lastName = ${user.lastName}, 
+					address = ${user.address}, city = ${user.city}, 
+					postalCode = ${user.postalCode}, country = ${user.country},   
+ 					phoneNumber = ${user.phoneNumber}, password = ${user.password}, edit = 0)}"> Edit Profile</a> 
 <!--     			</span>	 -->
 
 				</div>

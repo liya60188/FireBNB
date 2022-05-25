@@ -1,0 +1,66 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>House Edit</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<form action="/listHouses/edit" method="get">
+		<table>
+			<tr>
+				<td>ID</td>
+				<td><input type="text" name="id_house" th:value="${id_house}" readonly /></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><input type="text" name="description" th:value="${description}" /></td>
+			</tr>
+			<tr>
+				<td>Services</td>
+				<td><input type="text" name="services" th:value="${services}" /></td>
+			</tr>
+			<tr>
+				<td>Constraints</td>
+				<td><input type="text" name="constraints" th:value="${constraints}" /></td>
+			</tr>
+			<tr>
+				<td>Ratings</td>
+				<td><input type="text" name="ratingsH" th:value="${ratingsH}" /></td>
+			</tr>
+			<tr>
+				<td>Photos</td>
+				<td><input type="text" name="photos" th:value="${photos}" /></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td><input type="text" name="address" th:value="${address}" /></td>
+			</tr>
+			<tr>
+				<td>Additional Address</td>
+				<td><input type="text" name="additional_address" th:value="${additional_address}" /></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td><input type="text" name="city" th:value="${city}" /></td>
+			</tr>
+			<tr>
+				<td>Postal Code</td>
+				<td><input type="text" name="postal_code" th:value="${postal_code}" /></td>
+			</tr>
+			<tr>
+				<td>Country</td>
+				<td><input type="text" name="country" th:value="${country}" /></td>
+			</tr>
+			
+			
+			<tr>
+				<td><input type="hidden" name="edit" value="1" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="save" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

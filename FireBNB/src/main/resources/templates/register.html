@@ -5,7 +5,12 @@
 		xmlns:sec="http://www.thymeleaf.org">
 	<head>
 	<meta charset="utf-8" />
+	
 	<title>Registration</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	        crossorigin="anonymous" referrerpolicy="no-referrer">
+		</script>
 		<div th:insert="fragments/header.html :: links"> 
 		</div>
 	</head>
@@ -19,7 +24,7 @@
 
 <div class="row mt-5">
 </div>
-<div class="container border rounded-top">
+<div id="indexPage" class="container border rounded-top">
 	<div class="row" style="background-color: rgba(20, 166, 182);">
 		<h1 class="col text-center">Log In or Join the experience</h1>
 	</div>
@@ -93,9 +98,9 @@
 				</div>
 			</div>
 	
-			<form th:action="@{/userRegistration}" th:object="${user}"
+			<form id="registerForm" autocomplete="off" @submit="register" th:action="@{/userRegistration}" th:object="${user}"
             method="post">
-            	<div th:if="${exist == true}">User already exist</div>
+            	<div th:if="${exist == true}">This address email is already registered</div>
 				<div class="form-group">
 				  <div class="row mt-3">
 				  	<div class="col-2 text-right">
@@ -103,8 +108,10 @@
 				    </div>
 				    
 				    <div class="col-4">
-				    	<input type="text" class="form-control" id="firstNameInput" th:field="*{firstName}"
-                            required>
+				    	<input type="text" class="form-control" 
+				    	id="firstNameInput" v-model="firstNameInput"  
+				    	th:field="*{firstName}">
+                        <span id="firstNameError" ref="firstNameError"> </span>
 				    </div>
 				    
 				    <div class="col-2 text-right">
@@ -112,8 +119,10 @@
 				    </div>
 				    
 				    <div class="col-3">
-				    	<input type="text" class="form-control" id="lastNameInput" th:field="*{lastName}"
-                            required >
+				    	<input type="text" class="form-control" 
+				    	id="lastNameInput" v-model="lastNameInput"
+				    	th:field="*{lastName}">
+				    	<span id="lastNameError" ref="lastNameError"> </span>
 				    </div>				    
 				  </div>
 			  </div>
@@ -124,39 +133,37 @@
 				    	<label for="emailInput">Email</label>
 				    </div>
 				    
-				    <div class="col-6">
-				    	<input type="email" class="form-control" id="emailInput" th:field="*{email}" required>
-				    </div>
-				    
-				    <div class="col-1 text-right">
-				    	<label for="ageInput">Age</label>
-				    </div>
-				    
-				    <div class="col-2">
-				    	<input type="number" class="form-control" id="ageInput" th:field="*{age}"
-                            required >
-				    </div>				    
+				    <div class="col-9">
+				    	<input type="email" class="form-control" 
+				    	id="emailInput" v-model="emailInput"  
+				    	th:field="*{email}">
+				    	<span id="emailError" ref="emailError"> </span>
+				    </div>				    			    
 				  </div>
 			  </div>
 
 				<div class="form-group">
 				  <div class="row">
 				  	<div class="col-2 text-right">
-				    	<label for="adsressInput">Address</label>
+				    	<label for="addressInput">Address</label>
 				    </div>
 				    
 				    <div class="col-3">
-				    	<input type="text" class="form-control" id="adssressInput" th:field="*{address}"
-                            required >
+				    	<input type="text" class="form-control" 
+				    	id="addressInput" v-model="addressInput"
+				    	th:field="*{address}">
+				    	<span id="addressError" ref="addressError"> </span>
 				    </div>
 				    
 				    <div class="col-2 text-right">
-				    	<label for="additionalAdsressInput">Additional address</label>
+				    	<label for="additionalAddressInput">Additional address</label>
 				    </div>
 				    
 				    <div class="col-4">
-				    	<input type="text" class="form-control" id="additionalAdsressInput" th:field="*{additionalAddress}">
-				    </div>				    
+				    	<input type="text" class="form-control" 
+				    	id="additionalAddressInput"
+				    	th:field="*{additionalAddress}">
+					    </div>				    
 				  </div>
 			  </div>
 
@@ -167,8 +174,10 @@
 				    </div>
 				    
 				    <div class="col-2">
-				    	<input type="text" class="form-control" id="cityInput" th:field="*{city}"
-                            required >
+				    	<input type="text" class="form-control" 
+				    	id="cityInput" v-model="cityInput"
+				    	th:field="*{city}">
+				    	<span id="cityError" ref="cityError"> </span>
 				    </div>
 				    
 				    <div class="col-1 text-right">
@@ -176,8 +185,10 @@
 				    </div>
 				    
 				    <div class="col-2">
-				    	<input type="text" class="form-control" id="postalCodeInput" th:field="*{postalCode}"
-                            required >
+				    	<input type="number" class="form-control" 
+				    	id="postalCodeInput" v-model="postalCodeInput"
+				    	th:field="*{postalCode}">
+				    	<span id="postalCodeError" ref="postalCodeError"> </span>
 				    </div>	
 				    
 				    <div class="col-1 text-right">
@@ -185,8 +196,10 @@
 				    </div>
 				    
 				    <div class="col-3">
-				    	<input type="text" class="form-control" id="countryInput" th:field="*{country}"
-                            required>
+				    	<input type="text" class="form-control" 
+				    	id="countryInput" name="countryInput" v-model="countryInput"
+				    	th:field="*{country}">
+				    	<span id="countryError" ref="countryError"> </span>
 				    </div>			    
 				  </div>
 			  </div>
@@ -198,27 +211,46 @@
 				    </div>
 				    
 				    <div class="col-9">
-				    	<input type="number" class="form-control" id="phoneNumberInput" th:field="*{phoneNumber}"
-                            required minlength="10" maxlength="10" >
+				    	<input type="number" class="form-control" 
+				    	id="phoneNumberInput" v-model="phoneNumberInput" 
+				    	th:field="*{phoneNumber}">
+				    	<span id="phoneNumberError" ref="phoneNumberError"> </span>
 				    </div>				    
 				  </div>
 			  </div>
 		  		  			  
 			 <div class="form-group">
-			  <div class="row">
+			 	<div class="row">
 			  		<div class="col-2 text-right">
 				    	<label for="passwordInput">Password</label>
 				    </div>
 				    
 				    <div class="col-9">
-				    	<input type="password" class="form-control" id="passwordInput" th:field="*{password}" required minlength="6" maxlength="10">
+				    	<input type="password" class="form-control" 
+				    	id="passwordInput" v-model="passwordInput" 
+				    	th:field="*{password}" minlength="6">
+				    	<span id="passwordError" ref="passwordError"> </span>
 				    </div>
-				  </div>
-			  </div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+			  		<div class="col-2 text-right">
+				    	<label for="passwordConfirmInput">Password Confirm</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="password" class="form-control" 
+				    	id="passwordConfirmInput" v-model="passwordConfirmInput" 
+				    	minlength="6">
+				    	<span id="passwordConfirmError" ref="passwordConfirmError"> </span>
+				    </div>
+				</div>
+			</div>
 			  
 				<div class="row">
 					<div class="col-11 text-right">
-				  		<button type="submit" class="btn btn-light border border-dark rounded-pill">Sign Up</button>
+				  		<button type="submit"  class="btn btn-light border border-dark rounded-pill">Sign Up</button>
 				  	</div>
 				</div>
 			</form>
@@ -287,6 +319,10 @@
 	</div>
 </div>
 <!-- End of Footer -->
+
+<script src="https://unpkg.com/vue@next"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/indexFormRegulation.js}"></script>
 
 </body>
 </html>

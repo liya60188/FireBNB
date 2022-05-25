@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Table(name="user")
 public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5978500248036655362L;
 	@Id
 	@Column(name="user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +22,6 @@ public class User implements Serializable{
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
-	private int age;
 	private int rating;
 	private String email;
 	private String password;
@@ -55,13 +58,6 @@ public class User implements Serializable{
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public int getRating() {
@@ -132,13 +128,12 @@ public class User implements Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public User(Long user_id, String firstName, String lastName, int age, int rating, String email, String password,
+	public User(Long user_id, String firstName, String lastName, int rating, String email, String password,
 			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber, String role) {
 		super();
 		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.age = age;
 		this.rating = rating;
 		this.email = email;
 		this.password = password;
