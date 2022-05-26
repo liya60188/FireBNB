@@ -35,13 +35,8 @@ public class User implements Serializable{
 	@Column(name="phone_number")
 	private int phoneNumber;
 	private String role;
-//	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@JoinTable(
-//			name="user_roles",
-//			joinColumns = @JoinColumn(name="user_id"),
-//			inverseJoinColumns = @JoinColumn(name="role_id")
-//			)
-//	private Set<Role> roles = new HashSet<>();
+	@Column(name="profile_picture", nullable = true, length = 64)
+    private String profilePicture;
 
 	public Long getId_user() {
 		return user_id;
@@ -128,8 +123,16 @@ public class User implements Serializable{
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+	public void setProfilePicture(String profilePicture) {
+		this.role = profilePicture;
+	}
+	
 	public User(Long user_id, String firstName, String lastName, int rating, String email, String password,
-			String address, String city, int postalCode, String country, String additionalAddress, int phoneNumber, String role) {
+			String address, String city, int postalCode, String country, String additionalAddress, 
+			int phoneNumber, String profilePicture, String role) {
 		super();
 		this.user_id = user_id;
 		this.firstName = firstName;
@@ -143,6 +146,7 @@ public class User implements Serializable{
 		this.country = country;
 		this.additionalAddress = additionalAddress;
 		this.phoneNumber = phoneNumber;
+		this.profilePicture = profilePicture;
 		this.role = role;
 	}
 	
