@@ -110,4 +110,9 @@ public class UserController {
 	public String addHouse() {
 		return "addHouse";
 	}
+	
+	@GetMapping("/messagesView")
+	public String messagesView() {
+		return "messagesView";
+	}
 }

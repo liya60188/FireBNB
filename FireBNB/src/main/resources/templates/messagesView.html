@@ -1,0 +1,237 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Messages View</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div  class="container-fluid">
+	<div class="row">
+		<!-- Left column -->
+		<div class="col-1">
+		</div>
+		
+		<div class="col-3 mt-3">
+			<div class="row" style="background-color: black">
+				<div class="col mt-3 text-light text-left">
+					<h5><b>NAME LASTNAME</b></h5>
+				</div>
+			</div>
+			
+			<div class="row mb-3">
+				<div class="col mt-3 text-right">
+					<button type="submit" class="btn btn-secondary">New message</button>
+				</div>
+			</div>
+			
+			<div style="height: 700px; overflow: scroll; overflow-x: hidden">
+				<!-- new message -->
+				<div th:fragment="newMessage">
+					<div class="row" style="background-color: rgba(242,242,242)">
+						<div class="col">
+							<div class="row">
+								<div class="col">
+									<b>Sender's name</b>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<u>Object :</u> insert here the object
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<u>Date :</u> insert date and time
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-2">
+							<button type="submit" class="mt-4 btn border-0">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">
+								  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+								</svg>
+							</button>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<hr class="mt-2 mb-3 bg-light"/>
+						</div>
+					</div>
+				</div>
+				<!-- End of new message -->
+				
+				<div th:insert="messagesView.html :: newMessage"></div>
+				<div th:insert="messagesView.html :: newMessage"></div>
+				
+				<!-- Already opened message-->
+				<div th:fragment="openedMessage">
+					<div class="row">
+						<div class="col">
+							<div class="row">
+								<div class="col">
+									<b>Sender's name</b>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<u>Object :</u> insert here the object
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<u>Date :</u> insert date and time
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-2">
+							<button type="submit" class="mt-4 btn border-0">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">
+								  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+								</svg>
+							</button>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<hr class="mt-2 mb-3 bg-light"/>
+						</div>
+					</div>
+				</div>
+				<!-- End of already seen message -->
+				
+				<div th:insert="messagesView.html :: openedMessage"></div>
+				<div th:insert="messagesView.html :: openedMessage"></div>
+				<div th:insert="messagesView.html :: openedMessage"></div>
+			</div>
+		 </div>
+		<!-- End of left column -->
+		
+		<!-- Right column -->
+		<div class="col-7 mt-3 border-left border-dark" style="background-color: rgba(242,242,242)">
+			<div class="row" style="background-color: black">
+				<div class="col mt-3 text-light">
+					<h5><b>MY MESSAGES</b></h5>
+				</div>
+				
+				<div class="col-3 mt-2">
+					<div class="form-outline text-center">
+		 			 	<input type="search" id="form4" class="form-control" placeholder="name" aria-label="Search" />
+					</div>
+				</div>
+				
+				<div class="col-1 mt-3">
+					<button type="submit" class="btn btn-light border border-dark rounded-pill">
+			  			<svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			  				<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			  			</svg>	
+			  		</button>
+			  	</div>
+			</div>
+			
+			<div class="row shadow-sm">
+				<div class="col mt-5 mb-2 ml-5">
+					<b>Object :</b> insert the object here
+				</div>
+			</div>
+			
+			<div class="mt-2" style="height: 500px; overflow: scroll; overflow-x: hidden">
+				<!-- Sender's message -->
+				<div th:fragment="senderMessage">
+					<div class="row mt-5 ml-5">
+						<div class="col-8">
+							<div class="row">
+								<div class="col">
+									Sender's name
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col border rounded" style="background-color: rgba(250, 225, 234)">
+									<p align="justify">sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col text-right">
+									date heure
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End of sender's message -->
+				
+				<!-- Receiver's message -->
+				<div th:fragment="receiverMessage">
+					<div class="row mt-5 mr-5">
+						<div class="col-4">
+						</div>
+						
+						<div class="col">
+							<div class="row">
+								<div class="col border rounded" style="background-color: rgba(247, 243, 228)">
+									<p align="justify">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de</p>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col text-left">
+									date heure
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End receiver's message -->
+				
+				<div th:insert="messagesView.html :: senderMessage"></div>
+				<div th:insert="messagesView.html :: receiverMessage"></div>
+				<div th:insert="messagesView.html :: receiverMessage"></div>
+			</div> <!-- scroll end -->
+			
+			<div class="row mt-5 ml-3 mr-3">
+				<div class="col">
+					<div class="form-group shadow-textarea">
+					  <textarea class="form-control z-depth-1" id="textArea" rows="3" placeholder="Write something here..."></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col mt-1 mb-1 mr-5 text-right">
+					<button type="submit" class="btn btn-success">Send</button>
+				</div>
+			</div>
+			
+		</div>
+		<!-- End of right column -->
+	</div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+
+</body>
+</html>
