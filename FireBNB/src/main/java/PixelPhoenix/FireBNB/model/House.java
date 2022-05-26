@@ -1,16 +1,20 @@
 package PixelPhoenix.FireBNB.model;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +30,8 @@ public class House {
 	@Column(name = "id_house", unique = true)
 	Long id_house;
 
-	@Autowired
-	private RatingService ratingService;
+	/*@Autowired
+	private RatingService ratingService;*/
 
 	public Long getId_house() {
 		return id_house;
@@ -57,13 +61,9 @@ public class House {
 		this.ratingsH = ratingsH;
 	}
 
-	// CHANGE AM AGAIN
-	private void averageRating() {
-		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
-		
-		for (Rating rating : listHouseRatings) {
-			
-		}
+	@PrePersist
+	private void onCreate() {
+		this.ratingsH = 0.0;
 	}
 
 	public String services;
@@ -191,7 +191,7 @@ public class House {
 			Long id_user, String address, String city, int postal_code, String country, String additional_address) {
 		this.id_house = id_house;
 		this.description = description;
-		//this.ratingsH = ratingsH;
+		this.ratingsH = ratingsH;
 		this.services = services;
 		this.constraints = constraints;
 		this.photos = photos;

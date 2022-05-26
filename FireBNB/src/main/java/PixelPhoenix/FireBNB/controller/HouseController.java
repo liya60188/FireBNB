@@ -138,7 +138,7 @@ public class HouseController {
 		@RequestParam(name = "description", defaultValue = "") String description,
 		@RequestParam(name = "services", defaultValue = "") String services,
 		@RequestParam(name = "constraints", defaultValue = "") String constraints,
-		@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
+		@RequestParam(name = "ratingsH", defaultValue = "") double ratingsH,
 		@RequestParam(name = "photos", defaultValue = "") String photos,
 		@RequestParam(name = "address", defaultValue = "") String address,
 		@RequestParam(name = "city", defaultValue = "") String city,
@@ -192,6 +192,18 @@ public class HouseController {
 		
 		Optional<House> house = hssv.getHouse(id_house);
 		House house2 = house.get();
+		double ratingH = 0.0;
+		
+		int size = 0;
+		for (Rating rating : listHouseRatings) {
+			 ratingH += rating.getValue();
+			size += 1;
+		}
+		
+		ratingH = ratingH / size;
+		ratingH = (double) Math.round(ratingH * 100) / 100;
+		house2.setRatingsH(ratingH);
+		
 		model.addAttribute("house", house2);
 		
 		return "houseProfile";
