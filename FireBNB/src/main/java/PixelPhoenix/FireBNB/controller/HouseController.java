@@ -186,7 +186,7 @@ public class HouseController {
 	public String HousePage(@PathVariable Long id_house, Model model){
 		//House housePage = house.get();
 		
-		// CHANGED BY AMANDA
+		// CHANGED BY AMANDA - Show all Ratings + Average
 		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
 		model.addAttribute("listHouseRatings", listHouseRatings);
 		
@@ -203,6 +203,7 @@ public class HouseController {
 		ratingH = ratingH / size;
 		ratingH = (double) Math.round(ratingH * 100) / 100;
 		house2.setRatingsH(ratingH);
+		hssv.saveHouse(house2);
 		
 		model.addAttribute("house", house2);
 		

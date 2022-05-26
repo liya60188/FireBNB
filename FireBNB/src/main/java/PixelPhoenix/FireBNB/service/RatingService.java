@@ -32,6 +32,10 @@ public class RatingService {
 	public Iterable<Rating> getRatingsByHouse(Long id_house){
 		return ratingRepository.findById_house(id_house);
 	}
+	
+	public Iterable<Rating> getRatingsByReceiver(Long id_userReceiver){
+		return ratingRepository.findById_userReceiver(id_userReceiver);
+	}
  
 	public void deleteRating(final Long id) {
 		ratingRepository.deleteById(id);

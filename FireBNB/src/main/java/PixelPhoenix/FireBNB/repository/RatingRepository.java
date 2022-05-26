@@ -20,4 +20,7 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 	
 	@Query(value = "SELECT * FROM `ratings` WHERE id_house = :x", nativeQuery = true)
 	public Iterable<Rating> findById_house(@Param("x") Long id_house);
+
+	@Query(value = "SELECT * FROM `ratings` WHERE id_userReceiver = :x", nativeQuery = true)
+	public Iterable<Rating> findById_userReceiver(@Param("x") Long id_userReceiver);
 }
