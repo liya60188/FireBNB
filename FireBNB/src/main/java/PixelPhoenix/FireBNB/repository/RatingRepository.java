@@ -17,4 +17,7 @@ import PixelPhoenix.FireBNB.model.Rating;
 public interface RatingRepository extends JpaRepository<Rating, Long> {
 	//@Query("select ratings from Ratings ratings where rating.id_userSender like :x")
 	//public Optional<Rating> findAllById_userSender(@Param("x") Long id_userSender);
+	
+	@Query(value = "SELECT * FROM `ratings` WHERE id_house = :x", nativeQuery = true)
+	public Iterable<Rating> findById_house(@Param("x") Long id_house);
 }

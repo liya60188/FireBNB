@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import PixelPhoenix.FireBNB.model.House;
+import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.Service;
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.model.Constraint;
@@ -31,6 +32,7 @@ import PixelPhoenix.FireBNB.service.HouseService;
 import PixelPhoenix.FireBNB.service.ServiceService;
 import PixelPhoenix.FireBNB.service.UserService;
 import PixelPhoenix.FireBNB.service.ConstraintService;
+import PixelPhoenix.FireBNB.service.RatingService;
 
 @Controller
 public class HouseController {
@@ -43,6 +45,8 @@ public class HouseController {
 	private ConstraintService constraintService;
 	@Autowired
 	private UserService us;
+	@Autowired
+	private RatingService ratingService;
 	
 	/*public House chooseService(@RequestBody House house) {
 		hssv.saveHouse(house.getServices());
@@ -176,10 +180,15 @@ public class HouseController {
 			return "redirect:/housesList";
 		}
 	}
+	
 			
 	@RequestMapping(value="/houseProfile/{id_house}") 
 	public String HousePage(@PathVariable Long id_house, Model model){
 		//House housePage = house.get();
+		
+		// CHANGED BY AMANDA
+		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
+		model.addAttribute("listHouseRatings", listHouseRatings);
 		
 		Optional<House> house = hssv.getHouse(id_house);
 		House house2 = house.get();

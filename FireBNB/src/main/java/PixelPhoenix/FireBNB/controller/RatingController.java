@@ -58,7 +58,6 @@ public class RatingController {
 	}
 	
 	// Should redirect to user profile
-	//
 	@GetMapping(value = {"/rating/add/UserRating/{id_userReceiver}"})
 	public String ratingUserForm(Model model,
 			@PathVariable("id_userReceiver") Long id_userReceiver) {

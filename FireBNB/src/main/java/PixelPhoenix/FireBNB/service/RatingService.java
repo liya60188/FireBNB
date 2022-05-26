@@ -28,6 +28,10 @@ public class RatingService {
 	public Iterable<Rating> getRatings(){
 		return ratingRepository.findAll();
 	}
+	
+	public Iterable<Rating> getRatingsByHouse(Long id_house){
+		return ratingRepository.findById_house(id_house);
+	}
  
 	public void deleteRating(final Long id) {
 		ratingRepository.deleteById(id);

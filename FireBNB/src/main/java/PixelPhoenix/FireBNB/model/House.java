@@ -13,185 +13,196 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import PixelPhoenix.FireBNB.service.RatingService;
 
 @Entity
-@Table(name="house")
-public class House{
+@Table(name = "house")
+public class House {
 
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name="id_house", unique = true)
-		Long id_house;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_house", unique = true)
+	Long id_house;
+
+	@Autowired
+	private RatingService ratingService;
+
+	public Long getId_house() {
+		return id_house;
+	}
+
+	public void setId_house(Long id_house) {
+		this.id_house = id_house;
+	}
+
+	public String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public double ratingsH;
+
+	public double getRatingsH() {
+		return ratingsH;
+	}
+
+	public void setRatingsH(double ratingsH) {
+		this.ratingsH = ratingsH;
+	}
+
+	// CHANGE AM AGAIN
+	private void averageRating() {
+		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
 		
-		public Long getId_house() {
-			return id_house;
+		for (Rating rating : listHouseRatings) {
+			
 		}
+	}
 
-		public void setId_house(Long id_house) {
-			this.id_house = id_house;
-		}
-		
-		public String description;
-		public String getDescription() {
-			return description;
-		}
+	public String services;
 
-		public void setDescription(String description) {
-			this.description = description;
-		} 
-		
-		public int ratingsH;
-		public int getRatingsH() {
-			return ratingsH;
-		}
+	public String getServices() {
+		return services;
+	}
 
-		public void setRatingsH(int ratingsH) {
-			this.ratingsH = ratingsH;
-		}
-		
-		public String services;
-		
-		public String getServices() {
-			return services;
-		}
+	public void setServices(String services) {
+		this.services = services;
+	}
 
-		public void setServices(String services) {
-			this.services = services;
-		}
-		
-		public String constraints;
+	public String constraints;
 
-		public String getConstraints() {
-			return constraints;
-		}
+	public String getConstraints() {
+		return constraints;
+	}
 
-		public void setConstraints(String constraints) {
-			this.constraints = constraints;
-		}
+	public void setConstraints(String constraints) {
+		this.constraints = constraints;
+	}
 
-		/*
-		// Services - Foreign Key
-		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
-		
-		Set<Service> services;
-		public Set<Service> getServices() {
-			return services;
-		}
-		public void setServices(Set<Service> services) {
-			this.services = services;
-		}
-		
-		//Constraints - Foreign Key
-		@OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
-		Set<Constraint> constraints;
-		public Set<Constraint> getConstraints() {
-			return constraints;
-		}
-		public void setConstraints(Set<Constraint> constraints) {
-			this.constraints = constraints;
-		}
-*/
-		/*
-		//Photos - Foreign Key
-		@OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
-		Set<Photo> photos;		
-		public Set<Photo> getPhotos() {
-			return photos;
-		}
-		public void setPhotos(Set<Photo> photos) {
-			this.photos = photos;
-		}
-		*/
-		
-		@Lob
-		@Column(columnDefinition = "MEDIUMBLOB")
-		public String photos;
+	/*
+	 * // Services - Foreign Key
+	 * 
+	 * @OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
+	 * 
+	 * Set<Service> services; public Set<Service> getServices() { return services; }
+	 * public void setServices(Set<Service> services) { this.services = services; }
+	 * 
+	 * //Constraints - Foreign Key
+	 * 
+	 * @OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
+	 * Set<Constraint> constraints; public Set<Constraint> getConstraints() { return
+	 * constraints; } public void setConstraints(Set<Constraint> constraints) {
+	 * this.constraints = constraints; }
+	 */
+	/*
+	 * //Photos - Foreign Key
+	 * 
+	 * @OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
+	 * Set<Photo> photos; public Set<Photo> getPhotos() { return photos; } public
+	 * void setPhotos(Set<Photo> photos) { this.photos = photos; }
+	 */
 
-		public String getPhotos() {
-			return photos;
-		}
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	public String photos;
 
-		public void setPhotos(String photos) {
-			this.photos = photos;
-		}
-		
-		public Long id_user;
-		
-		public Long getId_user() {
-			return id_user;
-		}
+	public String getPhotos() {
+		return photos;
+	}
 
-		public void setId_user(Long id_user) {
-			this.id_user = id_user;
-		}
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
 
-		public String address;
-		
-		public String getAddress() {
-			return address;
-		}
+	public Long id_user;
 
-		public void setAddress(String address) {
-			this.address = address;
-		}
+	public Long getId_user() {
+		return id_user;
+	}
 
-		public String city;
-		
-		public String getCity() {
-			return city;
-		}
+	public void setId_user(Long id_user) {
+		this.id_user = id_user;
+	}
 
-		public void setCity(String city) {
-			this.city = city;
-		}
-		
-		public int postal_code;
-		
-		public int getPostal_code() {
-			return postal_code;
-		}
+	public String address;
 
-		public void setPostal_code(int postal_code) {
-			this.postal_code = postal_code;
-		}
-		
-		public String country;
+	public String getAddress() {
+		return address;
+	}
 
-		public String getCountry() {
-			return country;
-		}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-		public void setCountry(String country) {
-			this.country = country;
-		}
-		
-		public String additional_address;
+	public String city;
 
-		public String getAdditional_address() {
-			return additional_address;
-		}
+	public String getCity() {
+		return city;
+	}
 
-		public void setAdditional_address(String additional_address) {
-			this.additional_address = additional_address;
-		}
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address) {
-			this.id_house = id_house;
-			this.description = description;
-			this.ratingsH = ratingsH;
-			this.services = services;
-			this.constraints = constraints;
-			this.photos = photos;	
-			this.id_user = id_user;
-			this.address = address;
-			this.city = city;
-			this.postal_code = postal_code;
-			this.country = country;
-			this.additional_address = additional_address;
-		}
-		
-		public House() {}
-}	
+	public int postal_code;
+
+	public int getPostal_code() {
+		return postal_code;
+	}
+
+	public void setPostal_code(int postal_code) {
+		this.postal_code = postal_code;
+	}
+
+	public String country;
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String additional_address;
+
+	public String getAdditional_address() {
+		return additional_address;
+	}
+
+	public void setAdditional_address(String additional_address) {
+		this.additional_address = additional_address;
+	}
+
+	public House(Long id_house, String description, double ratingsH, String services, String constraints, String photos,
+			Long id_user, String address, String city, int postal_code, String country, String additional_address) {
+		this.id_house = id_house;
+		this.description = description;
+		//this.ratingsH = ratingsH;
+		this.services = services;
+		this.constraints = constraints;
+		this.photos = photos;
+		this.id_user = id_user;
+		this.address = address;
+		this.city = city;
+		this.postal_code = postal_code;
+		this.country = country;
+		this.additional_address = additional_address;
+	}
+
+	public House() {
+	}
+}

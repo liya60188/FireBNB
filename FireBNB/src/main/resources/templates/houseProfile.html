@@ -43,6 +43,16 @@
 		</div>
 	</div>
 	
+	<!-- CHANGED BY AM -->
+	<div>
+	listHouseRatings
+	<div th:each="rating: ${listHouseRatings}" var="rating">
+	<p th:text="${rating.value}"></p>
+	<p th:text="${rating.description}"></p>
+	</div>
+	
+	<!-- END CHANGE -->
+	
 	<br>
 	
 	<div>
@@ -59,6 +69,7 @@
 			<div> <img alt="" th:src="${house.photos}" style="width: 100px;height: 100px;"></div>
 		</div>
 		
+		<!-- CHANGE BY AMANDA -->
 		<a th:href="@{/rating/add/HouseRating/{id_house}(id_house=${house.id_house})}">Add Rating</a>
 </body>
 </html>
