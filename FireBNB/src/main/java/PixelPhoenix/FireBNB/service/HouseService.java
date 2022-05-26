@@ -28,9 +28,20 @@ public class HouseService {
 			return hsrp.findById(id);
 		}
 		
-	 public Iterable<House> getHouses(){
-			return hsrp.findAll();
-		}
+	 
+	 
+	 //////////////////
+	 //ORIGINAL
+//	 public Iterable<House> getHouses(){
+//			return hsrp.findAll();
+//		}
+	 
+	 public List<House> getAllHouses(){
+		 return hsrp.findAll();
+	 }
+	 ///////////////////
+	 
+	 
 	 
 	 public void deleteHouse(final Long id) {
 		 hsrp.deleteById(id);
@@ -44,21 +55,6 @@ public class HouseService {
 	 
 	 public void createHouse(House house) {
 		 hsrp.save(house);
-	 }
-	 
-	 /*
-	@SuppressWarnings("null")
-	@GetMapping("housesList")
-	 public String getJoinedHouseServices(){
-		 List<String> serviceNames = null;
-		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
-	            serviceNames.add(service.getServiceName());
-	        }
-		 return Arrays.toString(serviceNames.toArray());
-	 }
-	 */
-	
-	
-	
+	 }	
 
 }

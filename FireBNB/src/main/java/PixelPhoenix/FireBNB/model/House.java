@@ -1,5 +1,6 @@
 package PixelPhoenix.FireBNB.model;
 
+import java.sql.Blob;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -111,18 +112,40 @@ public class House{
 		}
 		*/
 		
+//		@Lob
+//		@Column(columnDefinition = "LONGBLOB")
+//		public String photos;
+//
+//		public String getPhotos() {
+//			return photos;
+//		}
+//
+//		public void setPhotos(String photos) {
+//			this.photos = photos;
+//		}
+		
 		@Lob
-		@Column(columnDefinition = "MEDIUMBLOB")
-		public String photos;
-
-		public String getPhotos() {
+		@Column(name="photos", length=Integer.MAX_VALUE, nullable=true)
+		public byte[] photos;
+		
+		public byte[] getPhotos() {
 			return photos;
 		}
 
-		public void setPhotos(String photos) {
+		public void setPhotos(byte[] photos) {
 			this.photos = photos;
 		}
 		
+//		public Blob photos;
+//
+//		public Blob getPhotos() {
+//			return photos;
+//		}
+//
+//		public void setPhotos(Blob photos) {
+//			this.photos = photos;
+//		}
+
 		public Long id_user;
 		
 		public Long getId_user() {
@@ -183,7 +206,7 @@ public class House{
 			this.additional_address = additional_address;
 		}
 
-		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address) {
+		public House(Long id_house,String description, int ratingsH, String services, String constraints, byte[] photos, Long id_user, String address, String city, int postal_code, String country, String additional_address) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;

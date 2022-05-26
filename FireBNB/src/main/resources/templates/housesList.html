@@ -11,13 +11,15 @@
 		<form action="/housesList/search" method="post">
 			<table>
 				<tr>
-					<td>Search: </td>
-					<td><input type="text" name="motCle" th:value="${motC}" placeholder="Find by description or Ratings" size="50"/></td>
+					<td>Find a house by description, ratings, services, constraints or address: </td>
+					<td><input type="text" name="motCle" th:value="${description}" placeholder="Search" size="60"/></td>
 					<td><input type="submit" name="action" value="search" /></td>
 				</tr>
 			</table>
 		</form>
 	</div>
+	
+
 
 	<form th:action="@{/housesList}" th:object="${house}" method="post">
 
@@ -55,5 +57,15 @@
 	</form>
 	
 	<a href="/housesList/add">Add new house</a>
+	
+	
+	<div class="container">
+		<ul class="pagination">
+			<li th:class="${pageCourante}==${status.index}?'active':''"
+				th:each="p,status:${pages}"><a
+				th:href="@{/housesList/search(page=${status.index},motCle=${motC})}"
+				th:text="${status.index}"></a></li>
+		</ul>
+	</div>
+	
 </body>
-</html>
