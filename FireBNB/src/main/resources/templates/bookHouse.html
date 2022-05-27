@@ -1,0 +1,130 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Book a house</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-light border rounded-pill" data-toggle="modal" data-target="#modalBooking">
+  Book a house
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      	<h5 class="modal-title" id="modalBookingLongTitle">Book a house</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="background-color: rgba(242, 242, 242);">
+		<div class="row">
+			<div class="col">
+				<h5><b>Select the duration of your stay</b></h5>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-1 mt-2 text-right">
+				Start
+			</div>
+			
+			<div class="col-5">
+				 <input type="date" class="form-control"  aria-label="date" aria-describedby="begin-date-text">
+			</div>
+			
+			<div class="col-1 mt-2 text-right">
+				End
+			</div>
+			
+			<div class="col-5">
+				 <input type="date" class="form-control"  aria-label="date" aria-describedby="end-date-text">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col mt-5">
+				<h5><b>Select the property you want to exchange</b></h5>
+			</div>
+		</div>
+		
+		<div class="row">
+				<div class="col-md-12">
+					<div class="stars">
+					  <form action="">
+					  	<div class="row">
+					  		<div class="col">
+							    <div class="form-check">
+								  <input class="form-check-input" type="radio" name="flexRadioButton" id="flexRadio">
+								  <label class="form-check-label ml-4" for="flexRadio">House address</label>
+								</div>
+							</div>
+					    </div>
+					    
+					    <div class="row">
+					  		<div class="col">
+							    <div class="form-check">
+								  <input class="form-check-input" type="radio" name="flexRadioButton" id="flexRadio">
+								  <label class="form-check-label ml-4" for="flexRadio">House address</label>
+								</div>
+							</div>
+					    </div>
+					    
+					    <div class="row">
+					  		<div class="col">
+							    <div class="form-check">
+								  <input class="form-check-input" type="radio" name="flexRadioButton" id="flexRadio">
+								  <label class="form-check-label ml-4" for="flexRadio">House address</label>
+								</div>
+							</div>
+					    </div>
+					    
+					    <div class="row">
+					  		<div class="col">
+							    <div class="form-check">
+								  <input class="form-check-input" type="radio" name="flexRadioButton" id="flexRadio">
+								  <label class="form-check-label ml-4" for="flexRadio">House address</label>
+								</div>
+							</div>
+					    </div>
+					  </form>
+					</div>	
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col mt-5 text-right">
+					<button type="submit" class="btn btn-success rounded-pill">Book this house</button>
+				</div>
+			</div>
+       <!-- end -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+
+</body>
+</html>
