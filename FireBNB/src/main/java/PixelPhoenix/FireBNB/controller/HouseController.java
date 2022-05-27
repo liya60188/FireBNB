@@ -183,7 +183,7 @@ public class HouseController {
 	
 			
 	@RequestMapping(value="/houseProfile/{id_house}") 
-	public String HousePage(@PathVariable Long id_house, Model model){
+	public String HousePage(@PathVariable Long id_house, Model model, Principal principal){
 		//House housePage = house.get();
 		
 		// CHANGED BY AMANDA - Show all Ratings + Average
@@ -204,6 +204,15 @@ public class HouseController {
 		ratingH = (double) Math.round(ratingH * 100) / 100;
 		house2.setRatingsH(ratingH);
 		hssv.saveHouse(house2);
+		
+		String emailPrincipal = principal.getName();
+		Long houseOwnerId = house2.getId_user();
+		String houseOwner = us.getNameFromId(houseOwnerId);
+		Long currentUserId = us.getIdByEmail(emailPrincipal);
+		
+		model.addAttribute("houseOwner", houseOwner);
+		model.addAttribute("houseOwnerId", houseOwnerId);
+		model.addAttribute("currentUserId", currentUserId);
 		
 		model.addAttribute("house", house2);
 		

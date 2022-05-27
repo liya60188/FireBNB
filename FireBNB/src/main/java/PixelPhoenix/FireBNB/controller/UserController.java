@@ -1,6 +1,7 @@
 package PixelPhoenix.FireBNB.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +66,8 @@ public class UserController {
 		// CHANGED BY AMANDA - Show all Ratings + Average
 		User user = us.getUser(email);
 		
+		List<String> listSenders = new ArrayList<>();
+		Iterable<User> allUsers = us.getUsers();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(email));
 		model.addAttribute("listUserRatings", listUserRatings);
 		double ratingH = 0.0;
@@ -73,6 +76,11 @@ public class UserController {
 		for (Rating rating : listUserRatings) {
 			ratingH += rating.getValue();
 			size += 1;
+			for (User sender : allUsers) {
+				if(sender.getId_user() == rating.getId_userSender()) {
+					listSenders.add(sender.getFirstName() + " " + sender.getLastName());
+				}
+			}
 		}
 
 		ratingH = ratingH / size;
@@ -82,6 +90,7 @@ public class UserController {
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
+		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("user", user);
 		model.addAttribute("numberOfHouses", numberOfHouses);
 		return "userProfile";

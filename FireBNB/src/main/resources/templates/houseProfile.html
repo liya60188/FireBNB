@@ -8,6 +8,13 @@
 <body>
 
 	<h1>House Page</h1>
+	
+	<div>
+		<label>House Owner</label>
+		<div>
+			<p th:text="${houseOwner}">
+		</div>
+	</div>
 
 	<div>
 		<label>Description</label>
@@ -70,6 +77,6 @@
 		</div>
 		
 		<!-- CHANGE BY AMANDA -->
-		<a th:href="@{/rating/add/HouseRating/{id_house}(id_house=${house.id_house})}">Add Rating</a>
+		<a th:if="${currentUserId} != ${houseOwnerId}" th:href="@{/rating/add/HouseRating/{id_house}(id_house=${house.id_house})}">Add Rating</a>
 </body>
 </html>

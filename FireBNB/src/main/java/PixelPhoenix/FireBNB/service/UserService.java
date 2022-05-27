@@ -42,6 +42,10 @@ public class UserService {
 		return ur.findIdFromEmail(email);
 	}
 	
+	public String getNameFromId(Long id_user){
+		return ur.findNameFromId(id_user);
+	}
+	
 	public void createUser(User user) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());

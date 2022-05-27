@@ -22,5 +22,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	// CHANGES AM - Function to get id by email
 	@Query(value = "SELECT user_id FROM `user` WHERE email = :x", nativeQuery = true)
 	public Long findIdFromEmail(@Param("x") String email);
+	
+	//Function to get name by id
+	@Query(value = "SELECT first_name, last_name FROM `user` WHERE user_id = :x", nativeQuery = true)
+	public String findNameFromId(@Param("x") Long id_user);
 }
 
