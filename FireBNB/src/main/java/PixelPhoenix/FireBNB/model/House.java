@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 
@@ -49,6 +50,10 @@ public class House{
 
 		public void setRatingsH(double ratingsH) {
 			this.ratingsH = ratingsH;
+		}
+		@PrePersist
+		private void onCreate() {
+			this.ratingsH = 0.0;
 		}
 
 		public String services;

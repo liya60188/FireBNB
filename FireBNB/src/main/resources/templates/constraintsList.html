@@ -1,37 +1,58 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>List of Constraints</title>
-</head>
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Constraints List</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
 
-List of Constraints
+<!-- Content -->
+<div class="container-fluid">
 
-	<form th:action="@{/constraintsList}" th:object="${constraint}" method="post">
-
-		<table>
-			<tr>
-				<th>Id</th>
-				<th>Constraint Name</th>
-			</tr>
-
-			<tr th:each="constraint: ${listConstraints}">
-				<td th:text="${constraint.id_constraint}">Id</td>
-				<td th:text="${constraint.constraintName}">Constraint Name</td>
-				<td> <a th:href="@{/listConstraints/edit(id_constraint=${constraint.id_constraint}, constraintName=${constraint.constraintName}, houseConstraint_FK=${constraint.houseConstraint_FK}, edit=0)}">Edit</a>
-				</td>
-				<td><a onclick="return confirm('Please Confirm')"
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Constraints List</b></h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mt-3 mb-3 text-right">
+	  		<a type="button" class="btn btn-light border-0" style="background-color: rgba(20, 166, 182);" href="/constraintsList/add">Add constraint</a>
+	  	</div>
+	</div>
+	
+	<div th:each="constraint: ${listConstraints}">
+		<div class="row mb-3">
+			<div class="col" th:text="'ID: ' + ${constraint.id_constraint}">
+				ID
+			</div>
+			
+			<div class="col" th:text="'Constraint Name:' + ${constraint.constraintName}">
+				Constraint Name
+			</div>
+			
+			<div class="col text-right">
+				<a type="button" class="btn btn-light border border-dark rounded-pill" th:href="@{/listConstraints/edit(id_constraint=${constraint.id_constraint}, constraintName=${constraint.constraintName}, edit=0)}">Edit</a>
+				<a type="button" class="btn btn-danger border border-dark rounded-pill" onclick="return confirm('Please Confirm')"
 					th:href="@{/constraintsList/delete(id_constraint=${constraint.id_constraint})}"> Delete
-				</a></td>
-			</tr>
+				</a>
+			</div>
+		</div>
+	</div>
+	</div>
+<!-- End of content -->
 
-
-		</table>
-
-	</form>
-	
-	<a href="/constraintsList/add">Add new constraint</a>
-	
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
 </body>
 </html>

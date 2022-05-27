@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Message;
+import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.Service;
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.model.Constraint;
@@ -36,6 +37,7 @@ import PixelPhoenix.FireBNB.service.MessageService;
 import PixelPhoenix.FireBNB.service.ServiceService;
 import PixelPhoenix.FireBNB.service.UserService;
 import PixelPhoenix.FireBNB.service.ConstraintService;
+import PixelPhoenix.FireBNB.service.RatingService;
 
 @Controller
 public class HouseController {
@@ -50,6 +52,8 @@ public class HouseController {
 	private UserService us;
 	@Autowired
 	private MessageService ms;
+	@Autowired
+	private RatingService ratingService;
 	
 	/*public House chooseService(@RequestBody House house) {
 		hssv.saveHouse(house.getServices());
@@ -174,17 +178,45 @@ public class HouseController {
 			house.setCountry(country);
 			house.setAdditional_address(additional_address);
 			hssv.saveHouse(house);
-			return "redirect:/housesList";
+			return "redirect:/profile/houses";
 		}
 	}
+	
 			
 	@RequestMapping(value="/houseProfile/{id_house}") 
-	public String HousePage(@PathVariable Long id_house, Model model){
+	public String HousePage(@PathVariable Long id_house, Model model, Principal principal){
 		//House housePage = house.get();
+		
+		// CHANGED BY AMANDA - Show all Ratings + Average
+		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
+		model.addAttribute("listHouseRatings", listHouseRatings);
 		
 		Optional<House> house = hssv.getHouse(id_house);
 		House house2 = house.get();
+		double ratingH = 0.0;
+		
+		int size = 0;
+		for (Rating rating : listHouseRatings) {
+			 ratingH += rating.getValue();
+			size += 1;
+		}
+		
+		ratingH = ratingH / size;
+		ratingH = (double) Math.round(ratingH * 100) / 100;
+		house2.setRatingsH(ratingH);
+		hssv.saveHouse(house2);
+		
+		String emailPrincipal = principal.getName();
+		Long houseOwnerId = house2.getId_user();
+		String houseOwner = us.getNameFromId(houseOwnerId);
+		Long currentUserId = us.getIdByEmail(emailPrincipal);
+		
+		model.addAttribute("houseOwner", houseOwner);
+		model.addAttribute("houseOwnerId", houseOwnerId);
+		model.addAttribute("currentUserId", currentUserId);
+		
 		model.addAttribute("house", house2);
+		
 		
 		return "houseProfile";
 	}
@@ -205,44 +237,6 @@ public class HouseController {
 		
 		return "bookHouse";
 	}
-	
-//	@PostMapping(value="/bookHouse")
-//	public String bookHouse(Model model, @ModelAttribute House house, BindingResult errors, @RequestParam("id_houseReceive") Long id_houseReceive) throws ParseException {
-//		
-//		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
-//		
-//		Date begin_date = s.parse(house.begin_date);
-//		Date end_date = s.parse(house.end_date);
-//		String isBookedError = null;
-//		
-//
-//		Optional<House> ot = hssv.getHouse(id_houseReceive);
-//		House house2= ot.get();
-//		Date begin_date_exist = s.parse(house2.getBegin_date());
-//		Date end_date_exist = s.parse(house2.getEnd_date());
-//		
-//		if(begin_date_exist == null && end_date_exist == null) {
-//			house2.setBegin_date(house2.getBegin_date());
-//			house2.setEnd_date(house2.getEnd_date());
-//			isBookedError = "";
-//		}else if(begin_date.before(begin_date_exist) && end_date.after(begin_date_exist) ||
-//		begin_date.before(end_date_exist) && end_date.after(end_date_exist) ||
-//		begin_date.before(begin_date_exist) && end_date.after(end_date_exist) ||
-//		begin_date.before(begin_date_exist) && end_date.after(end_date_exist)) {
-//			isBookedError = "Date overlap";
-//		}else {
-//			house2.setBegin_date(house2.getBegin_date());
-//			house2.setEnd_date(house2.getEnd_date());
-//			isBookedError = "";
-//		}
-//		
-//		
-//		model.addAttribute("isBookedError", isBookedError);
-//		model.addAttribute("id_house",id_houseReceive);
-//		
-//		return"bookHouse";
-//	}
-	
 	
 	@PostMapping(value="/bookHouse")
 	public String bookHouse(Model model, Principal principal, @RequestParam("id_houseReceive") Long id_houseReceive,

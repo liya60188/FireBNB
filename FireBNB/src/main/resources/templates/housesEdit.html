@@ -4,7 +4,7 @@
 		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	<head>
 	<meta charset="utf-8" />
-	<title>Edit houses</title>
+	<title>Edit house</title>
 		<div th:insert="fragments/header.html :: links"> 
 		</div>
 	</head>
@@ -17,6 +17,7 @@
 <!-- End of header --
 <!-- Content -->
 <!-- Gallery -->
+<form action="/listHouses/edit" method="get">
 <div class="container">
 	<div class="row mt-5">
 		<div>
@@ -89,8 +90,66 @@
 <!-- End of gallery -->
 
 <!-- House characteristics -->
+<input type="hidden" name="id_house" th:value="${id_house}" readonly />
 <div class="container">
-	<div th:insert="housesList.html :: characteristics"></div>
+	<div class="row">
+		<div class="col mt-5">
+			<h4 style="color:#14A6B6"><b>Location information</b></h4>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="adressInput">Address</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="adressInput" name="address" th:value="${address}">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="additionalAdressInput">Additional address</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="additionalAdressInput" name="additional_address" th:value="${additional_address}">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="cityInput">City</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="cityInput" name="city" th:value="${city}">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+		    	<label for="zipCodeInput">Postal Code</label>
+		    </div>
+		    
+		    <div class="col">
+		    	<input type="text" class="form-control" id="zipCodeInput" name="postal_code" th:value="${postal_code}">
+		    </div>	
+		   </div>
+		   
+		   <div class="row mt-3">
+		    <div class="col-2 text-right">
+		    	<label for="countryInput">Country</label>
+		    </div>
+		    
+		    <div class="col">
+		    	<input type="text" class="form-control" id="countryInput" name="country" th:value="${country}">
+		    	<input type="hidden" name="edit" value="1" />
+		    </div>
+		</div>
+	</div>
 </div>
 <!-- End of characteristics -->
 
@@ -100,17 +159,17 @@
 		<div class="col mt-5">
 			<div class="md-form">
 				<label for="form7">House description</label>
-			 	<textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
+			 	<textarea id="form7" class="md-textarea form-control" rows="3" name="description" th:value="${description}"></textarea>
 			</div>
 		</div>
 	</div>
-	
+</div>
 	<div class="row">
 		<div class="col mt-3 text-right">
-	  		<button type="submit" class="btn btn-light border border-dark rounded-pill">Save description</button>
+	  		<input type="submit" class="btn btn-light border border-dark rounded-pill" name="action" value="Save Description" >
 	  	</div>
 	</div>
-</div>
+</form>
 <!-- End of material textarea -->
 
 <!-- End of content -->

@@ -1,0 +1,33 @@
+<!DOCTYPE HTMl>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add Rating</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container">
+		<h1>Add Rating</h1>
+		<p></p>
+		<p></p>
+		<form th:action="@{/rating/add/HouseRating}" th:object="${rating}" method="post">
+			<table>
+			<tr>
+					<td>Id Home</td>
+					<td><input hidden type="text" name="id_house" th:value="${id_house}" /></td>
+				</tr>
+				<tr>
+					<td>Rating Value</td>
+					<td><input type="text" name="value" th:value="${value}" /></td>
+				</tr>
+				<tr>
+					<td>Content</td>
+					<td><input type="text" name="description" th:value="${description}" /></td>
+				</tr>
+				<tr>
+					<td><input type="submit" name="action" value="save" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>

@@ -1,28 +1,55 @@
-<!DOCTYPE HTMl>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title>Service Edit</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-</head>
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Constraints Edit</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
-	<form action="/listServices/edit" method="get">
-		<table>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" name="id_service" th:value="${id_service}" readonly /></td>
-			</tr>
-			<tr>
-				<td>Service Name</td>
-				<td><input type="text" name="serviceName" th:value="${serviceName}" /></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="edit" value="1" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="action" value="save" /></td>
-			</tr>
-		</table>
-	</form>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container">
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Edit service</b></h1>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+				<label for="id_service">ID</label>
+ 			 	<input type="text" name="id_service" th:value="${id_service}" readonly/>
+			</div>
+		</div>
+		
+		<div class="col mt-5 mb-5 border-0">
+			<div class="form-outline text-center">
+				<label for="serviceName">ID</label>
+ 			 	<input type="text" name="serviceName" th:value="${serviceName}" />
+			</div>
+			<input type="hidden" name="edit" value="1" />
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col  text-right">
+	  		<button type="submit" class="btn btn-success border-0" name="action" value="Save changes"></button>
+	  	</div>
+	</div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
 </body>
 </html>

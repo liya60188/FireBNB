@@ -1,58 +1,58 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>List of Services</title>
-</head>
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Constraints List</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
-	List of Services
-	
-	<div class=container>
-		<form action="/servicesList/search" method="post">
-			<table>
-				<tr>
-					<td>Recherche simple:</td>
-					<td><input type="text" name="motCle" th:value="${motC}" /></td>
-					<td><input type="submit" name="action" value="search" /></td>
-				</tr>
-			</table>
-		</form>
-	</div>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
 
-	<form th:action="@{/servicesList}" th:object="${service}" method="post">
+<!-- Content -->
+<div class="container-fluid">
 
-		<table>
-			<tr>
-				<th>Id</th>
-				<th>Service Name</th>
-			</tr>
-
-			<tr th:each="service: ${listServices}">
-				<td th:text="${service.id_service}">Id</td>
-				<td th:text="${service.serviceName}">Service Name</td>
-				<td> <a th:href="@{/listServices/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, edit=0, mc=${motC})}">Edit</a> 
-				<!-- houseService_FK=${service.houseService_FK},-->
-				</td>
-				<td><a onclick="return confirm('Please Confirm')"
-					th:href="@{/servicesList/delete(id_service=${service.id_service}, mc=${motC})}"> Delete
-				</a></td>
-			</tr>
-
-
-		</table>
-
-	</form>
-	
-	<a href="/servicesList/add">Add new service</a>
-	
-	<div class="container">
-		<ul class="pagination">
-			<li th:class="${pageCourante}==${status.index}?'active':''"
-				th:each="p,status:${pages}"><a
-				th:href="@{/servicesList/search(page=${status.index},motCle=${motC})}"
-				th:text="${status.index}"></a></li>
-		</ul>
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Servicess List</b></h1>
+		</div>
 	</div>
 	
+	<div class="row">
+		<div class="col mt-3 mb-3 text-right">
+	  		<a type="button" class="btn btn-light border-0" style="background-color: rgba(20, 166, 182);" href="/serviceList/add">Add service</a>
+	  	</div>
+	</div>
+	
+	<div th:each="service: ${listServices}">
+		<div class="row mb-3">
+			<div class="col" th:text="'ID: ' + ${service.id_service}">
+				ID
+			</div>
+			
+			<div class="col" th:text="'Service Name:' + ${service.serviceName}">
+				Service Name
+			</div>
+			
+			<div class="col text-right">
+				<a type="button" class="btn btn-light border border-dark rounded-pill" th:href="@{/listServices/edit(id_service=${service.id_service}, serviceName=${service.serviceName}, edit=0)}">Edit</a>
+				<a type="button" class="btn btn-danger border border-dark rounded-pill" onclick="return confirm('Please Confirm')"
+					th:href="@{/servicessList/delete(id_service=${service.id_service})}"> Delete
+				</a>
+			</div>
+		</div>
+	</div>
+	</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
 </body>
 </html>

@@ -22,7 +22,7 @@ public class User implements Serializable{
 	private String firstName;
 	@Column(name="last_name")
 	private String lastName;
-	private int rating;
+	public double rating;
 	private String email;
 	private String password;
 	private String address;
@@ -55,11 +55,16 @@ public class User implements Serializable{
 		this.lastName = lastName;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	
+	@PrePersist
+	private void onCreate() {
+		this.rating = 0.0;
 	}
 
 	public String getEmail() {
@@ -130,10 +135,10 @@ public class User implements Serializable{
 		this.role = profilePicture;
 	}
 	
-	public User(Long user_id, String firstName, String lastName, int rating, String email, String password,
+	public User(Long user_id, String firstName, String lastName, double rating, String email, String password,
 			String address, String city, int postalCode, String country, String additionalAddress, 
 			int phoneNumber, String profilePicture, String role) {
-		super();
+		//super();
 		this.user_id = user_id;
 		this.firstName = firstName;
 		this.lastName = lastName;

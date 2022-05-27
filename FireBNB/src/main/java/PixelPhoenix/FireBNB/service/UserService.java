@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.Role;
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.repository.UserRepository;
@@ -34,6 +35,15 @@ public class UserService {
 	
 	public List<User> findByName(String name){
 		return ur.findByFirstNameLike("%"+name+"%");
+	}
+	
+	//Yo
+	public Long getIdByEmail(String email){
+		return ur.findIdFromEmail(email);
+	}
+	
+	public String getNameFromId(Long id_user){
+		return ur.findNameFromId(id_user);
 	}
 	
 	public void createUser(User user) {

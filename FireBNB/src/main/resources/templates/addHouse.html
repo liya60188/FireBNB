@@ -1,130 +1,178 @@
-<!DOCTYPE HTMl>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title>Add House</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-</head>
-<!-- <body> -->
-<!-- 	<div class="container"> -->
-<!-- 		<h1>Add House</h1> -->
-<!-- 		<p></p> -->
-<!-- 		<p></p> -->
-<!-- 		<form action="/housesList/add" th:object="${house}" method="post"> -->
-<!-- 			<div> -->
-<!-- 				<label>Description -->
-<!-- 				<input type="text"  th:field="*{description}" /></label> -->
-<!-- <!-- 				name="description" --> 
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<label>Services -->
-<!-- 					<th:block th:each="service: ${listServices}"> -->
-<!-- 					<input type=radio  -->
-<!-- 					th:text="${service.serviceName}" -->
-<!-- 					th:field="*{services}"  th:value="${id_service}"/>  -->
-<!-- 					</th:block> -->
-<!-- 				</label> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<label th:each="constraint: ${listConstraints}">Constraints -->
-<!-- 				<input type=radio  -->
-<!-- 					th:text="${constraint.constraintName}" -->
-<!-- 					name="constraints" th:field="*{constraints}" th:value="${id_constraint}"/> </label> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<label>Ratings -->
-<!-- 				<input type="text" th:field="*{ratingsH}" /></label> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<label>Photos -->
-<!-- 				<input type="text"  th:field="*{photos}" /></label> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<label>User ID (change to current logged in) -->
-<!-- 				<input type="text" th:field="*{id_user}"/></label> -->
-<!-- 			</div> -->
-<!-- 			<div> -->
-<!-- 				<input type="submit" name="action" value="save" /> -->
-<!-- 			</div> -->
-<!-- 		</form> -->
-<!-- 	</div> -->
-<!-- </body> -->
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Add house</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
-	<div class="container">
-		<h1>Add House</h1>
-		<p></p>
-		<p></p>
-		<form action="/housesList/add" th:object="${house}" method="post">
-			<table>
-				<tr>
-					<td>Description</td>
-					<td><input type="text" name="description" th:value="${description}" /></td>
-				</tr>
-				
-				<tr>
-					<td>Services</td> 
-					<tr th:each="service: ${listServices}">
-						<td th:text="${service.serviceName}"></td>
-						<td><input type="checkbox" name="services" 
-						th:field="*{services}" th:value="${service.serviceName}"/></td>
-					</tr>
-				</tr>
-				
-				<tr>
-					<td>Constraints</td>
-					<tr th:each="constraint: ${listConstraints}">
-						<td th:text="${constraint.constraintName}">Constraint Name</td>
-						<td><input type="checkbox" name="constraints"
-						th:field="*{constraints}" th:value="${constraint.constraintName}" /></td>
-					</tr>
-				</tr>
-				
-				<tr>
-					<td>Ratings</td>
-					<td><input type="text" name="ratingsH" th:value="${ratingsH}" /></td>
-				</tr>
-				
-				<tr>
-					<td>Photos</td>
-					<td><input type="file" name="photos" multiple></td>
-				</tr>
-				
-				<tr>
-					<td>Address</td>
-					<td><input type="text" name="address" th:value="${address}"></td>
-				</tr>
-					
-				<tr>
-					<td>Additional address</td>
-					<td><input type="text" name="additional_address" th:value="${additional_address}"></td>
-				</tr>
-				
-				<tr>
-					<td>City</td>
-					<td><input type="text" name="city" th:value="${city}"></td>
-				</tr>
-				
-				<tr>
-					<td>Postal code</td>
-					<td><input type="text" name="postal_code" th:value="${postal_code}"></td>
-				</tr>
-				
-				<tr>
-					<td>Country</td>
-					<td><input type="text" name="country" th:value="${country}"></td>
-				</tr>
-				
-				<tr>
-					<td>User ID (change to current logged in)</td>
-					<td><input type="text" name="id_user"/></td>
-				</tr>
-				
-				<tr>
-					<td><input type="submit" name="action" value="save" /></td>
-				</tr>
-			</table>
-		</form>
-		
-		
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+
+<!-- House description -->
+
+<!-- End of house description -->
+<form action="/housesList/add" th:object="${house}" method="post">
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="col mt-5 mb-3 text-center">
+			<h1><b>Add a house</b></h1>
+		</div>
 	</div>
+	<div class="row">
+		<div class="col mt">
+			<h4 style="color:#14A6B6"><b>About the house</b></h4>
+		</div>
+	</div>
+	
+	<div class="form-group">		
+		<div class="row">
+			<div class="col">
+				<div class="md-form">
+					<div class="row">
+						<div class="col-2 text-right">
+							<label for="form7" >House description</label>
+						</div>		
+						<div class="col mt-3">
+					 		<textarea type="text" id="form7" class="md-textarea form-control" rows="3" name="description" th:value="${description}"></textarea>
+					 	</div>
+				 	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- House location -->
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="col mt-5">
+			<h4 style="color:#14A6B6"><b>Location information</b></h4>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="addressInput">Address</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="addressInput" name="address" th:value="${address}"/>
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="additionalAdressInput">Additional address</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="additionalAdressInput" name="additional_address" th:value="${additional_address}">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+				<label for="cityInput">City</label>
+			</div>
+			
+			<div class="col">
+				<input type="text" class="form-control" id="cityInput" name="city" th:value="${city}">
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col-2 text-right">
+		    	<label for="postalCodeInput">Postal code</label>
+		    </div>
+		    
+		    <div class="col">
+		    	<input type="text" class="form-control" id="postalCodeInput" name="postal_code" th:value="${postal_code}">
+		    </div>	
+		   </div>
+		   
+		   <div class="row mt-3">
+		    <div class="col-2 text-right">
+		    	<label for="countryInput">Country</label>
+		    </div>
+		    
+		    <div class="col mb-5">
+		    	<input type="text" class="form-control" id="countryInput" name="country" th:value="${country}">
+		    </div>
+		</div>
+	</div>
+</div>
+<!-- End of house location -->
+
+<!-- House amenities, constraints and services -->
+<div class="container" style="background-color:  rgba(242, 242, 242)">
+	<div class="row">
+		<div class="row">
+			<div class="col mt-3">
+				<h4 style="color:#14A6B6"><b>Amenities, constraints and services</b></h4>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col mb-5">
+			<label style="color:#14a6b6"><b>Services</b></label>
+
+			<div class="row ml-5">
+				<div class="col-4">
+					<div class="form-check" th:each="service: ${listServices}">
+					  <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:field="*{services}" name="services" th:value="${service.serviceName}">
+					  <label class="form-check-label" for="flexCheckDefault" th:text="${service.serviceName}">
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col mb-5">
+			<label style="color:#14a6b6"><b>Constraints</b></label>
+
+			<div class="row ml-5">
+				<div class="col-4">
+					<div class="form-check" th:each="constraint: ${constraintServices}">
+					  <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:field="*{constraints}" name="constraints" th:value="${constraint.constraintName}">
+					  <label class="form-check-label" for="flexCheckDefault" th:text="${constraint.constraintName}">
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end of House amenities, constraints and services -->
+
+<!-- Pictures of the house -->
+<div class="container">
+	<div class="row mt-5">
+		<div class="col">
+			<button type="submit" class="btn btn-light border border-dark rounded-pill">Add pictures</button>
+		</div>
+		
+		<div class="col text-right">
+			<input type="submit" class="btn btn-success border-0 rounded-pill btn-block" name="action" value="Save">
+		</div>
+	</div>
+</div>
+</form>
+<!-- End of pictures of the house -->
+
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
 </body>
+</html>
