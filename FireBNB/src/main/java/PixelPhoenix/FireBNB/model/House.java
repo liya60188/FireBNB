@@ -68,43 +68,6 @@ public class House{
 		public void setConstraints(String constraints) {
 			this.constraints = constraints;
 		}
-
-		/*
-		// Services - Foreign Key
-		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
-		
-		Set<Service> services;
-		public Set<Service> getServices() {
-			return services;
-		}
-		public void setServices(Set<Service> services) {
-			this.services = services;
-		}
-		
-		//Constraints - Foreign Key
-		@OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
-		Set<Constraint> constraints;
-		public Set<Constraint> getConstraints() {
-			return constraints;
-		}
-		public void setConstraints(Set<Constraint> constraints) {
-			this.constraints = constraints;
-		}
-*/
-		/*
-		//Photos - Foreign Key
-		@OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
-		Set<Photo> photos;		
-		public Set<Photo> getPhotos() {
-			return photos;
-		}
-		public void setPhotos(Set<Photo> photos) {
-			this.photos = photos;
-		}
-		*/
 		
 		@Lob
 		@Column(columnDefinition = "MEDIUMBLOB")
