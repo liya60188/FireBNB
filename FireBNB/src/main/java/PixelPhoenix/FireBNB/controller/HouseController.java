@@ -322,11 +322,7 @@ public class HouseController {
 			
 			return "redirect:/housesList";
 		}
-		
-		
-		
-		
-		
+			
 	}
 	
 }

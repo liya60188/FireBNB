@@ -88,14 +88,9 @@ public class Message {
 		return creation_date;
 	}
 
-	/*public void setCreation_date(Date creation_date) {
-		this.creation_date = creation_date;
-	}*/
 	@PrePersist
 	private void onCreate() {
-		//TODO - Change with users after choosing
-//		id_receiver = (long) 2;
-//		id_sender = (long) 1;
+
 	    creation_date = new Date();
 	}
 
