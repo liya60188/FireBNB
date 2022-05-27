@@ -57,22 +57,19 @@ public class HouseController {
 	
 	
 	@GetMapping("/housesList")
-	public String listHouses(Model model) {
+	public String listHouses(Model model, Principal principal) {
 		Iterable<House> listHouses = hssv.getHouses();
 		model.addAttribute("listHouses", listHouses);
 		
+		String emailLoggedUser = principal.getName();
+		User loggedUser = us.getUser(emailLoggedUser);
+		Long id_loggedUser = loggedUser.getId_user();
+		
+		model.addAttribute("id_loggedUser", id_loggedUser);
 		return "housesList";
 	}
 	
-//	@GetMapping("/profile/houses/{email}")
-//	public String listUserHouses(@PathVariable("email") String email, Model model) {
-//		User user = us.getUser(email);
-//		Iterable<House> listUserHouses = hssv.getUserHouses(user.getId_user());
-//		model.addAttribute("listUserHouses", listUserHouses);
-//		model.addAttribute("user", user);
-//		
-//		return "housesUserList";
-//	}
+
 	@GetMapping("/profile/houses")
 	public String listUserHouses(Principal principal, Model model) {
 		String emailLoggedUser = principal.getName();
@@ -141,7 +138,6 @@ public class HouseController {
 		@RequestParam(name = "description", defaultValue = "") String description,
 		@RequestParam(name = "services", defaultValue = "") String services,
 		@RequestParam(name = "constraints", defaultValue = "") String constraints,
-		@RequestParam(name = "ratingsH", defaultValue = "") int ratingsH,
 		@RequestParam(name = "photos", defaultValue = "") String photos,
 		@RequestParam(name = "address", defaultValue = "") String address,
 		@RequestParam(name = "city", defaultValue = "") String city,
@@ -158,7 +154,6 @@ public class HouseController {
 			model.addAttribute("description", description);
 			model.addAttribute("services", services);
 			model.addAttribute("constraints", constraints);
-			model.addAttribute("ratingsH", ratingsH);
 			model.addAttribute("photos", photos);
 			model.addAttribute("address", address);
 			model.addAttribute("city", city);
@@ -172,7 +167,6 @@ public class HouseController {
 			house.setDescription(description);
 			//house.setServices(services);
 			//house.setConstraints(constraints);
-			house.setRatingsH(ratingsH);
 			house.setPhotos(photos);
 			house.setAddress(address);
 			house.setCity(city);
