@@ -101,9 +101,33 @@ public class UserController {
 
 		String emailLoggedUser = principal.getName();
 		User user = us.getUser(emailLoggedUser);
+		
+		//chaananananged am
+		List<String> listSenders = new ArrayList<>();
+		Iterable<User> allUsers = us.getUsers();
+		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
+		model.addAttribute("listUserRatings", listUserRatings);
+		double ratingH = 0.0;
+
+		int size = 0;
+		for (Rating rating : listUserRatings) {
+			ratingH += rating.getValue();
+			size += 1;
+			for (User sender : allUsers) {
+				if(sender.getId_user() == rating.getId_userSender()) {
+					listSenders.add(sender.getFirstName() + " " + sender.getLastName());
+				}
+			}
+		}
+
+		ratingH = ratingH / size;
+		ratingH = (double) Math.round(ratingH * 100) / 100;
+		user.setRating(ratingH);
+		us.updateUser(user);
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
+		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("numberOfHouses", numberOfHouses);
 		model.addAttribute("user", user);
 		return "loggedUserProfile";
