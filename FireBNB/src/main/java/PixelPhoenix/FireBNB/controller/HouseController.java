@@ -216,6 +216,7 @@ public class HouseController {
 		
 		model.addAttribute("house", house2);
 		
+		
 		return "houseProfile";
 	}
 	
