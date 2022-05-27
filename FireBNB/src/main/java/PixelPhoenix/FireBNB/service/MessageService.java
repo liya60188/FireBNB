@@ -25,6 +25,10 @@ public class MessageService {
 	public Iterable<Message> getMessages(){
 		return messageRepository.findAll();
 	}
+	
+	public Iterable<Message> getUserMessages(Long id_user){
+		return messageRepository.findListMessages(id_user);
+	}
  
 	public void deleteMessage(final Long id) {
 		messageRepository.deleteById(id);

@@ -2,6 +2,9 @@ package PixelPhoenix.FireBNB.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import PixelPhoenix.FireBNB.model.House;
+import PixelPhoenix.FireBNB.model.Message;
 import PixelPhoenix.FireBNB.model.Service;
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.model.Constraint;
@@ -28,6 +32,7 @@ import PixelPhoenix.FireBNB.repository.HouseRepository;
 import PixelPhoenix.FireBNB.repository.ServiceRepository;
 import PixelPhoenix.FireBNB.repository.ConstraintRepository;
 import PixelPhoenix.FireBNB.service.HouseService;
+import PixelPhoenix.FireBNB.service.MessageService;
 import PixelPhoenix.FireBNB.service.ServiceService;
 import PixelPhoenix.FireBNB.service.UserService;
 import PixelPhoenix.FireBNB.service.ConstraintService;
@@ -43,6 +48,8 @@ public class HouseController {
 	private ConstraintService constraintService;
 	@Autowired
 	private UserService us;
+	@Autowired
+	private MessageService ms;
 	
 	/*public House chooseService(@RequestBody House house) {
 		hssv.saveHouse(house.getServices());
@@ -186,6 +193,140 @@ public class HouseController {
 		model.addAttribute("house", house2);
 		
 		return "houseProfile";
+	}
+	
+	@RequestMapping(value="/bookHouse")
+	public String bookHousePage(@RequestParam("id_house") Long id_house, Principal principal, Model model) {
+		Optional<House> house = hssv.getHouse(id_house);
+		House house2 = house.get();
+		model.addAttribute("id_houseReceive", id_house);
+		model.addAttribute("house",house2);
+		
+		String emailLoggedUser = principal.getName();
+		User loggedUser = us.getUser(emailLoggedUser);
+		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
+		
+		model.addAttribute("listUserHouses", listUserHouses);
+		model.addAttribute("loggedUser", loggedUser);
+		
+		return "bookHouse";
+	}
+	
+//	@PostMapping(value="/bookHouse")
+//	public String bookHouse(Model model, @ModelAttribute House house, BindingResult errors, @RequestParam("id_houseReceive") Long id_houseReceive) throws ParseException {
+//		
+//		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date begin_date = s.parse(house.begin_date);
+//		Date end_date = s.parse(house.end_date);
+//		String isBookedError = null;
+//		
+//
+//		Optional<House> ot = hssv.getHouse(id_houseReceive);
+//		House house2= ot.get();
+//		Date begin_date_exist = s.parse(house2.getBegin_date());
+//		Date end_date_exist = s.parse(house2.getEnd_date());
+//		
+//		if(begin_date_exist == null && end_date_exist == null) {
+//			house2.setBegin_date(house2.getBegin_date());
+//			house2.setEnd_date(house2.getEnd_date());
+//			isBookedError = "";
+//		}else if(begin_date.before(begin_date_exist) && end_date.after(begin_date_exist) ||
+//		begin_date.before(end_date_exist) && end_date.after(end_date_exist) ||
+//		begin_date.before(begin_date_exist) && end_date.after(end_date_exist) ||
+//		begin_date.before(begin_date_exist) && end_date.after(end_date_exist)) {
+//			isBookedError = "Date overlap";
+//		}else {
+//			house2.setBegin_date(house2.getBegin_date());
+//			house2.setEnd_date(house2.getEnd_date());
+//			isBookedError = "";
+//		}
+//		
+//		
+//		model.addAttribute("isBookedError", isBookedError);
+//		model.addAttribute("id_house",id_houseReceive);
+//		
+//		return"bookHouse";
+//	}
+	
+	
+	@PostMapping(value="/bookHouse")
+	public String bookHouse(Model model, Principal principal, @RequestParam("id_houseReceive") Long id_houseReceive,
+			@RequestParam("begin_date") String begin_dateString,
+			@RequestParam("end_date") String end_dateString,
+			@RequestParam("id_houseSend") Long id_houseSend) throws ParseException {
+		
+		String emailLoggedUser = principal.getName();
+		User loggedUser = us.getUser(emailLoggedUser);
+		
+		SimpleDateFormat s=new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date begin_date = s.parse(begin_dateString);
+		Date end_date = s.parse(end_dateString);
+		String isBookedError = null;
+		
+
+		Optional<House> ot = hssv.getHouse(id_houseReceive);
+		House house = ot.get();
+		Long id_Receiver = house.getId_user();
+		Date begin_date_exist = house.getBegin_date();
+		Date end_date_exist = house.getEnd_date();
+		
+		if(begin_date_exist == null && end_date_exist == null) {
+			house.setBegin_date(begin_date);
+			house.setEnd_date(end_date);
+			isBookedError = "";
+			
+			Message message = new Message();
+			message.setId_sender(loggedUser.getId_user());
+			message.setId_receiver(id_Receiver);
+			message.setSubject(house.getAddress() + ", " + house.getCity() + ", " + house.getCountry());
+			message.setContent(loggedUser.getFirstName()+" "+loggedUser.getLastName()+" has made an exchange proposition for your house.\n "
+					+ "Begin date: " + begin_date +"\n" + "End date: " + end_date);
+			message.setId_house_receiver(id_houseReceive);
+			message.setId_house_sender(id_houseSend);
+			ms.saveMessage(message);
+			
+			return "redirect:/housesList";
+			
+		}else if(begin_date.before(begin_date_exist) && end_date.after(begin_date_exist) ||
+		begin_date.before(end_date_exist) && end_date.after(end_date_exist) ||
+		begin_date.before(begin_date_exist) && end_date.after(end_date_exist) ||
+		begin_date.after(begin_date_exist) && end_date.before(end_date_exist)) {
+			isBookedError = "Date overlap";
+			model.addAttribute("isBookedError", isBookedError);
+			model.addAttribute("id_houseReceive",id_houseReceive);
+			model.addAttribute("house", house);
+			
+			Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
+			
+			model.addAttribute("listUserHouses", listUserHouses);
+			model.addAttribute("loggedUser", loggedUser);
+			
+			return"bookHouse";
+			
+		}else {
+			house.setBegin_date(begin_date);
+			house.setEnd_date(end_date);
+			isBookedError = "";
+			
+			Message message = new Message();
+			message.setId_sender(loggedUser.getId_user());
+			message.setId_receiver(id_Receiver);
+			message.setSubject(house.getAddress() + ", " + house.getCity() + ", " + house.getCountry());
+			message.setContent(loggedUser.getFirstName()+" "+loggedUser.getLastName()+" has made an exchange proposition for your house.\n "
+					+ "Begin date: " + begin_date +"\n" + "End date: " + end_date);
+			message.setId_house_receiver(id_houseReceive);
+			message.setId_house_sender(id_houseSend);
+			ms.saveMessage(message);
+			
+			return "redirect:/housesList";
+		}
+		
+		
+		
+		
+		
 	}
 	
 }

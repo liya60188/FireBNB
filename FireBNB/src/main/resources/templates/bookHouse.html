@@ -1,0 +1,54 @@
+<!DOCTYPE HTMl>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8" />
+<title>House Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<h1>Book house</h1>
+
+	<form th:action="@{/bookHouse}" th:object="${house}" method="post">
+	
+	<table>
+		<tr>
+			<td><input name="id_houseReceive" type="hidden" th:value="${id_houseReceive}"/></td>
+		</tr>
+		<tr>
+			<td for="begin_date">Begin date</td>
+			<td><input name="begin_date" type="date" th:field="*{begin_date}"/></td>
+		</tr>
+		
+		<tr>
+			<td for="end_date">End date</td>
+			<td><input name="end_date" type="date" th:field="*{end_date}"/></td>
+		</tr>
+		
+		<tr>
+			<td> Select a house</td>
+			<tr th:each="house : ${listUserHouses}">
+				<td th:text="${house.address}+', '+${house.city}+', '+${house.country}"></td>
+				<td><input type="radio" name="id_houseSend" th:value="${house.id_house}"/></td>
+			</tr>
+		</tr>
+		
+		<tr>
+			<td><input type="submit" name="action" value="save" /></td>
+		</tr>
+	
+	</table>
+	
+	</form>
+		<p th:text="${isBookedError}">Booked</p>
+	
+<!-- 				<b th:text="${loggedUser.email}"></b> -->
+<!-- 				<br> -->
+<!-- 				<b th:text="${id_houseReceive}"></b> -->
+				
+		
+		
+</body>
+</html>

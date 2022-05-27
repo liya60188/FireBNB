@@ -1,5 +1,6 @@
 package PixelPhoenix.FireBNB.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,15 +41,16 @@ public class House{
 			this.description = description;
 		} 
 		
-		public int ratingsH;
-		public int getRatingsH() {
+		public double ratingsH;
+		
+		public double getRatingsH() {
 			return ratingsH;
 		}
 
-		public void setRatingsH(int ratingsH) {
+		public void setRatingsH(double ratingsH) {
 			this.ratingsH = ratingsH;
 		}
-		
+
 		public String services;
 		
 		public String getServices() {
@@ -68,43 +70,6 @@ public class House{
 		public void setConstraints(String constraints) {
 			this.constraints = constraints;
 		}
-
-		/*
-		// Services - Foreign Key
-		@OneToMany(targetEntity = Service.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseService_FK", referencedColumnName = "id_house")
-		
-		Set<Service> services;
-		public Set<Service> getServices() {
-			return services;
-		}
-		public void setServices(Set<Service> services) {
-			this.services = services;
-		}
-		
-		//Constraints - Foreign Key
-		@OneToMany(targetEntity = Constraint.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "houseConstraint_FK", referencedColumnName = "id_house")
-		Set<Constraint> constraints;
-		public Set<Constraint> getConstraints() {
-			return constraints;
-		}
-		public void setConstraints(Set<Constraint> constraints) {
-			this.constraints = constraints;
-		}
-*/
-		/*
-		//Photos - Foreign Key
-		@OneToMany(targetEntity = Photo.class, cascade = CascadeType.ALL)
-		@JoinColumn(name = "housePhoto_FK", referencedColumnName = "id_house")
-		Set<Photo> photos;		
-		public Set<Photo> getPhotos() {
-			return photos;
-		}
-		public void setPhotos(Set<Photo> photos) {
-			this.photos = photos;
-		}
-		*/
 		
 		@Lob
 		@Column(columnDefinition = "MEDIUMBLOB")
@@ -177,8 +142,48 @@ public class House{
 		public void setAdditional_address(String additional_address) {
 			this.additional_address = additional_address;
 		}
+		
+		public Date begin_date;
 
-		public House(Long id_house,String description, int ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address) {
+		public Date getBegin_date() {
+			return begin_date;
+		}
+
+		public void setBegin_date(Date begin_date) {
+			this.begin_date = begin_date;
+		}
+		
+		public Date end_date;
+
+		public Date getEnd_date() {
+			return end_date;
+		}
+
+		public void setEnd_date(Date end_date) {
+			this.end_date = end_date;
+		}
+		
+//		public String begin_date;
+//		
+//		public String getBegin_date() {
+//			return begin_date;
+//		}
+//
+//		public void setBegin_date(String begin_date) {
+//			this.begin_date = begin_date;
+//		}
+//
+//		public String end_date;
+//
+//		public String getEnd_date() {
+//			return end_date;
+//		}
+//
+//		public void setEnd_date(String end_date) {
+//			this.end_date = end_date;
+//		}
+
+		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
@@ -191,6 +196,8 @@ public class House{
 			this.postal_code = postal_code;
 			this.country = country;
 			this.additional_address = additional_address;
+			this.begin_date = begin_date;
+			this.end_date = end_date; 
 		}
 		
 		public House() {}

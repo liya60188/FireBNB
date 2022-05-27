@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Message System</title>
+</head>
+<body>
+	Message System
+	
+
+
+		<div>
+			<h1 th:text="'Subject: Your house ' + ${message.subject}"></h1>
+			<p th:text="'By ' + ${senderFirstName} + ' ' + ${senderLastName}"></p>
+			<p th:text="${message.creation_date}"></p>
+			<p th:text="${message.content}"></p>
+			<p th:text="'Id de la maison de id_sender' + ${message.id_house_sender}"></p>
+		</div>
+		<div th:if="${message.id_house_sender}">
+		<a th:href=@{/houseProfile/{id_house}(id_house=${message.id_house_sender})}>View House</a>
+		</div>
+		
+		<form th:action="@{/confirmBooking}" th:object="${house}" method="post">
+			<td> Do you confirm the exchange?</td>
+			<tr>
+				<td><input name="id_house_receiver" type="hidden" th:value="${message.id_house_receiver}"/></td>
+				<td><input name="id_house_sender" type="hidden" th:value="${message.id_house_sender}"/></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="confirm" value="yes"/> Yes</td>
+				<td><input type="radio" name="confirm" value="no"/>No</td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="action" value="confirm" /></td>
+			</tr>
+		</form>
+
+
+	
+</body>
+</html>

@@ -22,6 +22,8 @@ public class Message {
 	Long id_message;
 	Long id_sender;
 	Long id_receiver;
+	Long id_house_receiver;
+	Long id_house_sender;
 	String subject;
 	String content;
 	Date creation_date;
@@ -50,6 +52,22 @@ public class Message {
 		this.id_receiver = id_receiver;
 	}
 
+	
+	public Long getId_house_receiver() {
+		return id_house_receiver;
+	}
+
+	public void setId_house_receiver(Long id_house_receiver) {
+		this.id_house_receiver = id_house_receiver;
+	}
+	public Long getId_house_sender() {
+		return id_house_sender;
+	}
+
+	public void setId_house_sender(Long id_house_sender) {
+		this.id_house_sender = id_house_sender;
+	}
+
 	public String getSubject() {
 		return subject;
 	}
@@ -76,15 +94,17 @@ public class Message {
 	@PrePersist
 	private void onCreate() {
 		//TODO - Change with users after choosing
-		id_receiver = (long) 2;
-		id_sender = (long) 1;
+//		id_receiver = (long) 2;
+//		id_sender = (long) 1;
 	    creation_date = new Date();
 	}
 
-	public Message(Long id_message, Long id_sender, Long id_receiver, String subject, String content, Date creation_date) {
+	public Message(Long id_message, Long id_sender, Long id_receiver, Long id_house_receiver, Long id_house_sender, String subject, String content, Date creation_date) {
 		this.id_message = id_message;
 		this.id_sender = id_sender;
 		this.id_receiver = id_receiver;
+		this.id_house_receiver = id_house_receiver;
+		this.id_house_sender = id_house_sender;
 		this.subject = subject;
 		this.content = content;
 		this.creation_date = creation_date;

@@ -14,4 +14,7 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 	@Query("select message from Message message where message.subject like :x")
 	public Page<Message> findByName(@Param("x") String mc, Pageable pg);
 	
+	@Query(value="SELECT * FROM `messaging` WHERE id_receiver = :x", nativeQuery = true)
+	public Iterable<Message> findListMessages(@Param("x") Long id_user);
+	
 }
