@@ -51,9 +51,21 @@ public class House{
 		public void setRatingsH(double ratingsH) {
 			this.ratingsH = ratingsH;
 		}
+		
+		public int ratingSize;
+		
+		public int getRatingSize() {
+			return ratingSize;
+		}
+
+		public void setRatingSize(int ratingSize) {
+			this.ratingSize = ratingSize;
+		}
+		
 		@PrePersist
 		private void onCreate() {
 			this.ratingsH = 0.0;
+			this.ratingSize = 0;
 		}
 
 		public String services;
@@ -76,16 +88,16 @@ public class House{
 			this.constraints = constraints;
 		}
 		
-		@Lob
-		@Column(columnDefinition = "MEDIUMBLOB")
-		public String photos;
+		//@Lob
+		//@Column(columnDefinition = "MEDIUMBLOB")
+		public String photo1;
 
-		public String getPhotos() {
-			return photos;
+		public String getPhoto1() {
+			return photo1;
 		}
 
-		public void setPhotos(String photos) {
-			this.photos = photos;
+		public void setPhoto1(String photo1) {
+			this.photo1 = photo1;
 		}
 		
 		public Long id_user;
@@ -188,13 +200,13 @@ public class House{
 //			this.end_date = end_date;
 //		}
 
-		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
+		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photo1, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
 			this.services = services;
 			this.constraints = constraints;
-			this.photos = photos;	
+			this.photo1 = photo1;	
 			this.id_user = id_user;
 			this.address = address;
 			this.city = city;

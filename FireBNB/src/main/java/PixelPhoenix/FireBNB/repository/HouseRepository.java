@@ -24,7 +24,7 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	
 	@Query(value = "SELECT * FROM `house` WHERE id_user = :x", nativeQuery = true)
 	public Iterable<House> findListHouses(@Param("x") Long id_user);
-	
+
 //	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 //	public Set<Service> getJoinedHouseServices();
 //	

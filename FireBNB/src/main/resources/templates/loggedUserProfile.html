@@ -103,8 +103,8 @@
 						<b>Total rating :</b>
 					</div>
 
-					<div class="col-1">
-						<span th:text="${user.rating} + '/5'"></span>
+					<div class="col-3">
+						<span th:text="${user.rating} + '/5 ' + '(' + ${size} + ')' "></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 							fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
 							viewBox="0 0 16 16">

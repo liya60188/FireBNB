@@ -83,10 +83,12 @@ public class UserController {
 		ratingH = ratingH / size;
 		ratingH = (double) Math.round(ratingH * 100) / 100;
 		user.setRating(ratingH);
+		user.setRatingSize(size);
 		us.updateUser(user);
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
+		model.addAttribute("size", size);
 		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("user", user);
 		model.addAttribute("numberOfHouses", numberOfHouses);
@@ -120,10 +122,12 @@ public class UserController {
 		ratingH = ratingH / size;
 		ratingH = (double) Math.round(ratingH * 100) / 100;
 		user.setRating(ratingH);
+		user.setRatingSize(size);
 		us.updateUser(user);
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
+		model.addAttribute("size", size);
 		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("numberOfHouses", numberOfHouses);
 		model.addAttribute("user", user);

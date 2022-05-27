@@ -20,7 +20,7 @@
 <!-- House description -->
 
 <!-- End of house description -->
-<form action="/housesList/add" th:object="${house}" method="post">
+<form action="/profile/houses/add" th:object="${house}" method="post">
 <div class="container" style="background-color:  rgba(242, 242, 242)">
 	<div class="row">
 		<div class="col mt-5 mb-3 text-center">
@@ -142,7 +142,7 @@
 
 			<div class="row ml-5">
 				<div class="col-4">
-					<div class="form-check" th:each="constraint: ${constraintServices}">
+					<div class="form-check" th:each="constraint: ${listConstraints}">
 					  <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:field="*{constraints}" name="constraints" th:value="${constraint.constraintName}">
 					  <label class="form-check-label" for="flexCheckDefault" th:text="${constraint.constraintName}">
 					  </label>
@@ -159,8 +159,9 @@
 	<div class="row mt-5">
 		<div class="col">
 			<button type="submit" class="btn btn-light border border-dark rounded-pill">Add pictures</button>
+			<input type="file" name="photos" multiple>
 		</div>
-		
+	
 		<div class="col text-right">
 			<input type="submit" class="btn btn-success border-0 rounded-pill btn-block" name="action" value="Save">
 		</div>
