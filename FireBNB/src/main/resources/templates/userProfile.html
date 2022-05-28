@@ -15,7 +15,7 @@
 
 	<!-- Content -->
 	<div class="container-fluid mt-5">
-		<div sec:authorize="hasRole('USER')" class="row">
+		<div sec:authorize="hasAuthority('USER')" class="row">
 			<div class="col-1"></div>
 			<!-- Left block -->
 			<div class="col-3 border shadow"
