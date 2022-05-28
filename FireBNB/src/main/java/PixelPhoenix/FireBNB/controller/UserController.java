@@ -103,6 +103,7 @@ public class UserController {
 		List<String> listSenders = new ArrayList<>();
 		Iterable<User> allUsers = us.getUsers();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
+		
 		model.addAttribute("listUserRatings", listUserRatings);
 		double ratingH = 0.0;
 
@@ -164,6 +165,7 @@ public class UserController {
 			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("address") String address, @RequestParam("city") String city,
 			@RequestParam("postalCode") int postalCode, @RequestParam("country") String country,
+			@RequestParam("description") String description,
 			@RequestParam("additionalAddress") String additionalAddress, @RequestParam("phoneNumber") int phoneNumber,
 			@RequestParam("password") String password, @RequestParam(name = "edit", defaultValue = "") int edit) {
 		if (edit == 0) {
@@ -175,6 +177,7 @@ public class UserController {
 			model.addAttribute("country", country);
 			model.addAttribute("additionalAddress", additionalAddress);
 			model.addAttribute("phoneNumber", phoneNumber);
+			model.addAttribute("descprition",description);
 			return "userEdit";
 		}
 		User user = us.getUser(email);
@@ -186,6 +189,7 @@ public class UserController {
 		user.setCountry(country);
 		user.setAdditionalAddress(additionalAddress);
 		user.setPhoneNumber(phoneNumber);
+		user.setDescription(description);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(password);
 		user.setPassword(encodedPassword);
@@ -203,5 +207,20 @@ public class UserController {
 		us.deleteUser(id_user);
 		return "redirect:/admin/users";
 	}
+	
+	
+	
+	//AJOUT - page de l'admin
+	
+	@GetMapping("/adminProfile")
+	public String adminProfile(Model model, Principal principal) {
 
+		String emailLoggedUser = principal.getName();
+		User user = us.getUser(emailLoggedUser);
+		
+		model.addAttribute("user",user);
+		
+		return "adminProfile";
+		
+	}
 }

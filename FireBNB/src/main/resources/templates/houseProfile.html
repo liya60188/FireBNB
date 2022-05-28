@@ -51,19 +51,59 @@
 			<div class="row mt-5">
 				<div class="col">
 				    <img
-				      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+				      th:src="@{'/house_photos/'+${house.photo1}}"
 				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="Boat on Calm Water"
+				      alt="House photo"
 				    />
 				</div>
 			</div>
-			
+<!-- 	Fenetre modale pour afficher les photos		 -->
 			<div class="row">
 				<div class="col text-right">
-					<p style="color:#14A6B6"><u>See all pictures</u></p>
+<!-- 					<p style="color:#14A6B6"><u>See all pictures</u></p> -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#house_photos">
+	  					See all photos
+						</button>
 				</div>
 			</div>
+		</div> 
+		
+		<div class="modal fade" id="house_photos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog" role="document">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h5 class="modal-title" id="exampleModalLabel">Pictures of the house</h5>
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+      		</div>
+			<div class="modal-body">
+					<img
+				      th:src="@{'/house_photos/'+${house.photo1}}"
+				      class="w-100 shadow-1-strong rounded mb-4"
+				      alt="House photo"
+				    />
+	
+				    <img
+				      th:src="@{'/house_photos/'+${house.photo2}}"
+				      class="w-100 shadow-1-strong rounded mb-4"
+				      alt="House photo"
+				    />
+
+				    <img
+				      th:src="@{'/house_photos/'+${house.photo3}}"
+				      class="w-100 shadow-1-strong rounded mb-4"
+				      alt="House photo"
+				    />
+
+			</div>
+			<div class="modal-footer">
+			</div>
 		</div>
+	</div>
+</div>	  
+
+<!-- Fin fenetre modale -->
 		
 		<div class="col">
 			<div class="row">

@@ -142,7 +142,9 @@ public class HouseController {
 		@RequestParam(name = "description", defaultValue = "") String description,
 		@RequestParam(name = "services", defaultValue = "") String services,
 		@RequestParam(name = "constraints", defaultValue = "") String constraints,
-		@RequestParam(name = "photos", defaultValue = "") String photos,
+		@RequestParam(name = "photo1", defaultValue = "") String photo1,
+		@RequestParam(name = "photo2", defaultValue = "") String photo2,
+		@RequestParam(name = "photo3", defaultValue = "") String photo3,
 		@RequestParam(name = "address", defaultValue = "") String address,
 		@RequestParam(name = "city", defaultValue = "") String city,
 		@RequestParam(name = "postal_code", defaultValue = "") int postal_code,
@@ -158,7 +160,9 @@ public class HouseController {
 			model.addAttribute("description", description);
 			model.addAttribute("services", services);
 			model.addAttribute("constraints", constraints);
-			model.addAttribute("photos", photos);
+			model.addAttribute("photo1", photo1);
+			model.addAttribute("photo2", photo2);
+			model.addAttribute("photo3", photo3);
 			model.addAttribute("address", address);
 			model.addAttribute("city", city);
 			model.addAttribute("postal_code", postal_code);
@@ -171,7 +175,9 @@ public class HouseController {
 			house.setDescription(description);
 			//house.setServices(services);
 			//house.setConstraints(constraints);
-			house.setPhotos(photos);
+			house.setPhoto1(photo1);
+			house.setPhoto2(photo2);
+			house.setPhoto3(photo3);
 			house.setAddress(address);
 			house.setCity(city);
 			house.setPostal_code(postal_code);

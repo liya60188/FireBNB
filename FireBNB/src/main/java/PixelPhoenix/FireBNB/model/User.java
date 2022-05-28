@@ -37,6 +37,7 @@ public class User implements Serializable{
 	private String role;
 	@Column(name="profile_picture", nullable = true, length = 64)
     private String profilePicture;
+	private String description;
 
 	public Long getId_user() {
 		return user_id;
@@ -135,9 +136,16 @@ public class User implements Serializable{
 		this.role = profilePicture;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	public User(Long user_id, String firstName, String lastName, double rating, String email, String password,
 			String address, String city, int postalCode, String country, String additionalAddress, 
-			int phoneNumber, String profilePicture, String role) {
+			int phoneNumber, String profilePicture, String role, String description) {
 		//super();
 		this.user_id = user_id;
 		this.firstName = firstName;
@@ -153,6 +161,7 @@ public class User implements Serializable{
 		this.phoneNumber = phoneNumber;
 		this.profilePicture = profilePicture;
 		this.role = role;
+		this.description = description;
 	}
 	
 	public User() {
