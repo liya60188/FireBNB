@@ -62,9 +62,53 @@ public class HouseController {
 	 * hssv.saveHouse(house.getServices()); }
 	 */
 
-	@GetMapping("/housesList")
-	public String listHouses(Model model, Principal principal) {
+	// List of houses Page with search bar
+	@Autowired
+	private HouseRepository houseRepository;
+
+	@RequestMapping(value = { "/housesList", "/housesList/search" })
+	public String listHouses(Model model, Principal principal,
+			@RequestParam(name = "country", defaultValue = "") String country,
+			@RequestParam(name = "city", defaultValue = "") String city,
+			@RequestParam(name = "address", defaultValue = "") String address) {
+
 		Iterable<House> listHouses = hssv.getHouses();
+		// No param search
+		if (country.equals("") && city.equals("") && address.equals("")) {
+			listHouses = hssv.getHouses();
+		}
+
+		// One param search
+		if (!country.equals("") && city.equals("") && address.equals("")) {
+			listHouses = houseRepository.findWithOne(country);
+		}
+		if (country.equals("") && !city.equals("") && address.equals("")) {
+			listHouses = houseRepository.findWithOne(city);
+		}
+		if (country.equals("") && city.equals("") && !address.equals("")) {
+			listHouses = houseRepository.findWithOne(address);
+		}
+
+		// 2 params search
+		if (!country.equals("") && !city.equals("") && address.equals("")) {
+			listHouses = houseRepository.findWithTwo(country, city);
+		}
+		if (country.equals("") && !city.equals("") && !address.equals("")) {
+			listHouses = houseRepository.findWithTwo(address, city);
+		}
+		if (!country.equals("") && city.equals("") && !address.equals("")) {
+			listHouses = houseRepository.findWithTwo(country, address);
+		}
+
+		// 3 params search
+		if (!country.equals("") && !city.equals("") && !address.equals("")) {
+			listHouses = houseRepository.findWithThree(country, city, address);
+		}
+
+		model.addAttribute("country", country);
+		model.addAttribute("city", city);
+		model.addAttribute("address", address);
+
 		model.addAttribute("listHouses", listHouses);
 
 		String emailLoggedUser = principal.getName();
@@ -72,7 +116,7 @@ public class HouseController {
 		Long id_loggedUser = loggedUser.getId_user();
 
 		model.addAttribute("id_loggedUser", id_loggedUser);
-		
+
 		return "housesList";
 	}
 
@@ -88,27 +132,26 @@ public class HouseController {
 		return "housesUserList";
 	}
 
-	// List of houses Page with search bar
-	@Autowired
-	private HouseRepository houseRepository;
-
-	@RequestMapping(value = { "/housesList", "/housesList/search" })
-	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String keyword,
-			@RequestParam(name = "page", defaultValue = "0") int page,
-			@RequestParam(name = "size", defaultValue = "5") int size) {
-		Page<House> listHouses = houseRepository.findByName("%" + keyword + "%", PageRequest.of(page, size));
-		int[] pages = new int[listHouses.getTotalPages()];
-		model.addAttribute("listHouses", listHouses.getContent());
-		model.addAttribute("motC", keyword);
-		model.addAttribute("pages", pages);
-		model.addAttribute("pageCourante", page);
-		return "housesList";
-	}
+	/*
+	 * @RequestMapping(value = { "/housesList", "/housesList/search" }) public
+	 * String search(Model model, @RequestParam(name = "motCle", defaultValue = "")
+	 * String keyword,
+	 * 
+	 * @RequestParam(name = "page", defaultValue = "0") int page,
+	 * 
+	 * @RequestParam(name = "size", defaultValue = "5") int size) { Page<House>
+	 * listHouses = houseRepository.findByName("%" + keyword + "%",
+	 * PageRequest.of(page, size)); int[] pages = new
+	 * int[listHouses.getTotalPages()]; model.addAttribute("listHouses",
+	 * listHouses.getContent()); model.addAttribute("motC", keyword);
+	 * model.addAttribute("pages", pages); model.addAttribute("pageCourante", page);
+	 * return "housesList"; }
+	 */
 
 	// Tests for Services
 	@Autowired
 	private ServiceRepository serviceRepository;
-	
+
 	@GetMapping("/profile/houses/add")
 	public String addUserHouseForm(Principal principal, Model model) {
 		House house = new House();
@@ -132,27 +175,24 @@ public class HouseController {
 		return "redirect:/housesList";
 	}
 
-	/*@GetMapping("/housesList/add")
-	public String houseForm(Model model) {
-		House house = new House();
-		// ModelAndView mav = new ModelAndView("addHouse");
-		model.addAttribute("house", house);
-
-		Iterable<Service> listServices = serviceService.getServices();
-		model.addAttribute("listServices", listServices);
-
-		Iterable<Constraint> listConstraints = constraintService.getConstraints();
-		model.addAttribute("listConstraints", listConstraints);
-
-		return "addHouse2";
-	}
-
-	@PostMapping("/housesList/add")
-	public String add(@ModelAttribute("house") @Validated House house, Model model) {
-		hssv.createHouse(house);
-		// model.addAttribute("house", houseAdd);
-		return "redirect:/housesList";
-	}*/
+	/*
+	 * @GetMapping("/housesList/add") public String houseForm(Model model) { House
+	 * house = new House(); // ModelAndView mav = new ModelAndView("addHouse");
+	 * model.addAttribute("house", house);
+	 * 
+	 * Iterable<Service> listServices = serviceService.getServices();
+	 * model.addAttribute("listServices", listServices);
+	 * 
+	 * Iterable<Constraint> listConstraints = constraintService.getConstraints();
+	 * model.addAttribute("listConstraints", listConstraints);
+	 * 
+	 * return "addHouse2"; }
+	 * 
+	 * @PostMapping("/housesList/add") public String
+	 * add(@ModelAttribute("house") @Validated House house, Model model) {
+	 * hssv.createHouse(house); // model.addAttribute("house", houseAdd); return
+	 * "redirect:/housesList"; }
+	 */
 
 	@RequestMapping(value = "/housesList/delete")
 	public String delete(Model model, @RequestParam(name = "id_house", defaultValue = "") Long id_house) {
@@ -241,11 +281,11 @@ public class HouseController {
 		List<String> servicesList = new ArrayList<>();
 		List<String> constraintsList = new ArrayList<>();
 
-		if(servicesString != null) {
+		if (servicesString != null) {
 			servicesList = Arrays.asList(servicesString.split(","));
 		}
-		
-		if(constraintsString != null) {
+
+		if (constraintsString != null) {
 			constraintsList = Arrays.asList(constraintsString.split(","));
 		}
 

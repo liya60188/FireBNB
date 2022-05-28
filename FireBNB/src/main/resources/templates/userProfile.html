@@ -97,7 +97,8 @@
 					</div>
 					<!-- CHANGE BY AMANDA -->
 					<div class="col-3">
-						<span th:text="${user.rating} + '/5 ' + '(' + ${user.ratingSize} + ')'"></span>
+						<span
+							th:text="${user.rating} + '/5 ' + '(' + ${user.ratingSize} + ')'"></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 							fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
 							viewBox="0 0 16 16">
@@ -124,6 +125,12 @@
 					</div>
 				</div>
 
+<!-- 
+				<div class="row" th:each="bestHouses : ${bestHouses}">
+					<div th:each=" key : ${bestHouses.key}" th:text="${key.id_house} + ' KEY:'"></div>
+					<div th:each=" value : ${bestHouses.value}" th:text="${value}"></div>
+				</div>
+  -->
 				<div class="row">
 					<div class="col text-center">
 						<img
@@ -168,7 +175,7 @@
 									<div class="col-3"></div>
 
 									<div class="col text-center">
-									<p th:text="'User n°' + ${rating.id_userSender}"></p>
+										<p th:text="'User n°' + ${rating.id_userSender}"></p>
 									</div>
 
 									<p th:text="${rating.value} + '/5'"></p>
@@ -268,6 +275,7 @@
 						class="text-light">Plan du site</a>
 			</div>
 		</div>
+
 	</div>
 	<!-- End of Footer -->
 

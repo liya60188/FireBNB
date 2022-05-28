@@ -2,8 +2,12 @@ package PixelPhoenix.FireBNB.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.User;
+import PixelPhoenix.FireBNB.repository.HouseRepository;
 import PixelPhoenix.FireBNB.repository.UserRepository;
 import PixelPhoenix.FireBNB.service.HouseService;
 import PixelPhoenix.FireBNB.service.RatingService;
@@ -37,6 +42,8 @@ public class UserController {
 	private HouseService hs;
 	@Autowired
 	private RatingService ratingService;
+	@Autowired
+	private HouseRepository hsrp;
 
 	@GetMapping("/")
 	public String index() {
@@ -48,21 +55,21 @@ public class UserController {
 		Iterable<User> listUsers = us.getUsers();
 		model.addAttribute("listUsers", listUsers);
 		// model.addAttribute("users", us.findByName(name));
-		
+
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Long id_loggedUser = loggedUser.getId_user();
-		
+
 		model.addAttribute("id_loggedUser", id_loggedUser);
 
 		return "usersList";
 	}
 
 	@GetMapping("/profile/{email}")
-	public String userProfile(Model model, @PathVariable("email") String email) {
+	public String userProfile(Model model, @PathVariable("email") String email, Principal principal) {
 		// CHANGED BY AMANDA - Show all Ratings + Average
 		User user = us.getUser(email);
-		
+
 		List<String> listSenders = new ArrayList<>();
 		Iterable<User> allUsers = us.getUsers();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(email));
@@ -74,7 +81,7 @@ public class UserController {
 			ratingH += rating.getValue();
 			size += 1;
 			for (User sender : allUsers) {
-				if(sender.getId_user() == rating.getId_userSender()) {
+				if (sender.getId_user() == rating.getId_userSender()) {
 					listSenders.add(sender.getFirstName() + " " + sender.getLastName());
 				}
 			}
@@ -88,7 +95,97 @@ public class UserController {
 
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
-		model.addAttribute("size", size);
+		// Best 3 or less houses
+		/*Iterable<House> listUserHouses = hs.getUserHouses(user.getId_user());
+		Map<House, Integer> bestHouses = new HashMap<House, Integer>();
+		List<Integer> houseRatingSizeList = new ArrayList<>();
+
+		int greatCounter = 0;
+		for (House house : listUserHouses) {
+			houseRatingSizeList.add(house.getRatingSize());
+			if (house.getRatingsH() > 4.5) {
+				greatCounter += 1;
+			}
+		}
+
+		// Random 3 best houses from 4 star filter
+		/*
+		 * List<House> keys = new ArrayList<>(bestHouses.keySet()); List<House> random =
+		 * new ArrayList<>(); Random rand = new Random();
+		 */
+
+		/*Iterable<House> bestFromDB = hsrp.findBestHouses(user.getId_user());
+		for (House best : bestFromDB) {
+			bestHouses.put(best, best.getRatingSize());
+		}
+		
+		if(bestHouses.size() > 3) {
+			while(bestHouses.size() > 3) {
+				for (House house : bestFromDB) {
+					if(bestHouses.containsKey(house)) {
+						bestHouses.remove(house);
+					}
+					if(bestHouses.size() == 3) {
+						break;
+					}
+				}
+			}
+		}
+		
+		if(bestHouses.size() < 3) {
+			while(bestHouses.size() < 3) {
+				for (House house : listUserHouses) {
+					if(!bestHouses.containsKey(house)) {
+						bestHouses.put(house, house.getRatingSize());
+					}
+					if(bestHouses.size() == 3) {
+						break;
+					}
+				}
+			}
+		}
+		
+		//for (House house : listUserHouses) {
+			
+			
+			/*if (greatCounter > 3) {
+				// S'il y a plus de 3 maisons à 4.5, prendre 3 1ères
+				if (house.ratingsH > 4.5) {
+					bestHouses.put(house, house.getRatingSize());
+				}
+			}
+			if (greatCounter <= 3) {
+				for (House best : bestFromDB) {
+					bestHouses.put(best, best.getRatingSize());
+					}
+				if (bestHouses.size() == 3) {
+					break;
+				}
+				bestHouses.put(house, house.getRatingSize());
+			}*/
+			
+		//}
+
+		// Collections.sort(houseRatingSizeList);
+
+		/*
+		 * 
+		 * if(bestHouses.size() > 3) { for (int i = 0; i < 3; i++) { House key =
+		 * keys.get(rand.nextInt(keys.size())); random.add(key); } } else { for(House
+		 * house : bestHouses.keySet()) { random.add(house); } }
+		 */
+
+		/*
+		 * do { for(House house : bestHouses.keySet()) { if(house.getRatingSize() ==
+		 * houseRatingSizeList.get(houseRatingSizeList.size() - 1)) {
+		 * //bestHouses.remove(house);
+		 * houseRatingSizeList.remove(houseRatingSizeList.size() - 1); } } }
+		 * while(bestHouses.size() > 3);
+		 */
+
+		// model.addAttribute("houseRatingSizeList", houseRatingSizeList);
+		//model.addAttribute("bestHouses", bestHouses);
+		// model.addAttribute("random", random);
 		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("user", user);
 		model.addAttribute("numberOfHouses", numberOfHouses);
@@ -100,8 +197,8 @@ public class UserController {
 
 		String emailLoggedUser = principal.getName();
 		User user = us.getUser(emailLoggedUser);
-		
-		//chaananananged am
+
+		// chaananananged am
 		List<String> listSenders = new ArrayList<>();
 		Iterable<User> allUsers = us.getUsers();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
@@ -113,7 +210,7 @@ public class UserController {
 			ratingH += rating.getValue();
 			size += 1;
 			for (User sender : allUsers) {
-				if(sender.getId_user() == rating.getId_userSender()) {
+				if (sender.getId_user() == rating.getId_userSender()) {
 					listSenders.add(sender.getFirstName() + " " + sender.getLastName());
 				}
 			}
