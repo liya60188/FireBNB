@@ -41,5 +41,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query(value = "SELECT * FROM `user` WHERE first_name like :x AND last_name like :y AND email like :z", nativeQuery = true)
 	public Iterable<User> findWithThree(@Param("x") String first_name, @Param("y") String last_name,@Param("z") String email);
+
+	@Query(value = "SELECT * FROM `user` WHERE role='ADMIN'", nativeQuery = true)
+	public List<User> findAdmins();
+
 }
 

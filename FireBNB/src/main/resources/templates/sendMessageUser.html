@@ -4,17 +4,17 @@
 		xmlns:sec="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Add Service</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<title>Messaging</title>
 </head>
 <body>
 	<div class="container">
-		<h1>Add Message</h1>
+		<h1 th:text="'Send message to ' + ${user.firstName} + ' ' + ${user.lastName}"> </h1>
 
-		<form action="/messagesListUser/add" method="post">
+		<form action="/messagesListUser/sendMessage" method="post">
 			<table>
 				<tr>
 				<td><input type="hidden" name="id_sender" th:value="${id_loggedUser}"/></td>
+				<td><input type="hidden" name="id_receiver" th:value="${id_user}"/></td>
 				</tr>
 				<tr>
 	

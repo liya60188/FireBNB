@@ -87,7 +87,6 @@ public class House{
 		public void setConstraints(String constraints) {
 			this.constraints = constraints;
 		}
-
 		public String photo1;
 		public String getPhoto1() {
 			return photo1;
@@ -197,7 +196,9 @@ public class House{
 			this.end_date = end_date;
 		}
 
+
 		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photo1, String photo2, String photo3, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
+
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;

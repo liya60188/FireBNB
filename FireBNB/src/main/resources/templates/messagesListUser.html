@@ -1,47 +1,94 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Message System</title>
-</head>
+	<title>Messages</title>
+ 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	        crossorigin="anonymous" referrerpolicy="no-referrer">
+		</script>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
 <body>
-	Message System
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+	<div id="messagingPage" class="container-fluid mt-5">
+		<div class="row">
+			<!-- Left block -->
+			<div class="col-3">
+				<button @click="afficherMessages('received')"> Received</button>
+				<button @click="afficherMessages('sent')"> Sent</button>
+				<a th:href="@{/messagesListUser/add(type='admin')}"> Send a message to the admin</a>
+			</div>
+			
+			
+			<!-- Right block -->
+			<div class="col-7">
+			<div v-if="!isReceivedHidden">
+			<p>Messages reçus</p>
+				<table>
+					<tr>
+						<th>Id</th>
+						<th>Subject</th>
+						<th>Content</th>
+						<th>Receiver</th>
+						<th>Sender</th>
+						<th>Date</th>
+					</tr>
+			
+					<tr th:each="message: ${listReceivedMessages}">
+						<td th:text="${message.id_message}">Id</td>
+						<td th:text="${message.subject}" v-model="subject">Subject</td>
+						<td th:text="${message.content}">Content</td>
+						<td th:text="${message.id_receiver}">Receiver</td>
+						<td th:text="${message.id_sender}">Sender</td>
+						<td th:text="${message.creation_date}">Date</td>
+						<td><a th:href="@{/messageProfile (id_message=${message.id_message})}">View</a></td> 
+						<td><a onclick="return confirm('Please Confirm')"
+							th:href="@{/messagesList/delete(id_message=${message.id_message}, mc=${motC})}"> Delete
+						</a></td>
+					</tr>
+				</table>
+				
+				</div>
+				
+				<div v-if="isSentHidden">
+					<p>Messages Envoyés</p>
+					<table>
+					<tr>
+						<th>Id</th>
+						<th>Subject</th>
+						<th>Content</th>
+						<th>Receiver</th>
+						<th>Sender</th>
+						<th>Date</th>
+					</tr>
+			
+					<tr th:each="message: ${listSentMessages}">
+						<td th:text="${message.id_message}">Id</td>
+						<td th:text="${message.subject}">Subject</td>
+						<td th:text="${message.content}">Content</td>
+						<td th:text="${message.id_receiver}">Receiver</td>
+						<td th:text="${message.id_sender}">Sender</td>
+						<td th:text="${message.creation_date}">Date</td>
+						<td><a th:href="@{/messageProfile (id_message=${message.id_message})}">View</a></td>
+						<td><a onclick="return confirm('Please Confirm')"
+							th:href="@{/messagesList/delete(id_message=${message.id_message}, mc=${motC})}"> Delete
+						</a></td>
+					</tr>
+				</table>
+				</div>
+			</div>
+		
 
-		<table>
-			<tr>
-				<th>Id</th>
-				<th>Subject</th>
-				<th>Content</th>
-				<th>Receiver</th>
-				<th>Sender</th>
-				<th>Date</th>
-			</tr>
-
-			<tr th:each="message: ${listUserMessages}">
-				<td th:text="${message.id_message}">Id</td>
-				<td th:text="${message.subject}">Subject</td>
-				<td th:text="${message.content}">Content</td>
-				<td th:text="${message.id_receiver}">Receiver</td>
-				<td th:text="${message.id_sender}">Sender</td>
-				<td th:text="${message.creation_date}">Date</td>
-				<td><a th:href="@{/messageProfile (id_message=${message.id_message})}">View</a></td>
-<!-- 				<td><a onclick="return confirm('Please Confirm')" -->
-<!-- 					th:href="@{/messagesList/delete(id_message=${message.id_message}, mc=${motC})}"> Delete -->
-<!-- 				</a></td> -->
-			</tr>
-
-
-		</table>
-
-	
-	<div class="container">
-		<ul class="pagination">
-			<li th:class="${pageCourante}==${status.index}?'active':''"
-				th:each="p,status:${pages}"><a
-				th:href="@{/messagesList/search(page=${status.index},motCle=${motC})}"
-				th:text="${status.index}"></a></li>
-		</ul>
-	</div>
-	
+	<script src="https://unpkg.com/vue@next"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/messagingDisplay.js}"></script>
 </body>
 </html>

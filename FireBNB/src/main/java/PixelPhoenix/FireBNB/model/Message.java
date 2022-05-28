@@ -2,9 +2,13 @@ package PixelPhoenix.FireBNB.model;
 
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import PixelPhoenix.FireBNB.service.UserService;
+
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,6 +97,15 @@ public class Message {
 
 	    creation_date = new Date();
 	}
+	
+//	@Autowired
+//	UserService us;
+//	public String getSenderFullName(Long id_sender) {
+//		Optional<User> u = us.getUserId(id_sender);
+//		User user = u.get();
+//		return user.getFirstName() + ' ' + user.getLastName();
+//		
+//	}
 
 	public Message(Long id_message, Long id_sender, Long id_receiver, Long id_house_receiver, Long id_house_sender, String subject, String content, Date creation_date) {
 		this.id_message = id_message;
