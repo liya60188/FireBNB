@@ -52,14 +52,19 @@ public class MessageController {
 	public String userMessages(Model model, Principal principal) {
 		String emailLoggedUser = principal.getName();
 		User user = us.getUser(emailLoggedUser);
-		Iterable<Message> listUserMessages = messageService.getUserMessages(user.getId_user());
+		Long id_loggedUser = user.getId_user();
+		Iterable<Message> listReceivedMessages = messageService.getReceivedMessages(user.getId_user());
+		Iterable<Message> listSentMessages = messageService.getSentMessages(user.getId_user());
 		
-		model.addAttribute("listUserMessages", listUserMessages);
+		model.addAttribute("listReceivedMessages", listReceivedMessages);
+		model.addAttribute("listSentMessages", listSentMessages);
+		model.addAttribute("id_loggedUser",id_loggedUser);
 		model.addAttribute("loggedUser", user);
 		return "messagesListUser";
 	}
 	
-	@GetMapping("/messageProfile")public String messageProfile(Model model, @RequestParam("id_message") Long id_message) {
+	@GetMapping("/messageProfile")
+	public String messageProfile(Model model, @RequestParam("id_message") Long id_message) {
 		
 		Optional<Message> m = messageService.getMessage(id_message);
 		Message message = m.get();
@@ -67,28 +72,85 @@ public class MessageController {
 		Optional<User> u = us.getUserId(idUser);
 		User sender = u.get();
 		
-		
-		
 		model.addAttribute("message", message);
 		model.addAttribute("senderFirstName", sender.getFirstName());
 		model.addAttribute("senderLastName", sender.getLastName());
+		model.addAttribute("email", sender.getEmail());
 		return "messageProfile";
 	}
 	
-	@GetMapping("/messagesList/add")
-	public String serviceForm(Model model) {
-		model.addAttribute("message", new Message());
+	@GetMapping("/messagesListUser/add")
+	public String sendMessageAdmin(Model model, Principal principal) {
+		String emailLoggedUser = principal.getName();
+		User user = us.getUser(emailLoggedUser);
+		Long idLoggedUser = user.getId_user();
+		
+		//model.addAttribute("message", new Message());
+		model.addAttribute("id_loggedUser", idLoggedUser);
+		model.addAttribute("loggedUser", user);
 		return "addMessage";
 	}
+	
+	@GetMapping("/messagesListUser/sendMessage")
+	public String sendMessageUser(Model model, Principal principal, 
+			@RequestParam("email") String emailUser,
+			@RequestParam("subject") String subject) {
+		
+		String emailLoggedUser = principal.getName();
+		User loggedUser = us.getUser(emailLoggedUser);
+		Long idLoggedUser = loggedUser.getId_user();
+		
+		User user = us.getUser(emailUser);
+		Long idUser = user.getId_user();
+		
+		model.addAttribute("id_loggedUser", idLoggedUser);
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("user", user);
+		model.addAttribute("id_user", idUser);
+		model.addAttribute("subject", subject);
+		return "sendMessageUser";
+	}
 
-	@PostMapping("/messagesList/add")
-	public String add(@ModelAttribute("message") @Validated Message message, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			return "addMessage";
+	@PostMapping("/messagesListUser/sendMessage")
+	public String sendMessages(Model model,
+			@RequestParam("subject") String subject,
+			@RequestParam("content") String content,
+			@RequestParam("id_sender") Long id_sender,
+			@RequestParam("id_receiver") Long id_receiver) {
+
+			Message message = new Message();
+			message.setId_sender(id_sender);
+			message.setSubject(subject);
+			message.setContent(content);
+		    message.setId_receiver(id_receiver);
+		    messageService.saveMessage(message);
+
+
+		return "redirect:/messagesListUser";
+	}
+	@PostMapping("/messagesListUser/add")
+	public String add(Model model,
+			@RequestParam("subject") String subject,
+			@RequestParam("content") String content,
+			@RequestParam("id_sender") Long id_sender) {
+
+		Iterable<User> adminList = us.getAdmins();
+		for (User a : adminList) {
+			Long id_admin = a.getId_user();
+			Message message = new Message();
+			message.setId_sender(id_sender);
+			message.setSubject(subject);
+			message.setContent(content);
+		    message.setId_receiver(id_admin);
+		    messageService.saveMessage(message);
 		}
-		Message messageAdd = messageService.saveMessage(message);
-		model.addAttribute("message", messageAdd);
-		return "redirect:/messagesList";
+
+//		Message messageAdd = messageService.saveMessage(message);
+//		model.addAttribute("message", messageAdd);
+//		return "redirect:/messagesList";
+
+		//model.addAttribute("message", messageAdd);
+		return "redirect:/messagesListUser";
 	}
 	
 	@RequestMapping(value = "/messagesList/delete")

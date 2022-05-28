@@ -25,9 +25,6 @@ const manageForms = Vue.createApp({
         }
     },
     methods:{
-        btnDelete(index){
-
-        },
         register: function(e){
            
 			console.log("formControl");

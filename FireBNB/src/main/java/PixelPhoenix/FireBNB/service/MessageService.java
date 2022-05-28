@@ -26,8 +26,11 @@ public class MessageService {
 		return messageRepository.findAll();
 	}
 	
-	public Iterable<Message> getUserMessages(Long id_user){
-		return messageRepository.findListMessages(id_user);
+	public Iterable<Message> getReceivedMessages(Long id_user){
+		return messageRepository.findReceivedMessages(id_user);
+	}
+	public Iterable<Message> getSentMessages(Long id_user){
+		return messageRepository.findSentMessages(id_user);
 	}
  
 	public void deleteMessage(final Long id) {

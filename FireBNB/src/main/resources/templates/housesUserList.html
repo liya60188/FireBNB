@@ -314,7 +314,7 @@
 <div class="container-fluid" th:each="house: ${listUserHouses}"var="house">
 	<div class="row mt-5">
 		<div class="col text-right">
-			<img class="img-fluid border mx-auto d-block" th:src="${house.photos}" alt="FireBnB logo" width="50%" height="50%">
+			<img class="img-fluid border mx-auto d-block" th:src="${house.photo1}" alt="FireBnB logo" width="50%" height="50%">
 			<!--   src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"  -->
 		</div>
 		
@@ -347,7 +347,7 @@
 				
 				<div class="col text-righ mr-5">
 					<a th:href="@{/houseProfile/{id_house} (id_house=${house.id_house})}">View</a>	
-					<a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photos}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, id_user=${house.id_user}, edit=0)}">Edit</a>
+					<a th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photo1=${house.photo1}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, id_user=${house.id_user}, edit=0)}">Edit</a>
 					<a sec:authorize="hasAuthority('ADMIN')" onclick="return confirm('Please Confirm')"
 					th:href="@{/housesList/delete(id_house=${house.id_house})}"> Delete</a>
 				</div>

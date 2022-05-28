@@ -76,16 +76,14 @@ public class House{
 			this.constraints = constraints;
 		}
 		
-		@Lob
-		@Column(columnDefinition = "MEDIUMBLOB")
-		public String photos;
+		public String photo1;
 
-		public String getPhotos() {
-			return photos;
+		public String getPhoto1() {
+			return photo1;
 		}
 
-		public void setPhotos(String photos) {
-			this.photos = photos;
+		public void setPhoto1(String photo1) {
+			this.photo1 = photo1;
 		}
 		
 		public Long id_user;
@@ -167,34 +165,15 @@ public class House{
 		public void setEnd_date(Date end_date) {
 			this.end_date = end_date;
 		}
-		
-//		public String begin_date;
-//		
-//		public String getBegin_date() {
-//			return begin_date;
-//		}
-//
-//		public void setBegin_date(String begin_date) {
-//			this.begin_date = begin_date;
-//		}
-//
-//		public String end_date;
-//
-//		public String getEnd_date() {
-//			return end_date;
-//		}
-//
-//		public void setEnd_date(String end_date) {
-//			this.end_date = end_date;
-//		}
 
-		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photos, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
+
+		public House(Long id_house,String description, double ratingsH, String services, String constraints, String photo1, Long id_user, String address, String city, int postal_code, String country, String additional_address, Date begin_date, Date end_date) {
 			this.id_house = id_house;
 			this.description = description;
 			this.ratingsH = ratingsH;
 			this.services = services;
 			this.constraints = constraints;
-			this.photos = photos;	
+			this.photo1 = photo1;	
 			this.id_user = id_user;
 			this.address = address;
 			this.city = city;

@@ -32,12 +32,14 @@ public class UserService {
 	public Iterable<User> getUsers(){
 		return ur.findAll();
 	}
+	public Iterable<User> getAdmins(){
+		return ur.findAdmins();
+	}
 	
 	public List<User> findByName(String name){
 		return ur.findByFirstNameLike("%"+name+"%");
 	}
 	
-	//Yo
 	public Long getIdByEmail(String email){
 		return ur.findIdFromEmail(email);
 	}

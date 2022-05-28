@@ -26,5 +26,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	//Function to get name by id
 	@Query(value = "SELECT first_name, last_name FROM `user` WHERE user_id = :x", nativeQuery = true)
 	public String findNameFromId(@Param("x") Long id_user);
+	
+	@Query(value = "SELECT * FROM `user` WHERE role='ADMIN'", nativeQuery = true)
+	public List<User> findAdmins();
+	;
 }
 
