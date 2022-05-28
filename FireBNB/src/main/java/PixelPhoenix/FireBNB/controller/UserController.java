@@ -44,22 +44,58 @@ public class UserController {
 	private RatingService ratingService;
 	@Autowired
 	private HouseRepository hsrp;
+	@Autowired
+	private UserRepository usrp;
 
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
 
-	@GetMapping("/usersList")
-	public String listUsers(Model model, @RequestParam(defaultValue = "") String name, Principal principal) {
+	@RequestMapping(value = { "/usersList", "/usersList/search" })
+	public String listUsers(Model model, 
+			@RequestParam(name = "first_name", defaultValue = "") String first_name,
+			@RequestParam(name = "last_name", defaultValue = "") String last_name,
+			@RequestParam(name = "email", defaultValue = "") String email, Principal principal) {
 		Iterable<User> listUsers = us.getUsers();
-		model.addAttribute("listUsers", listUsers);
-		// model.addAttribute("users", us.findByName(name));
 
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Long id_loggedUser = loggedUser.getId_user();
 
+		// Advanced Search
+		// One param search
+		if (!first_name.equals("") && last_name.equals("") && email.equals("")) {
+			listUsers = usrp.findWithOne(first_name);
+		}
+		if (first_name.equals("") && !last_name.equals("") && email.equals("")) {
+			listUsers = usrp.findWithOne(last_name);
+		}
+		if (first_name.equals("") && last_name.equals("") && !email.equals("")) {
+			listUsers = usrp.findWithOne(email);
+		}
+
+		// 2 params search
+		if (!first_name.equals("") && !last_name.equals("") && email.equals("")) {
+			listUsers = usrp.findWithTwo(first_name, last_name);
+		}
+		if (first_name.equals("") && !last_name.equals("") && !email.equals("")) {
+			listUsers = usrp.findWithTwo(email, last_name);
+		}
+		if (!first_name.equals("") && last_name.equals("") && !email.equals("")) {
+			listUsers = usrp.findWithTwo(first_name, email);
+		}
+
+		// 3 params search
+		if (!first_name.equals("") && !last_name.equals("") && !email.equals("")) {
+			listUsers = usrp.findWithThree(first_name, last_name, email);
+		}
+		
+		model.addAttribute("first_name", first_name);
+		model.addAttribute("last_name", last_name);
+		model.addAttribute("email", email);
+
+		model.addAttribute("listUsers", listUsers);
 		model.addAttribute("id_loggedUser", id_loggedUser);
 
 		return "usersList";
@@ -96,75 +132,44 @@ public class UserController {
 		int numberOfHouses = hs.numberHouses(user.getId_user());
 
 		// Best 3 or less houses
-		/*Iterable<House> listUserHouses = hs.getUserHouses(user.getId_user());
-		Map<House, Integer> bestHouses = new HashMap<House, Integer>();
-		List<Integer> houseRatingSizeList = new ArrayList<>();
-
-		int greatCounter = 0;
-		for (House house : listUserHouses) {
-			houseRatingSizeList.add(house.getRatingSize());
-			if (house.getRatingsH() > 4.5) {
-				greatCounter += 1;
-			}
-		}
-
-		// Random 3 best houses from 4 star filter
 		/*
-		 * List<House> keys = new ArrayList<>(bestHouses.keySet()); List<House> random =
-		 * new ArrayList<>(); Random rand = new Random();
+		 * Iterable<House> listUserHouses = hs.getUserHouses(user.getId_user());
+		 * Map<House, Integer> bestHouses = new HashMap<House, Integer>(); List<Integer>
+		 * houseRatingSizeList = new ArrayList<>();
+		 * 
+		 * int greatCounter = 0; for (House house : listUserHouses) {
+		 * houseRatingSizeList.add(house.getRatingSize()); if (house.getRatingsH() >
+		 * 4.5) { greatCounter += 1; } }
+		 * 
+		 * // Random 3 best houses from 4 star filter /* List<House> keys = new
+		 * ArrayList<>(bestHouses.keySet()); List<House> random = new ArrayList<>();
+		 * Random rand = new Random();
 		 */
 
-		/*Iterable<House> bestFromDB = hsrp.findBestHouses(user.getId_user());
-		for (House best : bestFromDB) {
-			bestHouses.put(best, best.getRatingSize());
-		}
-		
-		if(bestHouses.size() > 3) {
-			while(bestHouses.size() > 3) {
-				for (House house : bestFromDB) {
-					if(bestHouses.containsKey(house)) {
-						bestHouses.remove(house);
-					}
-					if(bestHouses.size() == 3) {
-						break;
-					}
-				}
-			}
-		}
-		
-		if(bestHouses.size() < 3) {
-			while(bestHouses.size() < 3) {
-				for (House house : listUserHouses) {
-					if(!bestHouses.containsKey(house)) {
-						bestHouses.put(house, house.getRatingSize());
-					}
-					if(bestHouses.size() == 3) {
-						break;
-					}
-				}
-			}
-		}
-		
-		//for (House house : listUserHouses) {
-			
-			
-			/*if (greatCounter > 3) {
-				// S'il y a plus de 3 maisons à 4.5, prendre 3 1ères
-				if (house.ratingsH > 4.5) {
-					bestHouses.put(house, house.getRatingSize());
-				}
-			}
-			if (greatCounter <= 3) {
-				for (House best : bestFromDB) {
-					bestHouses.put(best, best.getRatingSize());
-					}
-				if (bestHouses.size() == 3) {
-					break;
-				}
-				bestHouses.put(house, house.getRatingSize());
-			}*/
-			
-		//}
+		/*
+		 * Iterable<House> bestFromDB = hsrp.findBestHouses(user.getId_user()); for
+		 * (House best : bestFromDB) { bestHouses.put(best, best.getRatingSize()); }
+		 * 
+		 * if(bestHouses.size() > 3) { while(bestHouses.size() > 3) { for (House house :
+		 * bestFromDB) { if(bestHouses.containsKey(house)) { bestHouses.remove(house); }
+		 * if(bestHouses.size() == 3) { break; } } } }
+		 * 
+		 * if(bestHouses.size() < 3) { while(bestHouses.size() < 3) { for (House house :
+		 * listUserHouses) { if(!bestHouses.containsKey(house)) { bestHouses.put(house,
+		 * house.getRatingSize()); } if(bestHouses.size() == 3) { break; } } } }
+		 * 
+		 * //for (House house : listUserHouses) {
+		 * 
+		 * 
+		 * /*if (greatCounter > 3) { // S'il y a plus de 3 maisons à 4.5, prendre 3
+		 * 1ères if (house.ratingsH > 4.5) { bestHouses.put(house,
+		 * house.getRatingSize()); } } if (greatCounter <= 3) { for (House best :
+		 * bestFromDB) { bestHouses.put(best, best.getRatingSize()); } if
+		 * (bestHouses.size() == 3) { break; } bestHouses.put(house,
+		 * house.getRatingSize()); }
+		 */
+
+		// }
 
 		// Collections.sort(houseRatingSizeList);
 
@@ -184,7 +189,7 @@ public class UserController {
 		 */
 
 		// model.addAttribute("houseRatingSizeList", houseRatingSizeList);
-		//model.addAttribute("bestHouses", bestHouses);
+		// model.addAttribute("bestHouses", bestHouses);
 		// model.addAttribute("random", random);
 		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("user", user);
