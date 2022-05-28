@@ -13,10 +13,11 @@
 	<header th:insert="fragments/header.html :: header"> </header>
 	<!-- End of header -->
 
+<form action="/housesList/search" method="post">
+
 	<!-- Content -->
 	<div class="container-fluid">
 		<!-- Search bars-->
-		<form action="/housesList/search" method="post">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col mt-5 mb-5 border-0">
@@ -37,14 +38,14 @@
 
 					<div class="col mt-5 mb-5 border-0">
 						<div class="form-outline text-center">
-							<input type="text" name="address" th:value="${address}" id="form4"
-								class="form-control rounded-pill" placeholder="Address"
-								aria-label="Search" />
+							<input type="text" name="address" th:value="${address}"
+								id="form4" class="form-control rounded-pill"
+								placeholder="Address" aria-label="Search" />
 						</div>
 					</div>
 
 					<div class="col-1 mt-5 mb-5 text-left">
-						
+
 						<button type="submit" name="action" value="search"
 							class="btn btn-light border border-dark rounded-pill">
 							<svg xmlns="http://www.w3.org/2000/svg" width="40%" height="40%"
@@ -55,8 +56,9 @@
 						</button>
 					</div>
 				</div>
-		</form>
-		<!-- End of search bars -->
+		
+		<!--</form>
+		 End of search bars -->
 		<div class="row">
 			<div class="col-11 text-right">
 				<button type="button"
@@ -75,224 +77,85 @@
 				</div>
 			</div>
 
+			<!--  <form action="/housesList/search" method="post">-->
+				<div class="row mt-3">
+					<div class="col">
+						<div class="row">
+							<div class="col">
+								<p style="color: #14a6b6">
+									<b>Services</b>
+								</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="row ml-5" th:each="service : ${serviceList}">
+									<div class="col">
+										<div class="form-check">
+											<input th:text="${service.serviceName}"
+												th:value="${service.serviceName}"
+												name="services" class="form-check-input"
+												type="checkbox" id="flexCheckDefault"> <label
+												class="form-check-label" for="flexCheckDefault"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col">
+						<div class="row">
+							<div class="col">
+								<p style="color: #14a6b6">
+									<b>Constraints</b>
+								</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="row ml-5" th:each="constraint : ${constraintList}">
+									<div class="col">
+										<div class="form-check">
+											<input th:text="${constraint.constraintName}"
+												th:value="${constraint.constraintName}"
+												name="constraints"
+												class="form-check-input" type="checkbox" value=""
+												id="flexCheckDefault"> <label
+												class="form-check-label" for="flexCheckDefault"> </label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col mt-5 text-center">
+						<button type="submit"
+							class="btn btn-light border border-dark rounded-pill">
+							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+								fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+					  				<path
+									d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+					  			</svg>
+						</button>
+					</div>
+				</div>
+			<!-- </form> -->
 			<div class="row">
 				<div class="col">
-					<p style="color: #14a6b6">
-						<b> Rooms and beds </b>
-					</p>
+					<hr class="bg-dark" />
 				</div>
-			</div>
-
-			<div class="row ml-5">
-				<div class="col">Rooms</div>
-
-				<div class="col">
-					<input type="number" value="1" min="0" max="50" />
-				</div>
-
-				<div class="col">Beds</div>
-
-				<div class="col">
-					<input type="number" value="1" min="0" max="50" />
-				</div>
-			</div>
-
-			<div class="row mt-3">
-				<div class="col">
-					<p style="color: #14a6b6">
-						<b>Amenities</b>
-					</p>
-				</div>
-			</div>
-
-			<div class="row ml-5">
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Amenities x </label>
-					</div>
-				</div>
-			</div>
-
-			<div class="row mt-3">
-				<div class="col">
-					<p style="color: #14a6b6">
-						<b>Property type</b>
-					</p>
-				</div>
-			</div>
-
-			<div class="row ml-5">
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Type x </label>
-					</div>
-				</div>
-			</div>
-
-			<div class="row mt-3">
-				<div class="col">
-					<p style="color: #14a6b6">
-						<b>Constraints</b>
-					</p>
-				</div>
-			</div>
-
-			<div class="row ml-5">
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-
-				<div class="col-4">
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" value=""
-							id="flexCheckDefault"> <label class="form-check-label"
-							for="flexCheckDefault"> Constraint x </label>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col mt-5 text-center">
-				<button type="submit"
-					class="btn btn-light border border-dark rounded-pill">
-					<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-						fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-					  				<path
-							d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-					  			</svg>
-				</button>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<hr class="bg-dark" />
 			</div>
 		</div>
 	</div>
-	</div>
 
+</form>
 	<!-- Houses list -->
 
 	<div class="container-fluid" th:each="house: ${listHouses}" var="house">

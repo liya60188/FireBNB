@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,6 +57,8 @@ public class HouseController {
 	private MessageService ms;
 	@Autowired
 	private RatingService ratingService;
+	@Autowired
+	private ServiceRepository serviceRepository;
 
 	/*
 	 * public House chooseService(@RequestBody House house) {
@@ -70,7 +73,9 @@ public class HouseController {
 	public String listHouses(Model model, Principal principal,
 			@RequestParam(name = "country", defaultValue = "") String country,
 			@RequestParam(name = "city", defaultValue = "") String city,
-			@RequestParam(name = "address", defaultValue = "") String address) {
+			@RequestParam(name = "address", defaultValue = "") String address,
+			@RequestParam(name = "services", defaultValue = "") String services,
+			@RequestParam(name = "constraints", defaultValue = "") String constraints) {
 
 		Iterable<House> listHouses = hssv.getHouses();
 		// No param search
@@ -109,6 +114,27 @@ public class HouseController {
 		model.addAttribute("city", city);
 		model.addAttribute("address", address);
 
+		// Even More Advanced Search
+		Iterable<Service> serviceList = serviceService.getServices();
+		Iterable<Constraint> constraintList = constraintService.getConstraints();
+		List<House> result = new ArrayList<>();
+
+		for (House house : listHouses) {
+			if(services != null && house.getServices() != null) {
+				if (house.getServices().contains(services) && !result.contains(house)) {
+					result.add(house);
+				}
+			}
+			if(constraints != null && house.getConstraints() != null && !result.contains(house)) {
+				if (house.getConstraints().contains(constraints)) {
+					result.add(house);
+				}
+			}
+		}
+		listHouses = (Iterable<House>) result;
+
+		model.addAttribute("serviceList", serviceList);
+		model.addAttribute("constraintList", constraintList);
 		model.addAttribute("listHouses", listHouses);
 
 		String emailLoggedUser = principal.getName();
@@ -149,8 +175,6 @@ public class HouseController {
 	 */
 
 	// Tests for Services
-	@Autowired
-	private ServiceRepository serviceRepository;
 
 	@GetMapping("/profile/houses/add")
 	public String addUserHouseForm(Principal principal, Model model) {
