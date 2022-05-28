@@ -1,6 +1,7 @@
 package PixelPhoenix.FireBNB.controller;
 
 import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -75,6 +76,9 @@ public class RatingController {
 		String emailUser = principal.getName();
 		User currentUser = userService.getUser(emailUser);
 		ratingService.createUserRating(rating, currentUser.getId_user());
-		return "redirect:/profile";
+		
+		Optional<User> u = userService.getUserId(rating.getId_userReceiver());
+		User userReceiver = u.get();
+		return "redirect:/profile/" + userReceiver.getEmail();
 	}
 }

@@ -71,8 +71,7 @@
 				</div>
 				
 				<div class="col">
-<!-- 					<input type="text" class="form-control" id="descriptionInput" th:field="*{description}" th:placeholder="${user.description}"> -->
-					<textarea id="form7" class="md-textarea form-control" rows="3" name="description" th:value="${description}"></textarea>
+					<textarea id="form7" class="md-textarea form-control" rows="3" name="description" th:field="*{description}"></textarea>
 				</div>
 			</div>
 			
@@ -157,7 +156,7 @@
 	  		<a type="submit" class="btn btn-danger border-0"
 	  		sec:authorize="hasAuthority('ADMIN')" 
 			onclick="return confirm('Please Confirm')"
-			th:href="@{/profile/delete(email=${user.email})}">Delete user</a>
+			th:href="@{/profile/delete(email=${user.email}, type='userProfile')}">Delete user</a>
 	  	</div>
 	</div>
 	</form>
