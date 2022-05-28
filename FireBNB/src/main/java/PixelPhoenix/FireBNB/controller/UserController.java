@@ -203,7 +203,6 @@ public class UserController {
 		String emailLoggedUser = principal.getName();
 		User user = us.getUser(emailLoggedUser);
 
-		// chaananananged am
 		List<String> listSenders = new ArrayList<>();
 		Iterable<User> allUsers = us.getUsers();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
@@ -236,7 +235,18 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "loggedUserProfile";
 	}
+	
+	@GetMapping("/adminProfile")
+	public String adminProfile(Model model, Principal principal) {
 
+		String emailLoggedUser = principal.getName();
+		User user = us.getUser(emailLoggedUser);
+		
+		model.addAttribute("user",user);
+		
+		return "adminProfile";
+		
+	}
 	@GetMapping("/login")
 	public String registrationForm(Model model) {
 		User user = new User();
@@ -268,12 +278,17 @@ public class UserController {
 
 	@PostMapping("/profile/update")
 	public String updateUser(@RequestParam("email") String email, Model model,
-			@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-			@RequestParam("address") String address, @RequestParam("city") String city,
-			@RequestParam("postalCode") int postalCode, @RequestParam("country") String country,
+			@RequestParam("firstName") String firstName, 
+			@RequestParam("lastName") String lastName,
+			@RequestParam("address") String address, 
+			@RequestParam("city") String city,
+			@RequestParam("postalCode") int postalCode, 
+			@RequestParam("country") String country,
 			@RequestParam("description") String description,
-			@RequestParam("additionalAddress") String additionalAddress, @RequestParam("phoneNumber") int phoneNumber,
-			@RequestParam("password") String password, @RequestParam(name = "edit", defaultValue = "") int edit) {
+			@RequestParam("additionalAddress") String additionalAddress, 
+			@RequestParam("phoneNumber") int phoneNumber,
+			@RequestParam("password") String password, 
+			@RequestParam(name = "edit", defaultValue = "") int edit) {
 		if (edit == 0) {
 			model.addAttribute("firstName", firstName);
 			model.addAttribute("lastName", lastName);
@@ -313,20 +328,5 @@ public class UserController {
 		us.deleteUser(id_user);
 		return "redirect:/admin/users";
 	}
-	
-	
-	
-	//AJOUT - page de l'admin
-	
-	@GetMapping("/adminProfile")
-	public String adminProfile(Model model, Principal principal) {
 
-		String emailLoggedUser = principal.getName();
-		User user = us.getUser(emailLoggedUser);
-		
-		model.addAttribute("user",user);
-		
-		return "adminProfile";
-		
-	}
 }

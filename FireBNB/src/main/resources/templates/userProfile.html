@@ -15,14 +15,13 @@
 
 	<!-- Content -->
 	<div class="container-fluid mt-5">
-		<div class="row">
+		<div sec:authorize="hasRole('USER')" class="row">
 			<div class="col-1"></div>
 			<!-- Left block -->
 			<div class="col-3 border shadow"
 				style="background-color: rgba(242, 242, 242);">
 				<div class="row">
 					<div class="col mt-5 text center">
-					<!-- CHANGEMENT -->
 						<img
 							th:src="@{'/user_photos/'+${user.profilePicture}}"
 							alt="User picture"
@@ -56,7 +55,7 @@
 				<div class="row">
 					<div class="col">
 						<p>
-							<b>...</b>
+							<b>______</b>
 						</p>
 					</div>
 				</div>
@@ -99,12 +98,8 @@
 					</div>
 
 					<div class="col text-right">
-						<button type="submit"
-							class="btn btn-light border border-dark rounded-pill">Follow</button>
-
-						<a
-							th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}">Add
-							Rating</a>
+						<a th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}">Add
+						Rating</a>
 					</div>
 				</div>
 

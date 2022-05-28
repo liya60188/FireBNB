@@ -1,7 +1,7 @@
 <!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org">
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="utf-8" />
 <title>Users List</title>
@@ -65,7 +65,7 @@
 				<div class="col text-right">
 					<button type="submit"
 						class="btn btn-light border border-dark rounded-pill"
-						sec:authorize="hasRole('ADMIN')"
+						sec:authorize="hasRole('USER')"
 						th:href="@{/profile/update/{email}(email=${user.email}, 
 						firstName=${user.firstName}, lastName = ${user.lastName}, 
 						address = ${user.address}, city = ${user.city}, 
