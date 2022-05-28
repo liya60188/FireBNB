@@ -145,11 +145,6 @@ public class MessageController {
 		    messageService.saveMessage(message);
 		}
 
-//		Message messageAdd = messageService.saveMessage(message);
-//		model.addAttribute("message", messageAdd);
-//		return "redirect:/messagesList";
-
-		//model.addAttribute("message", messageAdd);
 		return "redirect:/messagesListUser";
 	}
 	

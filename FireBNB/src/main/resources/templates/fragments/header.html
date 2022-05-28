@@ -112,11 +112,10 @@
 							</button>
 
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" th:href="@{/profile}">Profile</a> <a
-									class="dropdown-item" th:href="@{/profile/houses}">Houses</a> <a
+								<a class="dropdown-item" th:href="@{/profile(email='')}">Profile</a> <a
+									class="dropdown-item" th:href="@{/profile/houses(email='')}">Houses</a> <a
 									class="dropdown-item" th:href="@{/messagesListUser}">Messages</a>
 								<div class="dropdown-divider"></div>
-								<!-- 				    <a class="dropdown-item text-danger" th:href="@{/logout}"> -->
 								<form class="dropdown-item border-0" th:action="@{/logout}"
 									method="post">
 									<input type="submit" value="Sign Out"

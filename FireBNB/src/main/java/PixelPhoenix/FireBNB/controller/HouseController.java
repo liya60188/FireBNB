@@ -285,7 +285,9 @@ public class HouseController {
 
 		String emailPrincipal = principal.getName();
 		Long houseOwnerId = house2.getId_user();
-		String houseOwner = us.getNameFromId(houseOwnerId);
+		Optional<User> u = us.getUserId(houseOwnerId);
+		User houseOwner = u.get();
+		//String houseOwner = us.getNameFromId(houseOwnerId);
 		Long currentUserId = us.getIdByEmail(emailPrincipal);
 
 		// Parse Services and Constraints

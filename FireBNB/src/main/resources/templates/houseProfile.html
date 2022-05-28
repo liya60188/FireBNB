@@ -36,11 +36,10 @@
 		<div class="col mt-5">
 			<div class="row">
 				<div class="col text-right">
-					Hosted by
-				</div>
-				
-				<div class="col text-left" style="color:#14A6B6">
-					<u th:text="${houseOwner}"></u>
+					<span> Hosted By 
+					<a th:text="'By ' + ${houseOwner.firstName} + ' ' + ${houseOwner.lastName}"
+					th:href="@{/profile(email=${houseOwner.email})}"></a>
+					</span>
 				</div>
 				
 				<div class="col text-right">
