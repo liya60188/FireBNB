@@ -67,11 +67,11 @@
 						class="btn btn-light border border-dark rounded-pill"
 						sec:authorize="hasRole('ADMIN')"
 						th:href="@{/profile/update/{email}(email=${user.email}, 
-					firstName=${user.firstName}, lastName = ${user.lastName}, 
-					address = ${user.address}, city = ${user.city}
-					, postalCode = ${user.postalCode}, country = ${user.country},  
-
-					phoneNumber = ${user.phoneNumber}, edit = 0)}">Edit</button>
+						firstName=${user.firstName}, lastName = ${user.lastName}, 
+						address = ${user.address}, city = ${user.city}, 
+						postalCode = ${user.postalCode}, country = ${user.country},  
+						phoneNumber = ${user.phoneNumber}, edit = 0)}">Edit
+					</button>
 				</div>
 			</div>
 		</div>
