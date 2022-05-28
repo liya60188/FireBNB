@@ -51,9 +51,21 @@ public class House{
 		public void setRatingsH(double ratingsH) {
 			this.ratingsH = ratingsH;
 		}
+		
+		public int ratingSize;
+		
+		public int getRatingSize() {
+			return ratingSize;
+		}
+
+		public void setRatingSize(int ratingSize) {
+			this.ratingSize = ratingSize;
+		}
+		
 		@PrePersist
 		private void onCreate() {
 			this.ratingsH = 0.0;
+			this.ratingSize = 0;
 		}
 
 		public String services;
@@ -75,9 +87,8 @@ public class House{
 		public void setConstraints(String constraints) {
 			this.constraints = constraints;
 		}
-		
+
 		public String photo1;
-		
 		public String getPhoto1() {
 			return photo1;
 		}

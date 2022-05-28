@@ -25,6 +25,24 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	@Query(value = "SELECT * FROM `house` WHERE id_user = :x", nativeQuery = true)
 	public Iterable<House> findListHouses(@Param("x") Long id_user);
 	
+	@Query(value = "SELECT * FROM `house` WHERE ratingsH > 4.0 AND id_user = :x", nativeQuery = true)
+	public Iterable<House> findBestHouses(@Param("x") Long id_user);
+	
+	// Advanced search try
+	@Query(value = "SELECT * FROM `house` WHERE country like :x OR city like :x OR address like :x", nativeQuery = true)
+	public Iterable<House> findWithOne(@Param("x") String one);
+	
+	@Query(value = "SELECT * FROM `house` WHERE country like :x AND city like :y OR "
+			+ "country like :y AND city like :x OR"
+			+ " address like :x AND city like :y OR"
+			+ " address like :y AND city like :x OR"
+			+ " address like :x AND country like :y OR"
+			+ " address like :y AND country like :x", nativeQuery = true)
+	public Iterable<House> findWithTwo(@Param("x") String one, @Param("y") String two);
+
+	@Query(value = "SELECT * FROM `house` WHERE country like :x AND city like :y AND address like :z", nativeQuery = true)
+	public Iterable<House> findWithThree(@Param("x") String country, @Param("y") String city, @Param("z") String address);
+
 //	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
 //	public Set<Service> getJoinedHouseServices();
 //	

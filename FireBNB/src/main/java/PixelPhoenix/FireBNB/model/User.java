@@ -63,9 +63,20 @@ public class User implements Serializable{
 		this.rating = rating;
 	}
 	
+	public int ratingSize;
+	
+	public int getRatingSize() {
+		return ratingSize;
+	}
+
+	public void setRatingSize(int ratingSize) {
+		this.ratingSize = ratingSize;
+	}
+	
 	@PrePersist
 	private void onCreate() {
 		this.rating = 0.0;
+		this.ratingSize = 0;
 	}
 
 	public String getEmail() {
