@@ -1,0 +1,115 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<title>Messages View</title>
+ 		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header -->
+
+<!-- Content -->
+<div class="container">
+	<div class="row mt-5" style="background-color: black">
+		<div class="col text-light">
+			<div class="row">
+				<div class="col-1 mt-2 text-left">
+					<svg xmlns="http://www.w3.org/2000/svg" width="70%" height="70%" fill="currentColor" class="bi bi-envelope-fill mt-1" viewBox="0 0 16 16">
+					  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+					</svg>
+				</div>
+				
+				<div class="col mt-2 text-left">
+					<h4><b>MY MESSAGES</b></h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-3" style="background-color: rgba(242,242,242)">
+			<div class="row border-bottom border-dark">
+				<div class="col mt-3 mb-3">
+					<h5>Received</h5>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col mt-3 mb-3" >
+					<h5>Sent</h5>
+				</div>
+			</div>
+			
+			<div class="row">	
+				<div class="col mt-3 text-right">
+					<button type="submit" class="btn btn-secondary">New message</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col">
+			<div style="height: 550px; overflow: scroll; overflow-x: hidden">
+				<div th:fragment="message">
+					<div class="row">
+						<div class="col">
+							<div class="row">
+								<div class="col">
+									<h4><b>Insert here the subject</b></h4>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<b>From <b> <u>Sender's name</u>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col">
+									<u>Date</u>: insert date and time
+								</div>
+							</div>
+						</div>
+						
+						<div class="col mt-4 text-right">
+							<button type="submit" class="btn btn-dark text-light border-0">View</button>
+							<button type="submit" class="btn border-0">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">
+								  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+								</svg>
+							</button>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<hr class="mt-2 mb-3 bg-light"/>
+						</div>
+					</div>
+				</div>
+				
+				<div th:insert="finalMessages.html :: message"></div>
+				<div th:insert="finalMessages.html :: message"></div>
+				<div th:insert="finalMessages.html :: message"></div>
+				<div th:insert="finalMessages.html :: message"></div>
+				<div th:insert="finalMessages.html :: message"></div>
+				<div th:insert="finalMessages.html :: message"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+
+</body>
+</html>
