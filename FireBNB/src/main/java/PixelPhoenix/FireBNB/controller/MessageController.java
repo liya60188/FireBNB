@@ -59,7 +59,7 @@ public class MessageController {
 		Iterable<Message> listSentMessages = messageService.getSentMessages(user.getId_user());
 		Hashtable<Long,String> listReceivedNames = new Hashtable<Long, String>();
 		
-		for (Message message : listSentMessages) {
+		for (Message message : listReceivedMessages) {
 
 			Optional<User> u = us.getUserId(message.getId_receiver());
 			User userReceiver = u.get();
@@ -73,7 +73,7 @@ public class MessageController {
 		return "messagesListUser";
 	}
 	
-	@GetMapping("/messageProfile")
+	@GetMapping("/messageView")
 	public String messageProfile(Model model, @RequestParam("id_message") Long id_message) {
 		
 		Optional<Message> m = messageService.getMessage(id_message);
@@ -86,7 +86,7 @@ public class MessageController {
 		model.addAttribute("senderFirstName", sender.getFirstName());
 		model.addAttribute("senderLastName", sender.getLastName());
 		model.addAttribute("email", sender.getEmail());
-		return "messageProfile";
+		return "messageView";
 	}
 	
 	@GetMapping("/messagesListUser/add")

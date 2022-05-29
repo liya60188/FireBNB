@@ -58,8 +58,8 @@ public class UserController {
 			@RequestParam(name = "first_name", defaultValue = "") String first_name,
 			@RequestParam(name = "last_name", defaultValue = "") String last_name,
 			@RequestParam(name = "email", defaultValue = "") String email, Principal principal) {
-		Iterable<User> listUsers = us.getUsers();
-
+		
+		Iterable<User> listUsers = us.getAll();;
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Long id_loggedUser = loggedUser.getId_user();
@@ -114,7 +114,7 @@ public class UserController {
 		}
 
 		List<String> listSenders = new ArrayList<>();
-		Iterable<User> allUsers = us.getUsers();
+		Iterable<User> allUsers = us.getAll();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
 		Hashtable<Long,String> listRateNames = new Hashtable<Long, String>();
 		Hashtable<Long,String> listRatePhotos = new Hashtable<Long, String>();

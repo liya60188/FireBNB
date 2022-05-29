@@ -29,8 +29,11 @@ public class UserService {
 	public Optional<User> getUserId(long id){
 		return ur.findById(id);	
 	}
-	public Iterable<User> getUsers(){
+	public Iterable<User> getAll(){
 		return ur.findAll();
+	}
+	public Iterable<User> getUsers(){
+		return ur.findUsers();
 	}
 	public Iterable<User> getAdmins(){
 		return ur.findAdmins();

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -154,34 +155,22 @@ public class HouseController {
 
 
 	@GetMapping("/profile/houses")
-	public String listUserHouses(Principal principal, Model model) {
-		String emailLoggedUser = principal.getName();
-		User loggedUser = us.getUser(emailLoggedUser);
-		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
+	public String listUserHouses(Principal principal, Model model, @RequestParam("email") String email) {
+		User user = null;
+		if(email != "") {
+			 user = us.getUser(email);
+		}else if(email == "") {
+			String emailLoggedUser = principal.getName();
+			user = us.getUser(emailLoggedUser);		
+		}
+		
+		Iterable<House> listUserHouses = hssv.getUserHouses(user.getId_user());
 
 		model.addAttribute("listUserHouses", listUserHouses);
-		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("user", user);
 
 		return "housesUserList";
 	}
-
-	/*
-	 * @RequestMapping(value = { "/housesList", "/housesList/search" }) public
-	 * String search(Model model, @RequestParam(name = "motCle", defaultValue = "")
-	 * String keyword,
-	 * 
-	 * @RequestParam(name = "page", defaultValue = "0") int page,
-	 * 
-	 * @RequestParam(name = "size", defaultValue = "5") int size) { Page<House>
-	 * listHouses = houseRepository.findByName("%" + keyword + "%",
-	 * PageRequest.of(page, size)); int[] pages = new
-	 * int[listHouses.getTotalPages()]; model.addAttribute("listHouses",
-	 * listHouses.getContent()); model.addAttribute("motC", keyword);
-	 * model.addAttribute("pages", pages); model.addAttribute("pageCourante", page);
-	 * return "housesList"; }
-	 */
-
-	// Tests for Services
 
 	@GetMapping("/profile/houses/add")
 	public String addUserHouseForm(Principal principal, Model model) {
@@ -263,10 +252,13 @@ public class HouseController {
 
 	@RequestMapping(value = "/houseProfile")
 	public String HousePage(@RequestParam("id_house") Long id_house, Model model, Principal principal) {
-
+		
 		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
 		model.addAttribute("listHouseRatings", listHouseRatings);
-
+		Hashtable<Long,String> listRateNames = new Hashtable<Long, String>();
+		Hashtable<Long,String> listRatePhotos = new Hashtable<Long, String>();
+		Hashtable<Long,String> listRateEmails = new Hashtable<Long, String>();
+		
 		Optional<House> house = hssv.getHouse(id_house);
 		House house2 = house.get();
 		double ratingH = 0.0;
@@ -275,6 +267,13 @@ public class HouseController {
 		for (Rating rating : listHouseRatings) {
 			ratingH += rating.getValue();
 			size += 1;
+			
+			Optional<User> u = us.getUserId(rating.getId_userSender());
+			User userSender = u.get();
+			listRateNames.put(rating.getId_userSender(), userSender.getFirstName() + ' ' + userSender.getLastName());
+			listRatePhotos.put(rating.getId_userSender(), userSender.getProfilePicture());
+			listRateEmails.put(rating.getId_userSender(), userSender.getEmail());
+
 		}
 
 		ratingH = ratingH / size;
@@ -315,8 +314,6 @@ public class HouseController {
 		model.addAttribute("house", house2);
 		
 		//Book house modal
-
-
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
@@ -325,26 +322,12 @@ public class HouseController {
 		model.addAttribute("house", house2);
 		model.addAttribute("listUserHouses", listUserHouses);
 		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("listRateNames", listRateNames);
+		model.addAttribute("listRateEmails", listRateEmails);
+		model.addAttribute("listRatePhotos", listRatePhotos);
 
 		return "houseProfile";
 	}
-//
-//	@RequestMapping(value = "/bookHouse")
-//	public String bookHousePage(@RequestParam("id_house") Long id_house, Principal principal, Model model) {
-//		Optional<House> house = hssv.getHouse(id_house);
-//		House house2 = house.get();
-//		model.addAttribute("id_houseReceive", id_house);
-//		model.addAttribute("house", house2);
-//
-//		String emailLoggedUser = principal.getName();
-//		User loggedUser = us.getUser(emailLoggedUser);
-//		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
-//
-//		model.addAttribute("listUserHouses", listUserHouses);
-//		model.addAttribute("loggedUser", loggedUser);
-//
-//		return "bookHouse";
-//	}
 
 	@PostMapping(value = "/bookHouse")
 	public String bookHouse(Model model, Principal principal, @RequestParam("id_houseReceive") Long id_houseReceive,

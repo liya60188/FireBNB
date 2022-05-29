@@ -44,6 +44,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 	@Query(value = "SELECT * FROM `user` WHERE role='ADMIN'", nativeQuery = true)
 	public List<User> findAdmins();
+	
+	@Query(value = "SELECT * FROM `user` WHERE role='USER'", nativeQuery = true)
+	public List<User> findUsers();
 
 }
 

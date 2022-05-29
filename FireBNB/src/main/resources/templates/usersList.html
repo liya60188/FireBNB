@@ -59,7 +59,7 @@
 			</div>
 		</div>
 		<div th:each="user: ${listUsers}">
-			<div th:if="${user.id_user != id_loggedUser}" class="row mb-3">
+			<div th:if="${user.id_user != id_loggedUser && user.role == 'USER'}" class="row mb-3">
 				<div class="col" th:text="${user.firstName}">First name</div>
 
 				<div class="col" th:text="${user.lastName}">Last name</div>
