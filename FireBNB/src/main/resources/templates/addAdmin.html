@@ -1,0 +1,215 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<head>
+	<meta charset="utf-8" />
+	
+	<title>Registration</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	        crossorigin="anonymous" referrerpolicy="no-referrer">
+		</script>
+		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> </header>
+<!-- End of header -->
+
+<div class="row mt-5">
+</div>
+<div id="indexPage" class="container border rounded-top">	
+	<div class="row mt-5 mb-5">
+		<div class="col text-center">
+			<div class="row">
+				<div class="col">
+					<hr class="bg-dark"/>
+				</div>
+				
+				<div class="col-2">
+					<h2> Sign Up </h2>
+				</div>
+				
+				<div class="col">
+					<hr class="bg-dark"/>
+				</div>
+			</div>	
+			<p th:if="${registrationSuccess}" class="error">Admin successfully registered !</p>	
+			<form id="registerForm" autocomplete="off" @submit="register" th:action="@{/adminRegistration}" th:object="${user}"
+           		method="post">
+            	<div th:if="${exist == true}">This address email is already registered</div>
+				<div class="form-group">
+				  <div class="row mt-3">
+				  	<div class="col-2 text-right">
+				    	<label for="firstNameInput">First Name</label>
+				    </div>
+				    
+				    <div class="col-4">
+				    	<input type="text" class="form-control" 
+				    	id="firstNameInput" v-model="firstNameInput"  
+				    	th:field="*{firstName}">
+                        <span id="firstNameError" ref="firstNameError"> </span>
+				    </div>
+				    
+				    <div class="col-2 text-right">
+				    	<label for="lastNameInput">Last Name</label>
+				    </div>
+				    
+				    <div class="col-3">
+				    	<input type="text" class="form-control" 
+				    	id="lastNameInput" v-model="lastNameInput"
+				    	th:field="*{lastName}">
+				    	<span id="lastNameError" ref="lastNameError"> </span>
+				    </div>				    
+				  </div>
+			  </div>
+			  
+			  <div class="form-group">
+				  <div class="row">
+				  	<div class="col-2 text-right">
+				    	<label for="emailInput">Email</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="email" class="form-control" 
+				    	id="emailInput" v-model="emailInput"  
+				    	th:field="*{email}">
+				    	<span id="emailError" ref="emailError"> </span>
+				    </div>				    			    
+				  </div>
+			  </div>
+
+				<div class="form-group">
+				  <div class="row">
+				  	<div class="col-2 text-right">
+				    	<label for="addressInput">Address</label>
+				    </div>
+				    
+				    <div class="col-3">
+				    	<input type="text" class="form-control" 
+				    	id="addressInput" v-model="addressInput"
+				    	th:field="*{address}">
+				    	<span id="addressError" ref="addressError"> </span>
+				    </div>
+				    
+				    <div class="col-2 text-right">
+				    	<label for="additionalAddressInput">Additional address</label>
+				    </div>
+				    
+				    <div class="col-4">
+				    	<input type="text" class="form-control" 
+				    	id="additionalAddressInput" v-model="additionalAddressInput"
+				    	th:field="*{additionalAddress}">
+					    </div>				    
+				  </div>
+			  </div>
+
+				<div class="form-group">
+				  <div class="row">
+				  	<div class="col-2 text-right">
+				    	<label for="cityInput">City</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="text" class="form-control" 
+				    	id="cityInput" v-model="cityInput"
+				    	th:field="*{city}">
+				    	<span id="cityError" ref="cityError"> </span>
+				    </div>
+				    
+				    <div class="col-2 mt-3 text-right">
+				    	<label for="postalCodeInput">Postal code</label>
+				    </div>
+				    
+				    <div class="col-9 mt-3">
+				    	<input type="number" class="form-control" 
+				    	id="postalCodeInput" v-model="postalCodeInput"
+				    	th:field="*{postalCode}">
+				    	<span id="postalCodeError" ref="postalCodeError"> </span>
+				    </div>	
+				    
+				    <div class="col-2 mt-3 text-right">
+				    	<label for="countryInput">Country</label>
+				    </div>
+				    
+				    <div class="col-9 mt-3">
+				    	<input type="text" class="form-control" 
+				    	id="countryInput" name="countryInput" v-model="countryInput"
+				    	th:field="*{country}">
+				    	<span id="countryError" ref="countryError"> </span>
+				    </div>			    
+				  </div>
+			  </div>
+
+			<div class="form-group">
+				  <div class="row"> 
+				    <div class="col-2 text-right">
+				    	<label for="phoneNumberInput">Phone number</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="number" class="form-control" 
+				    	id="phoneNumberInput" v-model="phoneNumberInput" 
+				    	th:field="*{phoneNumber}">
+				    	<span id="phoneNumberError" ref="phoneNumberError"> </span>
+				    </div>				    
+				  </div>
+			  </div>
+		  		  			  
+			 <div class="form-group">
+			 	<div class="row">
+			  		<div class="col-2 text-right">
+				    	<label for="passwordInput">Password</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="password" class="form-control" 
+				    	id="passwordInput" v-model="passwordInput" 
+				    	th:field="*{password}" minlength="6">
+				    	<span id="passwordError" ref="passwordError"> </span>
+				    </div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+			  		<div class="col-2 text-right">
+				    	<label for="passwordConfirmInput">Password Confirm</label>
+				    </div>
+				    
+				    <div class="col-9">
+				    	<input type="password" class="form-control" 
+				    	id="passwordConfirmInput" v-model="passwordConfirmInput" 
+				    	minlength="6">
+				    	<span id="passwordConfirmError" ref="passwordConfirmError"> </span>
+				    </div>
+				</div>
+			</div>
+			  
+				<div class="row">
+					<div class="col-11 text-right">
+				  		<button type="submit"  class="btn btn-light border border-dark rounded-pill">Sign Up</button>
+				  	</div>
+				</div>
+			</form>
+		</div>
+	</div>	
+</div>
+
+
+<div class="row mt-5">
+</div>
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/indexFormRegulation.js}"></script>
+
+</body>
+</html>

@@ -17,7 +17,10 @@
 	<div class="container-fluid">
 		<form action="/usersList/search" method="post">
 			<div class="row">
-				<div class="col mt-5 mb-5 border-0">
+				<div class="col-md-1">
+				</div>
+				
+				<div class="col-3 mt-5 mb-5 border-0">
 					<div class="form-outline text-center">
 						<input type="text" name="first_name" th:value="${first_name}"
 							id="form1" class="form-control rounded-pill"
@@ -25,7 +28,7 @@
 					</div>
 				</div>
 
-				<div class="col mt-5 mb-5 border-0">
+				<div class="col-3 mt-5 mb-5 border-0">
 					<div class="form-outline text-center">
 						<input type="text" name="last_name" th:value="${last_name}"
 							id="form1" class="form-control rounded-pill"
@@ -33,7 +36,7 @@
 					</div>
 				</div>
 
-				<div class="col mt-5 mb-5 border-0">
+				<div class="col-3 mt-5 mb-5 border-0">
 					<div class="form-outline text-center">
 						<input type="text" name="email" th:value="${email}" id="form1"
 							class="form-control rounded-pill" placeholder="e-mail"
@@ -41,10 +44,10 @@
 					</div>
 				</div>
 
-				<div class="col-1 mt-5 mb-5 border-0">
+				<div class="col-2 mt-5 mb-5 border-0">
 					<button type="submit" name="action" value="search"
 						class="btn btn-light border border-dark rounded-pill">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20%" height="20%"
+						<svg xmlns="http://www.w3.org/2000/svg" width="70px" height="25px"
 							fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 	  						<path
 								d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
@@ -80,6 +83,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row h-25"></div>
 	</div>
 	<!-- End of content -->
 

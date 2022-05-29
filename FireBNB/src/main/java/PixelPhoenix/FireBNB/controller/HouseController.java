@@ -259,8 +259,11 @@ public class HouseController {
 		Hashtable<Long,String> listRatePhotos = new Hashtable<Long, String>();
 		Hashtable<Long,String> listRateEmails = new Hashtable<Long, String>();
 		
+		
 		Optional<House> house = hssv.getHouse(id_house);
 		House house2 = house.get();
+		Date begin_date_exist = house2.getBegin_date();
+		Date end_date_exist = house2.getEnd_date();
 		double ratingH = 0.0;
 
 		int size = 0;
@@ -348,11 +351,12 @@ public class HouseController {
 		Long id_Receiver = house.getId_user();
 		Date begin_date_exist = house.getBegin_date();
 		Date end_date_exist = house.getEnd_date();
+		//String bookingSuccessMessage;
 
 		if (begin_date_exist == null && end_date_exist == null) {
 			house.setBegin_date(begin_date);
 			house.setEnd_date(end_date);
-			isBookedError = "";
+			//isBookedError = "";
 
 			Message message = new Message();
 			message.setId_sender(loggedUser.getId_user());
@@ -364,16 +368,18 @@ public class HouseController {
 			message.setId_house_receiver(id_houseReceive);
 			message.setId_house_sender(id_houseSend);
 			ms.saveMessage(message);
-			model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
+			//bookingSuccessMessage = "Your demand has been sent to the house owner !";
+			return "redirect:/houseProfile?id_house="+ id_houseReceive;
 
-			return "redirect:/housesProfile(id_house="+ id_houseReceive + ")";
+
+			//model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
 
 		} else if (begin_date.before(begin_date_exist) && end_date.after(begin_date_exist)
 				|| begin_date.before(end_date_exist) && end_date.after(end_date_exist)
 				|| begin_date.before(begin_date_exist) && end_date.after(end_date_exist)
 				|| begin_date.after(begin_date_exist) && end_date.before(end_date_exist)) {
-			isBookedError = "Date overlap";
-			model.addAttribute("isBookedError", isBookedError);
+			//isBookedError = "Date overlap";
+			//model.addAttribute("isBookedError", isBookedError);
 			model.addAttribute("id_houseReceive", id_houseReceive);
 			model.addAttribute("house", house);
 
@@ -381,13 +387,15 @@ public class HouseController {
 
 			model.addAttribute("listUserHouses", listUserHouses);
 			model.addAttribute("loggedUser", loggedUser);
+			//bookingSuccessMessage = "The house is already booked for these dates !";
+			return "redirect:/houseProfile?id_house="+ id_houseReceive;
 
-			return "redirect:/houseProfilec(id_house="+ id_houseReceive + ")#modalBooking";
+
 
 		} else {
 			house.setBegin_date(begin_date);
 			house.setEnd_date(end_date);
-			isBookedError = "";
+			//isBookedError = "";
 
 			Message message = new Message();
 			message.setId_sender(loggedUser.getId_user());
@@ -399,11 +407,12 @@ public class HouseController {
 			message.setId_house_receiver(id_houseReceive);
 			message.setId_house_sender(id_houseSend);
 			ms.saveMessage(message);
+			//bookingSuccessMessage = "Your demand has been sent to the house owner !";
+			//model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
+			return "redirect:/houseProfile?id_house="+ id_houseReceive;
 
-			model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
-
-			return "redirect:/housesProfile(id_house="+ id_houseReceive + ")";
 		}
+
 
 	}
 

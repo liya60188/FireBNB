@@ -1,0 +1,111 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<head>
+	<meta charset="utf-8" />
+	<title>Edit house</title>
+		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+
+<!-- Header -->
+<header th:insert="fragments/header.html :: header"> 
+</header>
+<!-- End of header --
+<!-- Content -->
+<div class="container mt-5 border border-dark">
+	<div class="row bg-dark">
+		<div class="col text-light text-center">
+			<h2>Message</h2>
+		</div>
+	</div>
+	
+	<div class="row mt-3">
+		<div class="col">
+			<div th:if="${message.id_house_sender != null}">
+				<h3 th:text="'Subject: Your house ' + ${message.subject}"></h3>
+				<hr class="mt-2 mb-3 bg-dark"/>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col text-left">
+			<p class="btn btn-secondary rounded-pill" th:text="'From ' + ${senderFirstName} + ' ' + ${senderLastName}"></p>
+		</div>
+		
+		<div class="col text-right">
+			<p class="btn btn-secondary rounded-pill" th:text="'On ' + ${message.creation_date}"></p>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col">
+			<p th:text="${message.content}"></p>
+		</div>
+	</div>	
+	
+	<div class="row">
+		<div class="col">
+			<p th:text="'Id de la maison de id_sender : ' + ${message.id_house_sender}"></p>
+		</div>
+		
+		<div class="col text-right">
+			<a style="color:black" th:href=@{/houseProfile(id_house=${message.id_house_sender})}><u>View House</u></a>
+		</div>
+	</div>	
+		
+	<form th:action="@{/confirmBooking}" th:object="${house}" method="post">
+		<div class="row">
+			<div class="col">
+		 		<p>Do you confirm the exchange?</p>
+		 	</div>
+		</div>
+	
+			<input name="id_house_receiver" type="hidden" th:value="${message.id_house_receiver}"/>
+			<input name="id_house_sender" type="hidden" th:value="${message.id_house_sender}"/>
+		
+		<div class="row">
+			<div class="col-12">
+				<input type="radio" name="confirm" value="yes"/> Yes
+			</div>
+			
+			<div class="col-12">
+				<input type="radio" name="confirm" value="no"/> No
+			</div>
+		</div>
+	
+		<div class="row mt-3">
+			<div class="col-2">
+				<input class="btn btn-light border border-dark rounded-pill" type="submit" name="action" value="confirm" />
+			</div>
+		</div>
+	</form>
+	
+	<div th:if="${message.id_house_sender == null}">
+		<h1 th:text="'Subject: ' + ${message.subject}"></h1>
+		<p th:text="'By ' + ${senderFirstName} + ' ' + ${senderLastName}"></p>
+		<p th:text="'On ' + ${message.creation_date}"></p>
+		<p th:text="${message.content}"></p>
+	</div>
+	
+	<div class="row mt-4 mb-3">
+		<div class="col text-right">
+			<a class="btn btn-lg btn-success border-0 rounded-pill" th:href="@{/messagesListUser/sendMessage(email=${email}, subject=${message.subject})}">Reply</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row h-25"></div>
+</div>
+<!-- End of content -->
+
+<!-- Footer -->
+<div th:insert="fragments/footer.html :: footer"></div>
+<!-- End of Footer -->
+</body>
+</html>

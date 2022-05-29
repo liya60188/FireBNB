@@ -27,7 +27,7 @@
 	      		alt="House picture"
 	   	 	/>
 	    	<div class="text-center mt-4">
-        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#house_photos">
+        		<button type="button" class="btn btn-light border border-dark rounded-pill" data-toggle="modal" data-target="#house_photos">
   					See all photos
 				</button>
          	</div>
@@ -35,19 +35,16 @@
 	</div>
 	
 	<div class="row">
-		<div class="col-10 text-right">
+		<div class="col-8 col-md-10 text-right">
 	  		<button type="submit" class="btn btn-light border border-dark rounded-pill">Add pictures</button>
 	  	</div>
 	  	
-	  	<div class="col-2 text-right">
+	  	<div class="col-4 col-md-2 text-right">
 	  		<button type="submit" class="btn btn-light border border-dark rounded-pill">Delete pictures</button>
 	  	</div>
 	</div>
-	
-	<div class="row">
-		
-	</div>
 </div>
+
 <div class="modal fade" id="house_photos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
  	<div class="modal-dialog" role="document">
     	<div class="modal-content">
@@ -86,9 +83,9 @@
 
 <!-- House characteristics -->
 <input type="hidden" name="id_house" th:value="${id_house}" readonly />
-<div class="container">
+<div class="container mt-5">
 	<div class="row">
-		<div class="col mt-5">
+		<div class="col">
 			<h4 style="color:#14A6B6"><b>Location information</b></h4>
 		</div>
 	</div>
@@ -158,12 +155,13 @@
 			</div>
 		</div>
 	</div>
-</div>
+	
 	<div class="row">
 		<div class="col mt-3 text-right">
 	  		<input type="submit" class="btn btn-light border border-dark rounded-pill" name="action" value="Save Description" >
 	  	</div>
 	</div>
+</div>
 </form>
 <!-- End of material textarea -->
 

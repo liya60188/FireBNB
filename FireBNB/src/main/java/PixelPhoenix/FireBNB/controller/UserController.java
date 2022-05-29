@@ -52,6 +52,16 @@ public class UserController {
 	public String index() {
 		return "index";
 	}
+	
+	@GetMapping("/loggedIndex")
+	public String loggedIndex() {
+		return "loggedIndex";
+	}
+	
+	@GetMapping("/adminIndex")
+	public String adminIndex() {
+		return "adminIndex";
+	}
 
 	@RequestMapping(value = { "/usersList", "/usersList/search" })
 	public String listUsers(Model model, 
@@ -110,7 +120,7 @@ public class UserController {
 			 user = us.getUser(email);
 		}else if(email == "") {
 			String emailLoggedUser = principal.getName();
-			 user = us.getUser(emailLoggedUser);		
+			user = us.getUser(emailLoggedUser);		
 		}
 
 		List<String> listSenders = new ArrayList<>();
@@ -151,6 +161,12 @@ public class UserController {
 		model.addAttribute("listRateNames", listRateNames);
 		model.addAttribute("listRateEmails", listRateEmails);
 		model.addAttribute("listRatePhotos", listRatePhotos);
+		
+		String role = user.getRole();
+		System.out.print(role);
+		if(role == "ADMIN") {
+			return "adminProfile";
+		}
 		return "userProfile";
 	}
 
@@ -173,6 +189,26 @@ public class UserController {
 		}
 
 		return "register";
+	}
+	
+	@GetMapping("/addAdmin")
+	public String registrationFormAdmin(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+
+		return "addAdmin";
+	}
+	@PostMapping("/adminRegistration")
+	public String processRegisterAdmin(@ModelAttribute User user, Model model) {
+
+		if (us.isUserExist(user.getEmail())) {
+			model.addAttribute("exist", true);
+		} else {
+			us.createAdmin(user);
+			model.addAttribute("registrationSuccess", true);
+		}
+
+		return "addAdmin";
 	}
 
 	@GetMapping("/profile/update")
@@ -203,6 +239,7 @@ public class UserController {
 			@RequestParam("phoneNumber") int phoneNumber,
 			@RequestParam("password") String password, 
 			@RequestParam(name = "edit", defaultValue = "") int edit,
+			@RequestParam("role") String role, 
 			Principal principal){
 		if (edit == 0) {
 			model.addAttribute("firstName", firstName);
@@ -229,12 +266,13 @@ public class UserController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(password);
 		user.setPassword(encodedPassword);
+		user.setRole(role);
 		us.updateUser(user);
 		
 		if(principal.getName() == user.getEmail()) {
-			return "redirect:/profile(email='')";
+			return "redirect:/profile?email=";
 		}
-		return "redirect:/profile(email="+user.getEmail()+")";
+		return "redirect:/profile?email=" + user.getEmail();
 		
 	}
 
