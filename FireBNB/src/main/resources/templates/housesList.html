@@ -195,7 +195,7 @@
 						</div>
 						<div class="col text-righ mr-5">
 							<a style="color: black"
-								th:href="@{/houseProfile/{id_house} (id_house=${house.id_house})}">View</a>
+								th:href="@{/houseProfile(id_house=${house.id_house})}">View</a>
 
 							<a style="color: black" sec:authorize="hasAuthority('ADMIN')"
 								th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, 

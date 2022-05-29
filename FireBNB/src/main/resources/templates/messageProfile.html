@@ -14,7 +14,7 @@
 		<p th:text="${message.content}"></p>
 		<p th:text="'Id de la maison de id_sender : ' + ${message.id_house_sender}"></p>
 		
-		<a th:href=@{/houseProfile/{id_house}(id_house=${message.id_house_sender})}>View House</a>
+		<a th:href=@{/houseProfile(id_house=${message.id_house_sender})}>View House</a>
 		<form th:action="@{/confirmBooking}" th:object="${house}" method="post">
 			<td> Do you confirm the exchange?</td>
 			<tr>

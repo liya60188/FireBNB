@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Message;
+import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.User;
 import PixelPhoenix.FireBNB.service.HouseService;
 import PixelPhoenix.FireBNB.service.MessageService;
@@ -55,10 +57,18 @@ public class MessageController {
 		Long id_loggedUser = user.getId_user();
 		Iterable<Message> listReceivedMessages = messageService.getReceivedMessages(user.getId_user());
 		Iterable<Message> listSentMessages = messageService.getSentMessages(user.getId_user());
+		Hashtable<Long,String> listReceivedNames = new Hashtable<Long, String>();
+		
+		for (Message message : listSentMessages) {
+
+			Optional<User> u = us.getUserId(message.getId_receiver());
+			User userReceiver = u.get();
+			listReceivedNames.put(message.getId_receiver(), userReceiver.getFirstName() + ' ' + userReceiver.getLastName());
+		}
 		
 		model.addAttribute("listReceivedMessages", listReceivedMessages);
 		model.addAttribute("listSentMessages", listSentMessages);
-		model.addAttribute("id_loggedUser",id_loggedUser);
+		model.addAttribute("listReceivedNames",listReceivedNames);
 		model.addAttribute("loggedUser", user);
 		return "messagesListUser";
 	}
@@ -152,7 +162,7 @@ public class MessageController {
 	public String delete(Model model, @RequestParam(name = "id_message", defaultValue = "") Long id_message,
 			@RequestParam(name = "mc", defaultValue = "") String mc) {
 		messageService.deleteMessage(id_message);
-		return "redirect:/messagesList/search?motCle=" + mc;
+		return "redirect:/messagesListUser";
 	}
 	
 	@PostMapping("/confirmBooking")

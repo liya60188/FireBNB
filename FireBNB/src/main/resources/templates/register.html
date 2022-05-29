@@ -44,7 +44,7 @@
 					<hr class="bg-dark"/>
 				</div>
 			</div>
-				<p th:if="${error}" class="error">Wrong user or password</p>
+				<p th:if="${error=='true'}" class="error">Wrong user or password</p>
 				<p th:if="${registrationSuccess}" class="error">You have been successfully registered! Please log in</p>
 				<form method="post" th:action="@{/login}" th:object="${user}">
 				  <div class="form-group">

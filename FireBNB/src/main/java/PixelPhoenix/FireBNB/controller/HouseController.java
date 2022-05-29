@@ -261,8 +261,8 @@ public class HouseController {
 		}
 	}
 
-	@RequestMapping(value = "/houseProfile/{id_house}")
-	public String HousePage(@PathVariable Long id_house, Model model, Principal principal) {
+	@RequestMapping(value = "/houseProfile")
+	public String HousePage(@RequestParam("id_house") Long id_house, Model model, Principal principal) {
 
 		Iterable<Rating> listHouseRatings = ratingService.getRatingsByHouse(id_house);
 		model.addAttribute("listHouseRatings", listHouseRatings);
@@ -313,26 +313,38 @@ public class HouseController {
 		model.addAttribute("currentUserId", currentUserId);
 
 		model.addAttribute("house", house2);
+		
+		//Book house modal
 
-		return "houseProfile";
-	}
-
-	@RequestMapping(value = "/bookHouse")
-	public String bookHousePage(@RequestParam("id_house") Long id_house, Principal principal, Model model) {
-		Optional<House> house = hssv.getHouse(id_house);
-		House house2 = house.get();
-		model.addAttribute("id_houseReceive", id_house);
-		model.addAttribute("house", house2);
 
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
 
+		model.addAttribute("id_houseReceive", id_house);
+		model.addAttribute("house", house2);
 		model.addAttribute("listUserHouses", listUserHouses);
 		model.addAttribute("loggedUser", loggedUser);
 
-		return "bookHouse";
+		return "houseProfile";
 	}
+//
+//	@RequestMapping(value = "/bookHouse")
+//	public String bookHousePage(@RequestParam("id_house") Long id_house, Principal principal, Model model) {
+//		Optional<House> house = hssv.getHouse(id_house);
+//		House house2 = house.get();
+//		model.addAttribute("id_houseReceive", id_house);
+//		model.addAttribute("house", house2);
+//
+//		String emailLoggedUser = principal.getName();
+//		User loggedUser = us.getUser(emailLoggedUser);
+//		Iterable<House> listUserHouses = hssv.getUserHouses(loggedUser.getId_user());
+//
+//		model.addAttribute("listUserHouses", listUserHouses);
+//		model.addAttribute("loggedUser", loggedUser);
+//
+//		return "bookHouse";
+//	}
 
 	@PostMapping(value = "/bookHouse")
 	public String bookHouse(Model model, Principal principal, @RequestParam("id_houseReceive") Long id_houseReceive,
@@ -369,8 +381,9 @@ public class HouseController {
 			message.setId_house_receiver(id_houseReceive);
 			message.setId_house_sender(id_houseSend);
 			ms.saveMessage(message);
+			model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
 
-			return "redirect:/housesList";
+			return "redirect:/housesProfile(id_house="+ id_houseReceive + ")";
 
 		} else if (begin_date.before(begin_date_exist) && end_date.after(begin_date_exist)
 				|| begin_date.before(end_date_exist) && end_date.after(end_date_exist)
@@ -386,7 +399,7 @@ public class HouseController {
 			model.addAttribute("listUserHouses", listUserHouses);
 			model.addAttribute("loggedUser", loggedUser);
 
-			return "bookHouse";
+			return "redirect:/houseProfilec(id_house="+ id_houseReceive + ")#modalBooking";
 
 		} else {
 			house.setBegin_date(begin_date);
@@ -404,7 +417,9 @@ public class HouseController {
 			message.setId_house_sender(id_houseSend);
 			ms.saveMessage(message);
 
-			return "redirect:/housesList";
+			model.addAttribute("bookingSuccessMessage", "Your demand has been sent to the house owner !");
+
+			return "redirect:/housesProfile(id_house="+ id_houseReceive + ")";
 		}
 
 	}
