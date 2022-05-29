@@ -22,29 +22,24 @@
 			<h1><b>Edit service</b></h1>
 		</div>
 	</div>
-	
+	<form th:action="@{/listServices/edit}" th:object="${service}" method="post">
 	<div class="row">
 		<div class="col mt-5 mb-5 border-0">
 			<div class="form-outline text-center">
-				<label for="id_service">ID</label>
- 			 	<input type="text" name="id_service" th:value="${id_service}" readonly/>
-			</div>
-		</div>
-		
-		<div class="col mt-5 mb-5 border-0">
-			<div class="form-outline text-center">
-				<label for="serviceName">ID</label>
+				<label for="serviceName">Service Name</label><br>
  			 	<input type="text" name="serviceName" th:value="${serviceName}" />
 			</div>
 			<input type="hidden" name="edit" value="1" />
+			<input type="hidden" name="id_service" th:value="${id_service}"/>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="col  text-right">
-	  		<button type="submit" class="btn btn-success border-0" name="action" value="Save changes"></button>
+	  		<input type="submit" class="btn btn-success border-0" name="action" value="Save changes">
 	  	</div>
 	</div>
+	</form>
 </div>
 <!-- End of content -->
 

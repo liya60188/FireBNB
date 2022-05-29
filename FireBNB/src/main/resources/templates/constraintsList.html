@@ -32,17 +32,13 @@
 	
 	<div th:each="constraint: ${listConstraints}">
 		<div class="row mb-3">
-			<div class="col" th:text="'ID: ' + ${constraint.id_constraint}">
-				ID
-			</div>
-			
-			<div class="col" th:text="'Constraint Name:' + ${constraint.constraintName}">
-				Constraint Name
+
+			<div class="col" th:text="${constraint.constraintName}">
 			</div>
 			
 			<div class="col text-right">
 				<a type="button" class="btn btn-light border border-dark rounded-pill" th:href="@{/listConstraints/edit(id_constraint=${constraint.id_constraint}, constraintName=${constraint.constraintName}, edit=0)}">Edit</a>
-				<a type="button" class="btn btn-danger border border-dark rounded-pill" onclick="return confirm('Please Confirm')"
+				<a type="button" class="btn btn-danger border border-danger rounded-pill" onclick="return confirm('Please Confirm')"
 					th:href="@{/constraintsList/delete(id_constraint=${constraint.id_constraint})}"> Delete
 				</a>
 			</div>

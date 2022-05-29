@@ -53,15 +53,13 @@ public class HouseService {
 		 return hsrp.countHouseNumber(id_user);
 	 }
 	 
-//	@SuppressWarnings("null")
-//	@GetMapping("housesList")
-//	 public String getJoinedHouseServices(){
-//		 List<String> serviceNames = null;
-//		 for (PixelPhoenix.FireBNB.model.Service service : hsrp.getJoinedHouseServices()) {
-//	            serviceNames.add(service.getServiceName());
-//	        }
-//		 return Arrays.toString(serviceNames.toArray());
-//	 }
+	public Iterable<House> getThreeRandomHouses(){
+		return hsrp.randomThreeHouses();
+	}
+	
+	public House getRandomHouse(Long id_user){
+		return hsrp.randomHouse(id_user);
+	}
 	
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.Role;
 import PixelPhoenix.FireBNB.model.User;
@@ -81,5 +82,8 @@ public class UserService {
 	public void deleteUser(final Long id_user) {
 		ur.deleteById(id_user);
 		//ur.delete(user);
+	}
+	public Iterable<User> getThreeRandomUsers(){
+		return ur.randomThreeUsers();
 	}
 }

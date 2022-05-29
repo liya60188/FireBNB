@@ -43,9 +43,9 @@ public interface HouseRepository extends JpaRepository<House, Long>{
 	@Query(value = "SELECT * FROM `house` WHERE country like :x AND city like :y AND address like :z", nativeQuery = true)
 	public Iterable<House> findWithThree(@Param("x") String country, @Param("y") String city, @Param("z") String address);
 
-//	@Query("select new Service(house.id_house, service.serviceName) from House house join house.services service")
-//	public Set<Service> getJoinedHouseServices();
-//	
-//	@Query("select new Constraint(house.id_house, constraint.constraintName) from House house join house.constraints constraint")
-//	public Set<Constraint> getJoinedHouseConstraint();
+	@Query(value="SELECT * FROM house ORDER BY RAND ( ) LIMIT 3", nativeQuery = true)
+	public Iterable<House> randomThreeHouses();
+	
+	@Query(value="SELECT * FROM house WHERE id_user= :x ORDER BY RAND ( ) LIMIT 1", nativeQuery = true)
+	public House randomHouse(@Param("x") Long id_user);
 }

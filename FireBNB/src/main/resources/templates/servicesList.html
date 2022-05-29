@@ -31,13 +31,8 @@
 	</div>
 	
 	<div th:each="service: ${listServices}">
-		<div class="row mb-3">
-			<div class="col" th:text="'ID: ' + ${service.id_service}">
-				ID
-			</div>
-			
-			<div class="col" th:text="'Service Name:' + ${service.serviceName}">
-				Service Name
+		<div class="row mb-3">		
+			<div class="col" th:text="${service.serviceName}">
 			</div>
 			
 			<div class="col text-right">

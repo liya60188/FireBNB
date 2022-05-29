@@ -2,54 +2,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-	<head>
-	<meta charset="utf-8" />
-	<title>Constraints Edit</title>
- 		<div th:insert="fragments/header.html :: links"> 
-		</div>
-	</head>
+<head>
+<meta charset="utf-8" />
+<title>Constraints Edit</title>
+<div th:insert="fragments/header.html :: links"></div>
+</head>
 
 <body>
-<!-- Header -->
-<header th:insert="fragments/header.html :: header"> 
-</header>
-<!-- End of header -->
+	<!-- Header -->
+	<header th:insert="fragments/header.html :: header"> </header>
+	<!-- End of header -->
 
-<!-- Content -->
-<div class="container">
-	<div class="row">
-		<div class="col mt-5 mb-3 text-center">
-			<h1><b>Edit constraint</b></h1>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col mt-5 mb-5 border-0">
-			<div class="form-outline text-center">
-				<label for="id_constraint">ID</label>
- 			 	<input type="text" name="id_constraint" th:value="${id_constraint}" readonly/>
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col mt-5 mb-3 text-center">
+				<h1>
+					<b>Edit constraint</b>
+				</h1>
 			</div>
 		</div>
-		
-		<div class="col mt-5 mb-5 border-0">
-			<div class="form-outline text-center">
-				<label for="constraintName">ID</label>
- 			 	<input type="text" name="constraintName" th:value="${constraintName}" />
-			</div>
-			<input type="hidden" name="edit" value="1" />
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col  text-right">
-	  		<button type="submit" class="btn btn-success border-0" name="action" value="Save changes"></button>
-	  	</div>
-	</div>
-</div>
-<!-- End of content -->
+		<form th:action="@{/listConstraints/edit}" th:object="${constraint}" method="post">
+			<div class="row">
 
-<!-- Footer -->
-<div th:insert="fragments/footer.html :: footer"></div>
-<!-- End of Footer -->
+				<div class="col mt-5 mb-5 border-0">
+					<div class="form-outline text-center">
+						<label for="constraintName">Constraint name</label> <br>
+						<input type="text" name="constraintName" th:value="${constraintName}" />
+					</div>
+					<input type="hidden" name="edit" value="1" />
+					<input type="hidden" name="id_constraint" th:value="${id_constraint}"/>
+					
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col  text-right">
+					<input type="submit" class="btn btn-success border-0"
+						name="action" value="Save changes">
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End of content -->
+
+	<!-- Footer -->
+	<div th:insert="fragments/footer.html :: footer"></div>
+	<!-- End of Footer -->
 </body>
 </html>
