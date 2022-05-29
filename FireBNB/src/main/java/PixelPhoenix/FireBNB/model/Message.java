@@ -30,6 +30,7 @@ public class Message {
 	Long id_house_sender;
 	String subject;
 	String content;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	Date creation_date;
 	
 	public Long getId_message() {

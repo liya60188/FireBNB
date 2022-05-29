@@ -58,17 +58,25 @@ public class MessageController {
 		Iterable<Message> listReceivedMessages = messageService.getReceivedMessages(user.getId_user());
 		Iterable<Message> listSentMessages = messageService.getSentMessages(user.getId_user());
 		Hashtable<Long,String> listReceivedNames = new Hashtable<Long, String>();
+		Hashtable<Long,String> listSentNames = new Hashtable<Long, String>();
+
 		
 		for (Message message : listReceivedMessages) {
-
+			Optional<User> u = us.getUserId(message.getId_sender());
+			User userSender = u.get();
+			listReceivedNames.put(message.getId_sender(), userSender.getFirstName() + ' ' + userSender.getLastName());
+		}
+		
+		for (Message message : listSentMessages) {
 			Optional<User> u = us.getUserId(message.getId_receiver());
 			User userReceiver = u.get();
-			listReceivedNames.put(message.getId_receiver(), userReceiver.getFirstName() + ' ' + userReceiver.getLastName());
+			listSentNames.put(message.getId_receiver(), userReceiver.getFirstName() + ' ' + userReceiver.getLastName());
 		}
 		
 		model.addAttribute("listReceivedMessages", listReceivedMessages);
 		model.addAttribute("listSentMessages", listSentMessages);
 		model.addAttribute("listReceivedNames",listReceivedNames);
+		model.addAttribute("listSentNames",listSentNames);
 		model.addAttribute("loggedUser", user);
 		return "messagesListUser";
 	}

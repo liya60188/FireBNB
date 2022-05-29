@@ -1,49 +1,81 @@
-<!DOCTYPE HTMl>
+<!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8" />
-<title>Send Message</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta charset="utf-8" />
+<title>Send a message</title>
+<div th:insert="fragments/header.html :: links"></div>
 </head>
+
 <body>
-	<div class="container" id="addMessagePage">
-		<h1>Add Message</h1>
+	<!-- Header -->
+	<header th:insert="fragments/header.html :: header"> </header>
+	<!-- End of header -->
 
-		<form action="/messagesListUser/add" method="post" @submit="addMessage">
-			<table>
-				<tr>
-					<td><input type="hidden" name="id_sender"
-						th:value="${id_loggedUser}" /></td>
-				</tr>
-				<tr>
+	<!-- Content -->
+	<div class="container border border-dark mt-5" id="addMessagePage">
+		<div class="row">
+			<div class="col bg-dark text-center text-light">
+				<h2>
+					Send message to the admin
+				</h2>
+			</div>
+		</div>
 
-					<td for="subjectInput" >Subject</td>
-					<td><input type="text" name="subject" th:value="${subject}" id="subjectInput" v-model="subjectInput"/></td>
-					<td><span id="subjectError" ref="subjectError"></span></td>
-				</tr>
-				
-				<tr>
-					<td for="contentInput">Content</td>
-					<td><input type="text" name="content" th:value="${content}" id="contentInput" v-model="contentInput"/></td>
-					<td><span id="contentError" ref="contentError"> </span></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="Send Message" /></td>
-				</tr>
-				
-			</table>
-			
-		</form>
+		<div class="col">
+			<form action="/messagesListUser/add" method="post"
+				@submit="addMessage">
+				<input type="hidden" name="id_sender" th:value="${id_loggedUser}" />
+				</td> <input type="hidden" name="id_sender" th:value="${id_loggedUser}" />
+				</td>
+
+				<div class="row mt-5">
+					<div class="col-2">Subject</div>
+
+					<div class="col-10">
+						<textarea type="text" class="form-control" name="subject"
+							th:value="${subject}" id="subjectInput" v-model="subjectInput"></textarea> 
+							<span id="subjectError"
+							ref="subjectError"></span>
+					</div>
+				</div>
+
+				<div class="row mt-5">
+					<div class="col-2">Content</div>
+
+					<div class="col-10">
+						<input type="text" class="md-textarea form-control" rows="3"
+							name="content" th:value="${content}" id="contentInput" v-model="contentInput"/> <span id="contentError"
+							ref="contentError"> </span>
+					</div>
+				</div>
+
+				<div class="row mt-5">
+					<div class="col text-right">
+						<input type="submit"
+							class="btn btn-light border border-dark rounded-pill"
+							name="action" value="Send Message" />
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
+
+<!-- 	<div class="container-fluid"> -->
+<!-- 		<div class="row h-25"></div> -->
+<!-- 	</div> -->
+	<!-- End of content -->
+
+	<!-- Footer -->
+	<div th:insert="fragments/footer.html :: footerFixed"></div>
+	<!-- End of Footer -->
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		th:src="@{/js/addMessageFormRegulation.js}"></script>
 </body>
-
-<script src="https://unpkg.com/vue@next"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<script type="text/javascript"
-	th:src="@{/js/addMessageFormRegulation.js}"></script>
-
 </html>

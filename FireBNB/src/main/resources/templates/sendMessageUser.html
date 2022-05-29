@@ -35,8 +35,8 @@
 
 					<div class="col-10">
 						<input type="text" class="form-control" name="subject"
-							th:value="${subject}" id="subjectInput" v-model="subjectInput"/> <span id="subjectError"
-							ref="subjectError"></span>
+							th:value="${subject}" id="subjectInput" v-model="subjectInput"/> 
+							<span id="subjectError" ref="subjectError"></span>
 					</div>
 				</div>
 
@@ -44,8 +44,9 @@
 					<div class="col-2">Content</div>
 
 					<div class="col-10">
-						<input type="text" class="md-textarea form-control" rows="3"
-							name="content" th:value="${content}" id="contentInput" v-model="contentInput"/> <span id="contentError"
+						<textarea type="text" class="md-textarea form-control" rows="3"
+							name="content" th:value="${content}" id="contentInput" v-model="contentInput"></textarea> 
+							<span id="contentError"
 							ref="contentError"> </span>
 					</div>
 				</div>

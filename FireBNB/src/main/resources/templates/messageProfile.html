@@ -48,11 +48,7 @@
 		</div>
 	</div>	
 	
-	<div class="row">
-		<div class="col">
-			<p th:text="'Id de la maison de id_sender : ' + ${message.id_house_sender}"></p>
-		</div>
-		
+	<div class="row">		
 		<div class="col text-right">
 			<a style="color:black" th:href=@{/houseProfile(id_house=${message.id_house_sender})}><u>View House</u></a>
 		</div>
@@ -99,9 +95,9 @@
 	</div>
 </div>
 
-<div class="container-fluid">
-	<div class="row h-25"></div>
-</div>
+<!-- <div class="container-fluid"> -->
+<!-- 	<div class="row h-25"></div> -->
+<!-- </div> -->
 <!-- End of content -->
 
 <!-- Footer -->

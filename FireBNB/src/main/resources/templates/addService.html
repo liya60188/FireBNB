@@ -18,9 +18,7 @@
 		<h1>Add Services</h1>
 		<p></p>
 		<p></p>
-		<form action="/servicesList/add" method="post"
-			@submit="addConstraint_Service">
-
+		<form action="/servicesList/add" method="post" @submit="addConstraint_Service">
 			Service Name <input id="nameInput" v-model="nameInput" type="text"
 				name="serviceName" th:value="${serviceName}" /> <input
 				type="submit" name="action" value="save" /> <span id="nameError"
@@ -29,11 +27,8 @@
 	</div>
 
 	<!-- End of content -->
-	<div class="container-fluid">
-		<div class="row h-100"></div>
-	</div>
 	<!-- Footer -->
-	<div th:insert="fragments/footer.html :: footer"></div>
+	<div th:insert="fragments/footer.html :: footerFixed"></div>
 	<!-- End of Footer -->
 
 </body>
