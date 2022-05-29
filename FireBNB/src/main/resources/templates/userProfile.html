@@ -5,8 +5,10 @@
 <head>
 <meta charset="utf-8" />
 <title>User Profile</title>
-<div th:insert="fragments/header.html :: links"></div>
-</head>
+<link th:href="@{/css/ratings.css}" rel="stylesheet" />
+<div th:insert="fragments/header.html :: links"> </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
 
 <body>
 	<!-- Header -->
@@ -82,9 +84,9 @@
 			</div>
 
 			<!-- Right block -->
-			<div class="col-7">
+			<div class="col-7" ml-5>
 				<div class="row">
-					<div class="col-5 col-md-5 col-lg-3 text-center">
+					<div class="col-5 col-md-5 col-lg-3 text-center" style="color:#14A6B6">
 						<b>Total rating :</b>
 					</div>
 					<!-- CHANGE BY AMANDA -->
@@ -100,50 +102,47 @@
 					</div>
 
 					<div th:if="${principal.name != user.email}" class="col text-right">
-						<a style="color: black" th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}"><u>Add Rating</u></a>
+<!-- 						<a style="color: black" th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}"><u>Add Rating</u></a> -->
+					<button type="button" class="btn btn-light border rounded-pill" data-toggle="modal" data-target="#modalRatings">
+					Rate this user</button>
 					</div>
 				</div>
 
 				<div class="row">
-					<div class="col-1">
-					</div>
-					
-					<div class="col mt-5 text-center">
-						<h3 style="color:#14A6B6">
-							<b>BEST RATED HOUSES</b>
-						</h3>
+					<div class="col mt-5 mb-2 text-center">
+						<h3 style="color:#14A6B6"><b>DISCOVER A RANDOM HOUSE</b></h3>
 					</div>
 				</div>
-
-<!-- 
-				<div class="row" th:each="bestHouses : ${bestHouses}">
-					<div th:each=" key : ${bestHouses.key}" th:text="${key.id_house} + ' KEY:'"></div>
-					<div th:each=" value : ${bestHouses.value}" th:text="${value}"></div>
+				
+				<div th:if="${randomHouse != null}" class="row text-center ">
+					<div class="col">
+						<figure class="figure">
+						  <img th:src="@{'/house_photos/'+${randomHouse.photo1}}" 
+						  class="figure-img img-fluid rounded" alt="Random house"
+						  style="width: 450px; height: 300px; object-fit: cover;">
+						  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
+							  	<div class="row">
+							  		<div class="col-1"></div>
+							  		
+							  		<div class="col-3 p-0">
+							  			<span th:text="${randomHouse.ratingsH} + '/5'"></span>
+									  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
+					  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+										</svg>
+									</div>
+									
+									<div class="col text-right p-0">
+										<a style="color:white" th:href="@{/houseProfile(id_house=${randomHouse.id_house})}" th:text="${randomHouse.city}+' '+${randomHouse.country}"></a>
+									</div>
+									
+									<div class="col-1"></div>
+								</div>
+							</figcaption>
+						</figure>
+					</div>
 				</div>
-  -->
-				<div class="row">
-					<div class="col-md-1">
-					</div>
-					
-					<div class="col-12 mt-3 col-md-3">
-						<img
-							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid">
-					</div>
-					
-					<div class="col-12 mt-3 col-md-3">
-						<img
-							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid"> 
-					</div>
-					
-					<div class="col-12 mt-3 col-md-3">
-						<img
-							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid">
-					</div>
-				</div>
-				<div class="row">
+				<div th:if="${randomHouse == null}" class="row text-center ">No houses available</div>
+				<div class="row text-center">
 					<div class="col mt-5 text-center">
 						<h3 style="color:#14A6B6">
 							<b>RATINGS</b>
@@ -194,7 +193,66 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="modalRatings" tabindex="-1" role="dialog" aria-labelledby="modalRatingsTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body" style="background-color: rgba(242, 242, 242);">
+				<form th:action="@{/rating/add/UserRating}" th:object="${rating}" method="post">
+					<div class="row">
+						<div class="col text-center">
+							<h2><b>Rate this user</b></h2>
+						</div>
+					</div>
+					
+					<input hidden type="text" name="id_userReceiver" th:value="${id_userReceiver}" />
+					
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<div class="stars">
+							    <input class="star star-5" id="star-5" type="radio" name="value" value="5"/>			
+							    <label class="star star-5" for="star-5"></label>			
+							    <input class="star star-4" id="star-4" type="radio" name="value" value="4"/>			
+							    <label class="star star-4" for="star-4"></label>			
+							    <input class="star star-3" id="star-3" type="radio" name="value" value="3"/>			
+							    <label class="star star-3" for="star-3"></label>			
+							    <input class="star star-2" id="star-2" type="radio" name="value" value="2"/>			
+							    <label class="star star-2" for="star-2"></label>		
+							    <input class="star star-1" id="star-1" type="radio" name="value" value="1"/>		
+							    <label class="star star-1" for="star-1"></label>
+							</div>	
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<div class="md-form">
+								<label for="form7" style="color:black"><h4><b>Comment</b></h4></label>
+							 	<textarea id="form7" name="description" th:value="${description}" class="md-textarea form-control" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col mt-5 text-right">
+							<button type="submit" name="action" value="save" class="btn btn-success rounded-pill">Save</button>
+						</div>
+					</div>
+				</form>	
+		       <!-- end -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	<!-- End of content -->
 
 <!-- Footer -->

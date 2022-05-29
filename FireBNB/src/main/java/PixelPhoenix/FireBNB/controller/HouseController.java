@@ -264,6 +264,7 @@ public class HouseController {
 		House house2 = house.get();
 		Date begin_date_exist = house2.getBegin_date();
 		Date end_date_exist = house2.getEnd_date();
+
 		double ratingH = 0.0;
 
 		int size = 0;
@@ -313,8 +314,8 @@ public class HouseController {
 		model.addAttribute("houseOwner", houseOwner);
 		model.addAttribute("houseOwnerId", houseOwnerId);
 		model.addAttribute("currentUserId", currentUserId);
-
-		model.addAttribute("house", house2);
+		model.addAttribute("begin_date", begin_date_exist);
+		model.addAttribute("end_date", end_date_exist);
 		
 		//Book house modal
 		String emailLoggedUser = principal.getName();

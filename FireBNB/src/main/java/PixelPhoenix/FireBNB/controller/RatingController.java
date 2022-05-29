@@ -52,10 +52,11 @@ public class RatingController {
 			Principal principal
 			) {
 		
+		Long id_house = rating.getId_house();
 		String emailUser = principal.getName();
 		User currentUser = userService.getUser(emailUser);
 		ratingService.createHouseRating(rating, currentUser.getId_user());
-		return "redirect:/housesList";
+		return "redirect:/houseProfile?id_house="+id_house;
 	}
 	
 	// Should redirect to user profile
@@ -79,6 +80,6 @@ public class RatingController {
 		
 		Optional<User> u = userService.getUserId(rating.getId_userReceiver());
 		User userReceiver = u.get();
-		return "redirect:/profile/" + userReceiver.getEmail();
+		return "redirect:/profile$email=" + userReceiver.getEmail();
 	}
 }

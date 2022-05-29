@@ -102,73 +102,29 @@
 	
 	<div class="container-fluid" style="background-image: url('https://i.ytimg.com/vi/oZGqcF9HiLU/maxresdefault.jpg')">
 		<div class="row">
-			<div class="Col mt-5 mb-2 text-center text-light">
-				<h3><b>BEST RATED HOUSES</b></h3>
+			<div class="col mt-5 mb-2 text-center text-light">
+				<h3><b>DISCOVER HOUSES</b></h3>
 			</div>
 		</div>
 		
 		<div class="row">
-			<div class="col">
+			<div class="col" th:each="house : ${listHouses}">
 				<figure class="figure">
-				  <img src="https://www.codeur.com/tuto/wp-content/uploads/2022/01/pexels-roberto-nickson-2559941-1.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
+				  <img th:src="@{'/house_photos/'+${house.photo1}}" 
+				  class="figure-img img-fluid rounded" alt="Random house">
 				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
 					  	<div class="row">
 					  		<div class="col-1"></div>
 					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
+					  		<div class="col-3 p-0">
+					  			<span th:text="${house.ratingsH} + '/5'"></span>
+							  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
 			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 								</svg>
 							</div>
 							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
-							</div>
-							
-							<div class="col-1"></div>
-						</div>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="col">
-				<figure class="figure">
-				  <img src="https://www.codeur.com/tuto/wp-content/uploads/2022/01/pexels-roberto-nickson-2559941-1.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
-				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
-					  	<div class="row">
-					  		<div class="col-1"></div>
-					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
-			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-								</svg>
-							</div>
-							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
-							</div>
-							
-							<div class="col-1"></div>
-						</div>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="col">
-				<figure class="figure">
-				  <img src="https://www.codeur.com/tuto/wp-content/uploads/2022/01/pexels-roberto-nickson-2559941-1.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
-				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
-					  	<div class="row">
-					  		<div class="col-1"></div>
-					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
-			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-								</svg>
-							</div>
-							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
+							<div class="col text-right p-0">
+								<a style="color:white" th:href="@{/houseProfile(id_house=${house.id_house})}" th:text="${house.city}+' '+${house.country}"></a>
 							</div>
 							
 							<div class="col-1"></div>
@@ -180,72 +136,29 @@
 		
 		<div class="row">
 			<div class="Col mt-5 mb-2 text-center text-light">
-				<h3><b>BEST RATED OWNERS</b></h3>
+				<h3><b>DISCOVER OWNERS</b></h3>
 			</div>
 		</div>
 		
 		<div class="row">
-			<div class="col">
-				<figure class="figure">
-				  <img src="https://media.glamourmagazine.co.uk/photos/623b3612980be8aafb01a665/3:4/w_1440,h_1920,c_limit/The%20Worst%20Person%20In%20The%20World%20230322GettyImages-1385537039_SQ.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
-				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
+			<div class="col" style="padding-left: 60px; padding-right: 60px;" th:each="user : ${listUsers}">
+				<figure class="figure" style="background-color: rgba(20, 23, 24, 0.6);">
+					<img th:src="@{'/user_photos/'+${user.profilePicture}}" 
+				  	class="figure-img img-fluid rounded" alt="Random user"
+				  	style="height:300px;">
+				  	<figcaption class="figure-caption text-light">
 					  	<div class="row">
 					  		<div class="col-1"></div>
 					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
+					  		<div class="col-3 p-0">
+					  			<span th:text="${user.rating} + '/5'"></span>
+							  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
 			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 								</svg>
 							</div>
 							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
-							</div>
-							
-							<div class="col-1"></div>
-						</div>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="col">
-				<figure class="figure">
-				  <img src="https://media.glamourmagazine.co.uk/photos/623b3612980be8aafb01a665/3:4/w_1440,h_1920,c_limit/The%20Worst%20Person%20In%20The%20World%20230322GettyImages-1385537039_SQ.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
-				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
-					  	<div class="row">
-					  		<div class="col-1"></div>
-					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
-			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-								</svg>
-							</div>
-							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
-							</div>
-							
-							<div class="col-1"></div>
-						</div>
-					</figcaption>
-				</figure>
-			</div>
-			
-			<div class="col">
-				<figure class="figure">
-				  <img src="https://media.glamourmagazine.co.uk/photos/623b3612980be8aafb01a665/3:4/w_1440,h_1920,c_limit/The%20Worst%20Person%20In%20The%20World%20230322GettyImages-1385537039_SQ.jpg" class="figure-img img-fluid rounded" alt="Best rated houses">
-				  <figcaption class="figure-caption text-light" style="background-color: rgba(20, 23, 24, 0.6);">
-					  	<div class="row">
-					  		<div class="col-1"></div>
-					  		
-					  		<div class="col">
-							  	5/5 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
-			  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-								</svg>
-							</div>
-							
-							<div class="col text-right">
-								<u>VIEW PROFILE</u>
+							<div class="col text-right p-0">
+								<a style="color:white" th:href="@{/profile(email=${user.email})}" th:text="${user.firstName}+' '+${user.lastName}"></a>
 							</div>
 							
 							<div class="col-1"></div>

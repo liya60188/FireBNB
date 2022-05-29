@@ -198,10 +198,10 @@
 						</svg>
 						</div>
 						<div class="col text-right mr-5">
-							<a style="color: black"
+							<a class="btn btn-light border rounded-pill"
 								th:href="@{/houseProfile(id_house=${house.id_house})}"><u>View</u></a>
 
-							<a style="color: black" sec:authorize="hasAuthority('ADMIN')"
+							<a class="btn btn-light border rounded-pill" sec:authorize="hasAuthority('ADMIN')"
 								th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, 
 								services=${house.services}, constraints=${house.constraints}, photo1=${house.photo1}, photo2=${house.photo2}, photo3=${house.photo3}, 
 								address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, 

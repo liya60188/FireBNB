@@ -49,12 +49,21 @@ public class UserController {
 	private UserRepository usrp;
 
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		Iterable<House> listHouses = hs.getThreeRandomHouses();
+		Iterable<User> listUsers = us.getThreeRandomUsers();
+		model.addAttribute("listUsers",listUsers);
+		model.addAttribute("listHouses", listHouses);
 		return "index";
 	}
 	
 	@GetMapping("/loggedIndex")
-	public String loggedIndex() {
+	public String loggedIndex(Model model) {
+		Iterable<House> listHouses = hs.getThreeRandomHouses();
+		Iterable<User> listUsers = us.getThreeRandomUsers();
+		model.addAttribute("listUsers",listUsers);
+		model.addAttribute("listHouses", listHouses);
+		
 		return "loggedIndex";
 	}
 	
@@ -69,7 +78,7 @@ public class UserController {
 			@RequestParam(name = "last_name", defaultValue = "") String last_name,
 			@RequestParam(name = "email", defaultValue = "") String email, Principal principal) {
 		
-		Iterable<User> listUsers = us.getAll();;
+		Iterable<User> listUsers = us.getAll();
 		String emailLoggedUser = principal.getName();
 		User loggedUser = us.getUser(emailLoggedUser);
 		Long id_loggedUser = loggedUser.getId_user();
@@ -123,6 +132,8 @@ public class UserController {
 			user = us.getUser(emailLoggedUser);		
 		}
 
+		Long id_userReceiver = user.getId_user();
+		House randomHouse = hs.getRandomHouse(user.getId_user());
 		List<String> listSenders = new ArrayList<>();
 		Iterable<User> allUsers = us.getAll();
 		Iterable<Rating> listUserRatings = ratingService.getRatingsByReceiver(us.getIdByEmail(user.getEmail()));
@@ -157,10 +168,12 @@ public class UserController {
 		model.addAttribute("listSenders", listSenders);
 		model.addAttribute("numberOfHouses", numberOfHouses);
 		model.addAttribute("user", user);
+		model.addAttribute("id_userReceiver", id_userReceiver);
 		model.addAttribute("principal", principal);
 		model.addAttribute("listRateNames", listRateNames);
 		model.addAttribute("listRateEmails", listRateEmails);
 		model.addAttribute("listRatePhotos", listRatePhotos);
+		model.addAttribute("randomHouse", randomHouse);
 		
 		String role = user.getRole();
 		System.out.print(role);

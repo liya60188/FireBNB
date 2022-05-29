@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import PixelPhoenix.FireBNB.model.House;
 import PixelPhoenix.FireBNB.model.Rating;
 import PixelPhoenix.FireBNB.model.User;
 
@@ -47,6 +48,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query(value = "SELECT * FROM `user` WHERE role='USER'", nativeQuery = true)
 	public List<User> findUsers();
+	
+	@Query(value="SELECT * FROM user WHERE role='USER' ORDER BY RAND ( ) LIMIT 3", nativeQuery = true)
+	public Iterable<User> randomThreeUsers();
 
 }
 
