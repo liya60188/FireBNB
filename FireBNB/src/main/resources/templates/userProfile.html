@@ -196,24 +196,30 @@
 				</div>
 			</div>
 		</div>
-		<div sec:authorize="hasAuthority('ADMIN')" class="row">
- 			<div class="col-2 text-left mt-2">
-		     	<a th:href= "@{/housesList}" class="text-light">See all houses</a>
-		    </div>
-		    
-		    <div class="col-2 text-left mt-2 mb-0">
-		     	<a th:href="@{/usersList}" class="text-light">See all owners</a>
-		    </div>
-		    
-		     <div class="col-2 text-left mt-2 mb-0">
-		     	<a th:href="@{/servicesList}" class="text-light">See all services</a>
-		    </div>
-		    
-		     <div class="col-2 text-left mt-2 mb-0">
-		     	<a th:href="@{/constraintsList}" class="text-light">See all constraints</a>
-		    </div>
+		<div sec:authorize="hasAuthority('ADMIN')" class="container mt-5 border border-dark">
+			<div class="row bg-dark">
+				<div class="col text-light text-center">
+					<h2>Select an action</h2>
+				</div>
+			</div>
+			<div class="row mt-5 mb-5">
+				<div class="col-6 text-center">
+					<a th:href="@{/constraintsList}" class="btn btn-light border border-dark rounded-pill">Add new constraints</a>
+				</div>
+				
+				<div class="col-6 text-center">
+					<a th:href="@{/servicesList}" class="btn btn-light border border-dark rounded-pill">Add new services</a>
+				</div>
+				
+				<div class="col-6 mt-5 text-center">
+					<a th:href="@{/login}" class="btn btn-light border border-dark rounded-pill">Create new user</a>
+				</div>
+				
+				<div class="col-6 mt-5 text-center">
+					<a th:href="@{/usersList}" class="btn btn-light border border-dark rounded-pill">Delete user</a>
+				</div>
+			</div>
 		</div>
-	</div>
 	</div>
 	<!-- End of content -->
 

@@ -213,6 +213,7 @@ public class UserController {
 			@RequestParam("phoneNumber") int phoneNumber,
 			@RequestParam("password") String password, 
 			@RequestParam(name = "edit", defaultValue = "") int edit,
+			@RequestParam("role") String role, 
 			Principal principal){
 		if (edit == 0) {
 			model.addAttribute("firstName", firstName);
@@ -239,12 +240,13 @@ public class UserController {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(password);
 		user.setPassword(encodedPassword);
+		user.setRole(role);
 		us.updateUser(user);
 		
 		if(principal.getName() == user.getEmail()) {
-			return "redirect:/profile(email='')";
+			return "redirect:/profile?email=";
 		}
-		return "redirect:/profile(email="+user.getEmail()+")";
+		return "redirect:/profile?email="+user.getEmail()";
 		
 	}
 
