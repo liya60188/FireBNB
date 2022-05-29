@@ -62,6 +62,11 @@ public class UserController {
 	public String adminIndex() {
 		return "adminIndex";
 	}
+	
+	@GetMapping("/adminProfile")
+	public String adminProfile() {
+		return "adminProfile";
+	}
 
 	@RequestMapping(value = { "/usersList", "/usersList/search" })
 	public String listUsers(Model model, 
@@ -164,10 +169,13 @@ public class UserController {
 		
 		String role = user.getRole();
 		System.out.print(role);
-		if(role == "ADMIN") {
-			return "adminProfile";
-		}
+//		if(role == "USER") {
+//			return "userProfile";
+//		}else {
+//			return "adminProfile";
+//		}
 		return "userProfile";
+		
 	}
 
 	@GetMapping("/login")

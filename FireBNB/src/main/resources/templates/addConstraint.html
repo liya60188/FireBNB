@@ -8,20 +8,30 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="addConsSerPage">
 		<h1>Add Constraints</h1>
 		<p></p>
 		<p></p>
-		<form action="/constraintsList/add" method="post">
+		<form action="/constraintsList/add" method="post"
+			@submit="addConstraint_Service">
 			<table>
 				<tr>
 					<td>Constraint Name</td>
-					<td><input type="text" name="constraintName" th:value="${constraintName}" /></td>
+					<td><input id="nameInput" v-model="nameInput" type="text"
+						name="constraintName" th:value="${constraintName}" /></td>
 				</tr>
 				<tr>
 					<td><input type="submit" name="action" value="save" /></td>
 				</tr>
 			</table>
+			<span id="nameError" ref="nameError"> </span>
 		</form>
 	</div>
 </body>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	th:src="@{/js/addConsServFormRegulation.js}"></script>
+</html>

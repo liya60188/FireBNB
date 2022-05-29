@@ -168,6 +168,7 @@ public class HouseController {
 
 		model.addAttribute("listUserHouses", listUserHouses);
 		model.addAttribute("user", user);
+		model.addAttribute("principal", principal);
 
 		return "housesUserList";
 	}

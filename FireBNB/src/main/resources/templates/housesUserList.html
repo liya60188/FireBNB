@@ -74,7 +74,7 @@
 		  		<button type="submit" class="btn btn-light border border-dark rounded-pill" data-toggle="collapse" data-target="#collapseElements" aria-expanded="false" aria-controls="collapseElements">+more</button>
 		  	</div>
 		  	
-		  	<div class="col-5 col-md-2 text-right ">
+		  	<div th:if="${principal.name == user.email}" class="col-5 col-md-2 text-right ">
 		  		<a href="/profile/houses/add" class="btn btn-light border border-dark rounded-pill">Add new house</a>
 		  	</div>
 		</div>
