@@ -1,350 +1,390 @@
 <!DOCTYPE>
-	<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-	<head>
-	<meta charset="utf-8" />
-	<title>House Profile</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-	        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-	        crossorigin="anonymous" referrerpolicy="no-referrer">
-	</script>
-	<link th:href="@{/css/ratings.css}" rel="stylesheet" />
-	<div th:insert="fragments/header.html :: links"> </div>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	</div>
-	</head>
+<head>
+<meta charset="utf-8" />
+<title>House Profile</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer">
+	
+</script>
+<link th:href="@{/css/ratings.css}" rel="stylesheet" />
+<div th:insert="fragments/header.html :: links"></div>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</div>
+</head>
 
 <body>
-<!-- Header -->
-<header th:insert="fragments/header.html :: header"> 
-</header>
-<!-- End of header -->
+	<!-- Header -->
+	<header th:insert="fragments/header.html :: header"> </header>
+	<!-- End of header -->
 
-<!-- Content -->
-<div class="container-fluid">
-	<p th:text="${bookingSuccessMessage}"></p>
-	<div class="row">
-		<div class="col-12">
-			<div class="row">
-				<div class="col-12 col-md-8">
-					<h2 th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"></h2>
-				</div>
-				
-				<div class="col-12 col-md-4 text-right">
-					<a style="font-size:25px"><span th:text="${house.ratingsH} + '/5 ' + '(' + ${house.ratingSize} + ')' "></span></a>
-					<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" fill="currentColor" class="bi bi-star-fill mb-1 ml-1" viewBox="0 0 16 16">
-  						<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-					</svg>
-				</div>
-			</div>
-		</div>
-		
-		<div class="col-12 mt-3">
-			<div class="row">
-				<div class="col text-left">
-					<span> Hosted By 
-					<a th:text="'By ' + ${houseOwner.firstName} + ' ' + ${houseOwner.lastName}"
-					th:href="@{/profile(email=${houseOwner.email})}"></a>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-12">
-			<div class="row mt-5">
-				<div class="col">
-				    <img
-				      th:src="@{'/house_photos/'+${house.photo1}}"
-				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="House photo"
-				    />
-				</div>
-			</div>
-<!-- 	Fenetre modale pour afficher les photos		 -->
-			<div class="row">
-				<div class="col-11 text-right">
-						<button type="button" class="btn btn-light border rounded-pill" data-toggle="modal" data-target="#house_photos">
-	  					See all photos
-						</button>
-				</div>
-			</div>
-		</div> 
-		
-		<div class="modal fade" id="house_photos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<h5 class="modal-title" id="exampleModalLabel">Pictures of the house</h5>
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          			<span aria-hidden="true">&times;</span>
-        		</button>
-      		</div>
-			<div class="modal-body">
-					<img
-				      th:src="@{'/house_photos/'+${house.photo1}}"
-				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="House photo"
-				    />
-	
-				    <img
-				      th:src="@{'/house_photos/'+${house.photo2}}"
-				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="House photo"
-				    />
-
-				    <img
-				      th:src="@{'/house_photos/'+${house.photo3}}"
-				      class="w-100 shadow-1-strong rounded mb-4"
-				      alt="House photo"
-				    />
-
-			</div>
-			<div class="modal-footer">
-			</div>
-		</div>
-	</div>
-</div>	  
-
-<!-- Fin fenetre modale -->
-		<div class="row mt-3 mb-4">
-			<div class="col text-center">
-				<h4 style="color:#14A6B6"><b>Description</b></h4>
-				<p th:text="${house.description}"></p>
-			</div>
-		</div>
-		
-		<div class="container mb-5">
-			<div class="row">
-				<div class="col">
-					<div class="row">
-						<div class="col">
-							<h4 style="color:#14A6B6"><b>Services</b></h4>
-						</div>
-					</div>
-					
-					<div class="row" th:each="service : ${servicesList}">
-						<div class="col"  th:text="${service}">
-						</div>
-					</div>
-				</div>
-				
-				<div class="col">
-					<div class="row">
-						<div class="col">
-							<h4 style="color:#14A6B6"><b>Constraints</b></h4>
-						</div>
-					</div>
-					
-					<div class="row"  th:each="constraint : ${constraintsList}">
-						<div class="col" th:text="${constraint}">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-11 text-right">
-			<button type="button" class="btn btn-light border rounded-pill" 
-					data-toggle="modal" data-target="#modalBooking">Book house</button>
-		</div>
-			
-		</div>
-		<div class="col">
+	<!-- Content -->
+	<div class="container-fluid">
+		<p th:text="${bookingSuccessMessage}"></p>
+		<div class="row">
+			<div class="col-12">
 				<div class="row">
-					<div class="col text-center">
-						<h3 style="color:#14A6B6">RATINGS</h3>
+					<div class="col-12 col-md-8">
+						<h2
+							th:text="${house.address}+' '+${house.additional_address}+' '+${house.city}+' '+${house.postal_code}+' '+${house.country}"></h2>
+					</div>
+
+					<div class="col-12 col-md-4 text-right">
+						<span th:text="${house.ratingsH} + '/5 '"></span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"
+							fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
+							viewBox="0 0 16 16">
+  						<path
+								d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+					</svg>
+						<span th:if="${house.ratingsH == 1}"
+							th:text="${house.ratingSize} + ' rating'"></span> <span
+							th:if="${house.ratingsH >= 1}"
+							th:text="${house.ratingSize} + ' ratings'"></span> <span
+							th:if="${house.ratingsH <= 1}"
+							th:text="${house.ratingSize} + ' rating'"></span>
 					</div>
 				</div>
-				
-				<div th:each="rating: ${listHouseRatings}" var="rating">
-					<div class="row mt-3 mr-5">
-						<div class="row">
-							<div class="col-3">
-								<div class="row">
-									<div class="col-3"></div>
-									<div class="col text-center">
-										<img th:src="@{'/user_photos/'+${listRatePhotos.get(rating.id_userSender)}}"
-												alt="FireBnB logo"
-												class="img-fluid border rounded-circle mx-auto d-block"
-												style="width: 85px; height: 85px; object-fit: cover;">								
-									</div>
-								</div>
-								
-								<div class="row">
-									<div class="col-3"></div>
-									<div class="col text-center">
-										<a th:text="'By ' + ${listRateNames.get(rating.id_userSender)}"
-										th:href="@{/profile(email=${listRateEmails.get(rating.id_userSender)})}"></a>
-									</div>
-								</div>
-							</div>
-							
-							<div class="col-9 text-justify mt-4">
-								<span><b th:text="${rating.value} + '/5'"></b></span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-									fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
-									viewBox="0 0 16 16">
-			  							<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-								</svg>
-								<p th:text="${rating.description}"></p>
-							</div>
+			</div>
+
+			<div class="col-12 mt-3">
+				<div class="row">
+					<div class="col text-left">
+						<span> Hosted By <a
+							th:text="${houseOwner.firstName} + ' ' + ${houseOwner.lastName}"
+							th:href="@{/profile(email=${houseOwner.email})}"></a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="row mt-5">
+					<div class="col">
+						<img th:src="@{'/house_photos/'+${house.photo1}}"
+							class="w-100 shadow-1-strong rounded mb-4" alt="House photo" />
+					</div>
+				</div>
+				<!-- 	Fenetre modale pour afficher les photos		 -->
+				<div class="row">
+					<div class="col-11 text-right">
+						<button type="button" class="btn btn-light border rounded-pill"
+							data-toggle="modal" data-target="#house_photos">See all
+							photos</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="house_photos" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Pictures of
+								the house</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
+						<div class="modal-body">
+							<img th:src="@{'/house_photos/'+${house.photo1}}"
+								class="w-100 shadow-1-strong rounded mb-4" alt="House photo" />
+
+							<img th:src="@{'/house_photos/'+${house.photo2}}"
+								class="w-100 shadow-1-strong rounded mb-4" alt="House photo" />
+
+							<img th:src="@{'/house_photos/'+${house.photo3}}"
+								class="w-100 shadow-1-strong rounded mb-4" alt="House photo" />
+
+						</div>
+						<div class="modal-footer"></div>
 					</div>
 				</div>
-				
-				<div class="col-11 text-right">
-<!-- 					<a class="btn btn-light border rounded-pill"  th:if="${currentUserId} != ${houseOwnerId}" th:href="@{/rating/add/HouseRating/{id_house}(id_house=${house.id_house})}">Add Rating</a> -->
-				<button type="button" class="btn btn-light border rounded-pill" th:if="${currentUserId} != ${houseOwnerId}" data-toggle="modal" data-target="#modalRatings">
-				 Rate this house</button>
+			</div>
+
+			<!-- Fin fenetre modale -->
+			<div class="row mt-3 mb-4">
+				<div class="col text-center">
+					<h4 style="color: #14A6B6">
+						<b>Description</b>
+					</h4>
+					<p th:text="${house.description}"></p>
 				</div>
 			</div>
-<!-- Modal Booking-->
-<div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="modalBookingTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      	<h5 class="modal-title" id="modalBookingLongTitle">Book a house</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="background-color: rgba(242, 242, 242);">
-		<form th:action="@{/bookHouse}" th:object="${house}" method="post">
-			<input name="id_houseReceive" type="hidden" th:value="${id_houseReceive}"/>
-			<div class="row">
-				<div class="col">
-					<h5><b>Select the duration of your stay</b></h5>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-1 mt-2 text-right">
-					Start
-				</div>
-				
-				<div class="col-5">
-					 <input type="date" class="form-control"  aria-label="date" aria-describedby="begin-date-text" name="begin_date" th:field="*{begin_date}">
-				</div>
-				
-				<div class="col-1 mt-2 text-right">
-					End
-				</div>
-				
-				<div class="col-5">
-					 <input type="date" class="form-control"  aria-label="date" aria-describedby="end-date-text"  name="end_date" th:field="*{end_date}">
-				</div>
-			</div>
-			<div class="row class mt-2">
-				<span th:text="'The house is booked from ' + ${begin_date} + ' to ' + ${end_date}"></span>
-			</div>
-			
-			<div class="row">
-				<div class="col mt-3">
-					<h5><b>Select the property you want to exchange</b></h5>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<div class="stars" th:each="house : ${listUserHouses}">
+
+			<div class="container mb-5">
+				<div class="row">
+					<div class="col">
 						<div class="row">
 							<div class="col">
-								<div class="form-check">
-									<input class="form-check-input" type="radio" name="id_houseSend" th:value="${house.id_house}">
-									<label class="form-check-label ml-4" th:text="${house.address}+', '+${house.city}+', '+${house.country}"></label>
-								</div>
+								<h4 style="color: #14A6B6">
+									<b>Services</b>
+								</h4>
 							</div>
-						</div>					   
-					</div>	
-				</div>
-			</div>
-			<div class="row">
-				<div class="col mt-5 text-right">
-					<input type="submit" class="btn btn-success rounded-pill" name="action" value="Book this house">
-				</div>
-			</div>	
+						</div>
 
-		</form>
-		<p th:text="${isBookedError}"></p>
-      	</div>
-      	<div class="modal-footer">
-        	<button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal">Close</button>
-      	</div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- End of Modal Booking -->
+						<div class="row" th:each="service : ${servicesList}">
+							<div class="col" th:text="${service}"></div>
+						</div>
+					</div>
 
-<!-- Modal Rating -->
-<div class="modal fade" id="modalRatings" tabindex="-1" role="dialog" aria-labelledby="modalRatingsTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="background-color: rgba(242, 242, 242);">
-		<form th:action="@{/rating/add/HouseRating}" th:object="${rating}" method="post">
-			<div class="row">
-				<div class="col text-center">
-					<h2><b>Rate this house</b></h2>
-				</div>
-			</div>
-			
-			<input hidden type="text" name="id_house" th:value="${id_houseReceive}" />
-			
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<div class="stars">
-					    <input class="star star-5" id="star-5" type="radio" name="value" value="5"/>			
-					    <label class="star star-5" for="star-5"></label>			
-					    <input class="star star-4" id="star-4" type="radio" name="value" value="4"/>			
-					    <label class="star star-4" for="star-4"></label>			
-					    <input class="star star-3" id="star-3" type="radio" name="value" value="3"/>			
-					    <label class="star star-3" for="star-3"></label>			
-					    <input class="star star-2" id="star-2" type="radio" name="value" value="2"/>			
-					    <label class="star star-2" for="star-2"></label>		
-					    <input class="star star-1" id="star-1" type="radio" name="value" value="1"/>		
-					    <label class="star star-1" for="star-1"></label>
-					</div>	
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col">
-					<div class="md-form">
-						<label for="form7" style="color:black"><h4><b>Comment</b></h4></label>
-					 	<textarea id="form7" name="description" th:value="${description}" class="md-textarea form-control" rows="3"></textarea>
+					<div class="col">
+						<div class="row">
+							<div class="col">
+								<h4 style="color: #14A6B6">
+									<b>Constraints</b>
+								</h4>
+							</div>
+						</div>
+
+						<div class="row" th:each="constraint : ${constraintsList}">
+							<div class="col" th:text="${constraint}"></div>
+						</div>
 					</div>
 				</div>
 			</div>
-			
+			<div class="col-11 text-right">
+				<button sec:authorize="hasAuthority('USER')" type="button"
+					class="btn btn-light border rounded-pill" data-toggle="modal"
+					data-target="#modalBooking">Book house</button>
+			</div>
+
+		</div>
+		<div class="col">
 			<div class="row">
-				<div class="col mt-5 text-right">
-					<button type="submit" name="action" value="save" class="btn btn-success rounded-pill">Save</button>
+				<div class="col text-center">
+					<h3 style="color: #14A6B6">RATINGS</h3>
 				</div>
 			</div>
-		</form>	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger rounded-pill" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End of Modal Rating -->
 
-<!-- Footer -->
-<div th:insert="fragments/footer.html :: footer"></div>
-<!-- End of Footer -->
+			<div th:each="rating: ${listHouseRatings}" var="rating">
+				<div class="row mt-3 mr-5">
+					<div class="row">
+						<div class="col-3">
+							<div class="row">
+								<div class="col text-center">
+									<img
+										th:src="@{'/user_photos/'+${listRatePhotos.get(rating.id_userSender)}}"
+										alt="FireBnB logo"
+										class="img-fluid border rounded-circle mx-auto d-block"
+										style="width: 85px; height: 85px; object-fit: cover;">
+								</div>
+							</div>
 
-<script src="https://unpkg.com/vue@next"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script type="text/javascript" th:src="@{/js/indexFormRegulation.js}"></script>
+							<div class="row">
+								<div class="col text-center">
+									<a th:text="'By ' + ${listRateNames.get(rating.id_userSender)}"
+										th:href="@{/profile(email=${listRateEmails.get(rating.id_userSender)})}"></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-9 text-justify mt-4">
+							<span><b th:text="${rating.value} + '/5'"></b></span>
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+								fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
+								viewBox="0 0 16 16">
+			  							<path
+									d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+								</svg>
+							<p th:text="${rating.description}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-11 text-right">
+				<!-- 					<a class="btn btn-light border rounded-pill"  th:if="${currentUserId} != ${houseOwnerId}" th:href="@{/rating/add/HouseRating/{id_house}(id_house=${house.id_house})}">Add Rating</a> -->
+				<button sec:authorize="hasAuthority('USER')" type="button"
+					class="btn btn-light border rounded-pill"
+					th:if="${currentUserId} != ${houseOwnerId}" data-toggle="modal"
+					data-target="#modalRatings">Rate this house</button>
+			</div>
+		</div>
+		<!-- Modal Booking-->
+		<div class="modal fade" id="modalBooking" tabindex="-1" role="dialog"
+			aria-labelledby="modalBookingTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modalBookingLongTitle">Book a
+							house</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body"
+						style="background-color: rgba(242, 242, 242);">
+						<form th:action="@{/bookHouse}" th:object="${house}" method="post">
+							<input name="id_houseReceive" type="hidden"
+								th:value="${id_houseReceive}" />
+							<div class="row">
+								<div class="col">
+									<h5>
+										<b>Select the duration of your stay</b>
+									</h5>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-1 mt-2 text-right">Start</div>
+
+								<div class="col-5">
+									<input type="date" class="form-control" aria-label="date"
+										aria-describedby="begin-date-text" name="begin_date"
+										th:field="*{begin_date}">
+								</div>
+
+								<div class="col-1 mt-2 text-right">End</div>
+
+								<div class="col-5">
+									<input type="date" class="form-control" aria-label="date"
+										aria-describedby="end-date-text" name="end_date"
+										th:field="*{end_date}">
+								</div>
+							</div>
+							<div class="row class mt-2">
+								<span
+									th:text="'The house is booked from ' + ${begin_date} + ' to ' + ${end_date}"></span>
+							</div>
+
+							<div class="row">
+								<div class="col mt-3">
+									<h5>
+										<b>Select the property you want to exchange</b>
+									</h5>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="stars" th:each="house : ${listUserHouses}">
+										<div class="row">
+											<div class="col">
+												<div class="form-check">
+													<input class="form-check-input" type="radio"
+														name="id_houseSend" th:value="${house.id_house}">
+													<label class="form-check-label ml-4"
+														th:text="${house.address}+', '+${house.city}+', '+${house.country}"></label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col mt-5 text-right">
+									<input type="submit" class="btn btn-success rounded-pill"
+										name="action" value="Book this house">
+								</div>
+							</div>
+
+						</form>
+						<p th:text="${isBookedError}"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger rounded-pill"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Modal Booking -->
+
+	<!-- Modal Rating -->
+	<div class="modal fade" id="modalRatings" tabindex="-1" role="dialog"
+		aria-labelledby="modalRatingsTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"
+					style="background-color: rgba(242, 242, 242);">
+					<form th:action="@{/rating/add/HouseRating}" th:object="${rating}"
+						method="post">
+						<div class="row">
+							<div class="col text-center">
+								<h2>
+									<b>Rate this house</b>
+								</h2>
+							</div>
+						</div>
+
+						<input hidden type="text" name="id_house"
+							th:value="${id_houseReceive}" />
+
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<div class="stars">
+									<input class="star star-5" id="star-5" type="radio"
+										name="value" value="5" /> <label class="star star-5"
+										for="star-5"></label> <input class="star star-4" id="star-4"
+										type="radio" name="value" value="4" /> <label
+										class="star star-4" for="star-4"></label> <input
+										class="star star-3" id="star-3" type="radio" name="value"
+										value="3" /> <label class="star star-3" for="star-3"></label>
+									<input class="star star-2" id="star-2" type="radio"
+										name="value" value="2" /> <label class="star star-2"
+										for="star-2"></label> <input class="star star-1" id="star-1"
+										type="radio" name="value" value="1" /> <label
+										class="star star-1" for="star-1"></label>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="md-form">
+									<label for="form7" style="color: black"><h4>
+											<b>Comment</b>
+										</h4></label>
+									<textarea id="form7" name="description"
+										th:value="${description}" class="md-textarea form-control"
+										rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col mt-5 text-right">
+								<button type="submit" name="action" value="save"
+									class="btn btn-success rounded-pill">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger rounded-pill"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End of Modal Rating -->
+
+	<!-- Footer -->
+	<div th:insert="fragments/footer.html :: footer"></div>
+	<!-- End of Footer -->
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"
+		integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" th:src="@{/js/indexFormRegulation.js}"></script>
 
 </body>
 </html>

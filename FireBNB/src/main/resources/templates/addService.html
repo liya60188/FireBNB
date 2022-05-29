@@ -5,28 +5,37 @@
 <head>
 <meta charset="UTF-8" />
 <title>Add Service</title>
+<div th:insert="fragments/header.html :: links"></div>
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+	<!-- Header -->
+	<header th:insert="fragments/header.html :: header"> </header>
+	<!-- End of header -->
+
+	<!-- Content -->
 	<div class="container" id="addConsSerPage">
 		<h1>Add Services</h1>
 		<p></p>
 		<p></p>
 		<form action="/servicesList/add" method="post"
 			@submit="addConstraint_Service">
-			<table>
-				<tr>
-					<td>Service Name</td>
-					<td><input id="nameInput" v-model="nameInput" type="text"
-						name="serviceName" th:value="${serviceName}" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" name="action" value="save" /></td>
-				</tr>
-			</table>
-			<span id="nameError" ref="nameError"> </span>
+
+			Service Name <input id="nameInput" v-model="nameInput" type="text"
+				name="serviceName" th:value="${serviceName}" /> <input
+				type="submit" name="action" value="save" /> <span id="nameError"
+				ref="nameError"> </span>
 		</form>
 	</div>
+
+	<!-- End of content -->
+	<div class="container-fluid">
+		<div class="row h-100"></div>
+	</div>
+	<!-- Footer -->
+	<div th:insert="fragments/footer.html :: footer"></div>
+	<!-- End of Footer -->
+
 </body>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"

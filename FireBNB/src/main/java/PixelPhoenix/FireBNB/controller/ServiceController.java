@@ -24,18 +24,19 @@ import PixelPhoenix.FireBNB.service.ServiceService;
 public class ServiceController {
 	@Autowired 
 	private ServiceService serviceService;
-	/*
+	
 	@GetMapping("/servicesList")
 	public String listServices(Model model) {
 		Iterable<Service> listServices = serviceService.getServices();
 		model.addAttribute("listServices", listServices);
 		return "servicesList";
-	}*/
+	}
 	
 	//New affichage/show
 	@Autowired
 	private ServiceRepository serviceRepository;
-	@RequestMapping(value = {"/servicesList", "/servicesList/search"})
+	
+	/*@RequestMapping(value = {"/servicesList", "/servicesList/search"})
 	public String search(Model model, @RequestParam(name = "motCle", defaultValue = "") String mc,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size) {
@@ -46,7 +47,7 @@ public class ServiceController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("pageCourante", page);
 		return "servicesList";
-	}
+	}*/
 	
 	@GetMapping("/servicesList/add")
 	public String serviceForm(Model model) {

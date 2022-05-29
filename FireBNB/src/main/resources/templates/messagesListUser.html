@@ -85,7 +85,7 @@
 						</div>
 						
 						<div class="col mt-4 text-right">
-						<a class="btn btn-dark text-light border-0" th:href="@{/messageView(id_message=${message.id_message})}">View</a>
+						<a class="btn btn-dark text-light border-0" th:href="@{/messageProfile(id_message=${message.id_message})}">View</a>
 						<a class="btn border-0" onclick="return confirm('Please Confirm')"
 							th:href="@{/messagesList/delete(id_message=${message.id_message}, mc=${motC})}"> Delete
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x-lg" viewBox="0 0 16 16">

@@ -199,7 +199,7 @@
 						</div>
 						<div class="col text-right mr-5">
 							<a class="btn btn-light border rounded-pill"
-								th:href="@{/houseProfile(id_house=${house.id_house})}"><u>View</u></a>
+								th:href="@{/houseProfile(id_house=${house.id_house})}">View</a>
 
 							<a class="btn btn-light border rounded-pill" sec:authorize="hasAuthority('ADMIN')"
 								th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, 
@@ -207,7 +207,7 @@
 								address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, 
 								additional_address=${house.additional_address}, id_user=${house.id_user}, edit=0)}">Edit</a>
 
-							<a style="color: red" sec:authorize="hasAuthority('ADMIN')"
+							<a class="btn btn-danger border rounded-pill" sec:authorize="hasAuthority('ADMIN')"
 								onclick="return confirm('Please Confirm')"
 								th:href="@{/housesList/delete(id_house=${house.id_house})}">
 								Delete</a>

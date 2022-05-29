@@ -73,7 +73,7 @@ public class MessageController {
 		return "messagesListUser";
 	}
 	
-	@GetMapping("/messageView")
+	@GetMapping("/messageProfile")
 	public String messageProfile(Model model, @RequestParam("id_message") Long id_message) {
 		
 		Optional<Message> m = messageService.getMessage(id_message);
@@ -86,7 +86,7 @@ public class MessageController {
 		model.addAttribute("senderFirstName", sender.getFirstName());
 		model.addAttribute("senderLastName", sender.getLastName());
 		model.addAttribute("email", sender.getEmail());
-		return "messageView";
+		return "messageProfile";
 	}
 	
 	@GetMapping("/messagesListUser/add")

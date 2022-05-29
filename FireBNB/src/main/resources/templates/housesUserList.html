@@ -35,27 +35,9 @@
 				</div>
 			</div>
 			
-			<div class="col-4 col-md mt-5 border-0">
-				<div class="form-outline text-center">
-	 			 	<input type="search" id="form3" class="form-control rounded-pill" placeholder="Date" aria-label="Search" />
-				</div>
-			</div>
-			
 			<div class="col-4 col-md mt-5 mb-5 border-0">
 				<div class="form-outline text-center">
-	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="People" aria-label="Search" />
-				</div>
-			</div>
-			
-			<div class="col-4 col-md mt-5 mb-5 border-0">
-				<div class="form-outline text-center">
-	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="Surface" aria-label="Search" />
-				</div>
-			</div>
-			
-			<div class="col-4 col-md mt-5 mb-5 border-0">
-				<div class="form-outline text-center">
-	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="Price" aria-label="Search" />
+	 			 	<input type="search" id="form4" class="form-control rounded-pill" placeholder="Address" aria-label="Search" />
 				</div>
 			</div>
 			
@@ -352,10 +334,10 @@
 				</div>
 				
 				<div class="col text-right mr-5">
-					<a style="color: black" th:href="@{/houseProfile(id_house=${house.id_house})}"><u>View</u></a>	
-					<a style="color: black" th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photo1}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, id_user=${house.id_user}, edit=0)}"><u>Edit</u></a>
-					<a style="color: red" sec:authorize="hasAuthority('ADMIN')" onclick="return confirm('Please Confirm')"
-					th:href="@{/housesList/delete(id_house=${house.id_house})}"><u>Delete</u></a>
+					<a class="btn btn-light border rounded-pill" th:href="@{/houseProfile(id_house=${house.id_house})}">View</a>	
+					<a class="btn btn-light border rounded-pill" th:href="@{/listHouses/edit(id_house=${house.id_house}, description=${house.description}, ratingsH=${house.ratingsH}, services=${house.services}, constraints=${house.constraints}, photos=${house.photo1}, address=${house.address}, city=${house.city}, postal_code=${house.postal_code}, country=${house.country}, additional_address=${house.additional_address}, id_user=${house.id_user}, edit=0)}">Edit</a>
+					<a class="btn btn-danger border rounded-pill" onclick="return confirm('Please Confirm')"
+					th:href="@{/housesList/delete(id_house=${house.id_house})}">Delete</a>
 				</div>
 				
 			</div>

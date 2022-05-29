@@ -141,11 +141,11 @@
 		</div>
 		
 		<div class="row">
-			<div class="col" style="padding-left: 60px; padding-right: 60px;" th:each="user : ${listUsers}">
+			<div class="col" th:each="user : ${listUsers}">
 				<figure class="figure" style="background-color: rgba(20, 23, 24, 0.6);">
 					<img th:src="@{'/user_photos/'+${user.profilePicture}}" 
 				  	class="figure-img img-fluid rounded" alt="Random user"
-				  	style="height:300px;">
+				  	>
 				  	<figcaption class="figure-caption text-light">
 					  	<div class="row">
 					  		<div class="col-1"></div>
