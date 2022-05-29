@@ -70,14 +70,13 @@
 					</div>
 				</div>
 
-				<div class="row mt-3">
+				<div class="row mt-3 mb-3">
 					<div th:if="${user.email != principal.name}" class="col">
-						<a th:href="@{/profile/houses(email=${user.email})}">See
-							all houses</a>
+						<a style="color: black" th:href="@{/profile/houses(email=${user.email})}"><u>See all houses</u></a>
 					</div>
 					<div th:if="${user.email == principal.name}" class="col">
-						<a th:href="@{/profile/update(email=${user.email}, type='myProfile')}">
-							Edit Profile</a>
+						<a style="color: black" th:href="@{/profile/update(email=${user.email}, type='myProfile')}">
+							<u>Edit Profile</u></a>
 					</div>
 				</div>
 			</div>
@@ -85,11 +84,11 @@
 			<!-- Right block -->
 			<div class="col-7">
 				<div class="row">
-					<div class="col-3 text-right">
+					<div class="col-5 col-md-5 col-lg-3 text-center">
 						<b>Total rating :</b>
 					</div>
 					<!-- CHANGE BY AMANDA -->
-					<div class="col-3">
+					<div class="col-7 col-md-5 col-lg-3 text-left">
 						<span th:text="${user.rating} + '/5'"></span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 							fill="currentColor" class="bi bi-star-fill mb-1 ml-1"
@@ -101,12 +100,14 @@
 					</div>
 
 					<div class="col text-right">
-						<a th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}">Add
-						Rating</a>
+						<a style="color: black" th:href="@{/rating/add/UserRating/{id_userReceiver}(id_userReceiver=${user.id_user})}"><u>Add Rating</u></a>
 					</div>
 				</div>
 
 				<div class="row">
+					<div class="col-1">
+					</div>
+					
 					<div class="col mt-5 text-center">
 						<h3>
 							<b>BEST RATED HOUSES</b>
@@ -121,17 +122,25 @@
 				</div>
   -->
 				<div class="row">
-					<div class="col text-center">
+					<div class="col-md-1">
+					</div>
+					
+					<div class="col-12 mt-3 col-md-3">
 						<img
 							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid" width="25%" height="25%">
+							alt="FireBnB logo" class="img-fluid">
+					</div>
+					
+					<div class="col-12 mt-3 col-md-3">
 						<img
 							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid ml-5" width="25%"
-							height="25%"> <img
+							alt="FireBnB logo" class="img-fluid"> 
+					</div>
+					
+					<div class="col-12 mt-3 col-md-3">
+						<img
 							src="https://archzine.fr/wp-content/uploads/2016/03/le-belle-photo-image-la-plus-belle-image-du-monde.jpg"
-							alt="FireBnB logo" class="img-fluid ml-5" width="25%"
-							height="25%">
+							alt="FireBnB logo" class="img-fluid">
 					</div>
 				</div>
 				<div class="row">
@@ -183,7 +192,7 @@
 					</div>
 				</div>
 				<div class="text-center mt-4">
-					<a class="primary-btn" th:href="@{/messagesListUser/sendMessage(email=${user.email}, subject='')}">Send a message</a>
+					<a class="btn border-dark rounded-pill" th:href="@{/messagesListUser/sendMessage(email=${user.email}, subject='')}">Send a message</a>
 				</div>
 			</div>
 		</div>

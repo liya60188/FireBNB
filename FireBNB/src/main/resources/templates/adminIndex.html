@@ -1,0 +1,56 @@
+<!DOCTYPE>
+	<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Admin</title>
+		<div th:insert="fragments/header.html :: links"> 
+		</div>
+	</head>
+
+<body>
+
+	<!-- Header -->
+	<header th:insert="fragments/header.html :: header"> 
+	</header>
+	
+<!-- Content -->
+<div class="container mt-5 border border-dark">
+	<div class="row bg-dark">
+		<div class="col text-light text-center">
+			<h2>Select an action</h2>
+		</div>
+	</div>
+	
+	<div class="row mt-5 mb-5">
+		<div class="col-6 text-center">
+			<a href="" class="btn btn-light border border-dark rounded-pill">Add new constraints</a>
+		</div>
+		
+		<div class="col-6 text-center">
+			<a href="" class="btn btn-light border border-dark rounded-pill">Add new services</a>
+		</div>
+		
+		<div class="col-6 mt-5 text-center">
+			<a href="" class="btn btn-light border border-dark rounded-pill">Create new user</a>
+		</div>
+		
+		<div class="col-6 mt-5 text-center">
+			<a href="" class="btn btn-light border border-dark rounded-pill">Delete user</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row h-50"></div>
+</div>
+<!-- End of content -->
+	
+	<!-- Footer -->
+	<div th:insert="fragments/footer.html :: footer"></div>
+	<!-- End of Footer -->
+</div>
+</body>
+</html>

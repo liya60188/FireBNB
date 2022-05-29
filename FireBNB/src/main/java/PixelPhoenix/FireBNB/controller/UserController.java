@@ -52,6 +52,16 @@ public class UserController {
 	public String index() {
 		return "index";
 	}
+	
+	@GetMapping("/loggedIndex")
+	public String loggedIndex() {
+		return "adminIndex";
+	}
+	
+	@GetMapping("/adminIndex")
+	public String adminIndex() {
+		return "adminIndex";
+	}
 
 	@RequestMapping(value = { "/usersList", "/usersList/search" })
 	public String listUsers(Model model, 
